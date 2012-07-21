@@ -12,6 +12,9 @@
 
 @synthesize text;
 @synthesize state;
+@synthesize statusItem;
+
+BOOL menuVisible = NO;
 
 const int EXTRA_SPACING = 20;
 const int VERTICAL_OFFSET = 3;
@@ -24,8 +27,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 - (id) init {
     self = [super init];
     drawStringAttributes = [[NSMutableDictionary alloc] init];
-	[drawStringAttributes setValue:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	[drawStringAttributes setValue:[NSFont systemFontOfSize:11.0] forKey:NSFontAttributeName];
+	[drawStringAttributes setValue:[NSFont menuBarFontOfSize:11.0] forKey:NSFontAttributeName];
     return self;
 }
 
@@ -35,7 +37,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     [timer invalidate];
     if (stringSize.width + EXTRA_SPACING <= 300) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING, stringSize.height)];
+        [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING, [self frame].size.height)];
     } else {
         scrolling = YES;
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL
@@ -46,7 +48,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         scrollLeft = YES;
         scrollMaxOffset = (stringSize.width) - 250;
         scrollCurrentOffset = 0;
-        [self setFrame:NSMakeRect(0, 0, 250, stringSize.height)];
+        [self setFrame:NSMakeRect(0, 0, 250, [self frame].size.height)];
     }
     [self refresh];
 }
@@ -56,6 +58,13 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) refresh {
+    [statusItem drawStatusBarBackgroundInRect:[self bounds] withHighlight:menuVisible];
+    if (menuVisible) {
+        [drawStringAttributes setValue:[NSColor selectedMenuItemTextColor] forKey:NSForegroundColorAttributeName];
+    } else {
+        [drawStringAttributes setValue:[NSColor controlTextColor] forKey:NSForegroundColorAttributeName];
+    }
+    
     if (scrolling) {
         scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
         if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACING || scrollCurrentOffset <= -EXTRA_SPACING) {
@@ -72,6 +81,27 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         centerPoint.y = VERTICAL_OFFSET;
         [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
     }
+}
+
+- (void) mouseDown:(NSEvent*)event {
+    [[statusItem menu] setDelegate:self];
+    [statusItem popUpStatusItemMenu:[statusItem menu]];
+    [self setNeedsDisplay:YES];
+}
+
+- (void) rightMouseDown:(NSEvent*)event {
+    [self mouseDown:event];
+}
+
+- (void) menuWillOpen:(NSMenu*)menu {
+    menuVisible = YES;
+    [self setNeedsDisplay:YES];
+}
+
+- (void) menuDidClose:(NSMenu *)menu {
+    menuVisible = NO;
+    [[statusItem menu] setDelegate:nil];
+    [self setNeedsDisplay:YES];
 }
 
 @end

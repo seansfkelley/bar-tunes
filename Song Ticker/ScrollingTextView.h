@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ScrollingTextView : NSView{
+@interface ScrollingTextView : NSView <NSMenuDelegate> {
+    NSStatusItem *statusItem;
     NSTimer *timer;
     NSMutableDictionary *drawStringAttributes;
     NSSize stringSize;
@@ -20,5 +21,6 @@
 
 @property (nonatomic) NSString *text;
 @property NSString *state;
+@property NSStatusItem *statusItem;
 
 @end

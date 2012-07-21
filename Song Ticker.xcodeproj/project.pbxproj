@@ -12,22 +12,10 @@
 		7854A08E15B9202700026D40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A08D15B9202700026D40 /* main.m */; };
 		7854A09215B9202700026D40 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7854A09015B9202700026D40 /* Credits.rtf */; };
 		7854A09515B9202700026D40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A09415B9202700026D40 /* AppDelegate.m */; };
-		7854A09815B9202800026D40 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7854A09615B9202800026D40 /* MainMenu.xib */; };
-		7854A0A015B9202800026D40 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7854A09F15B9202800026D40 /* SenTestingKit.framework */; };
-		7854A0A115B9202800026D40 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7854A08115B9202700026D40 /* Cocoa.framework */; };
-		7854A0A915B9202800026D40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7854A0A715B9202800026D40 /* InfoPlist.strings */; };
-		7854A0AC15B9202800026D40 /* Song_TickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A0AB15B9202800026D40 /* Song_TickerTests.m */; };
+		7874867715B929380059D593 /* openitunes.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 7874867615B929380059D593 /* openitunes.scpt */; };
+		7874867A15B9396F0059D593 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* MainMenu.xib */; };
+		7874867E15B942530059D593 /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7874867D15B942530059D593 /* ScrollingTextView.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7854A0A215B9202800026D40 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7854A07415B9202700026D40 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7854A07C15B9202700026D40;
-			remoteInfo = "Song Ticker";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7854A07D15B9202700026D40 /* Song Ticker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Song Ticker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,20 +23,18 @@
 		7854A08415B9202700026D40 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7854A08515B9202700026D40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7854A08615B9202700026D40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7854A08915B9202700026D40 /* Song Ticker-Info.plist */ = {isa = PBXFileReference; path = "Song Ticker-Info.plist"; sourceTree = "<group>"; };
+		7854A08915B9202700026D40 /* Song Ticker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Song Ticker-Info.plist"; sourceTree = "<group>"; };
 		7854A08B15B9202700026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7854A08D15B9202700026D40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7854A08F15B9202700026D40 /* Song Ticker-Prefix.pch */ = {isa = PBXFileReference; path = "Song Ticker-Prefix.pch"; sourceTree = "<group>"; };
+		7854A08F15B9202700026D40 /* Song Ticker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Song Ticker-Prefix.pch"; sourceTree = "<group>"; };
 		7854A09115B9202700026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		7854A09315B9202700026D40 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		7854A09315B9202700026D40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7854A09415B9202700026D40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7854A09715B9202800026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		7854A09E15B9202800026D40 /* Song TickerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Song TickerTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7854A09F15B9202800026D40 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		7854A0A615B9202800026D40 /* Song TickerTests-Info.plist */ = {isa = PBXFileReference; path = "Song TickerTests-Info.plist"; sourceTree = "<group>"; };
-		7854A0A815B9202800026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7854A0AA15B9202800026D40 /* Song_TickerTests.h */ = {isa = PBXFileReference; path = Song_TickerTests.h; sourceTree = "<group>"; };
-		7854A0AB15B9202800026D40 /* Song_TickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song_TickerTests.m; sourceTree = "<group>"; };
+		7874867615B929380059D593 /* openitunes.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = openitunes.scpt; sourceTree = "<group>"; };
+		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
+		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +46,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7854A09A15B9202800026D40 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7854A0A015B9202800026D40 /* SenTestingKit.framework in Frameworks */,
-				7854A0A115B9202800026D40 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -76,9 +53,9 @@
 			isa = PBXGroup;
 			children = (
 				7854A08715B9202700026D40 /* Song Ticker */,
-				7854A0A415B9202800026D40 /* Song TickerTests */,
 				7854A08015B9202700026D40 /* Frameworks */,
 				7854A07E15B9202700026D40 /* Products */,
+				7874867615B929380059D593 /* openitunes.scpt */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				7854A07D15B9202700026D40 /* Song Ticker.app */,
-				7854A09E15B9202800026D40 /* Song TickerTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,7 +92,9 @@
 			children = (
 				7854A09315B9202700026D40 /* AppDelegate.h */,
 				7854A09415B9202700026D40 /* AppDelegate.m */,
-				7854A09615B9202800026D40 /* MainMenu.xib */,
+				7874867C15B942530059D593 /* ScrollingTextView.h */,
+				7874867D15B942530059D593 /* ScrollingTextView.m */,
+				7874867815B9396F0059D593 /* MainMenu.xib */,
 				7854A08815B9202700026D40 /* Supporting Files */,
 			);
 			path = "Song Ticker";
@@ -130,25 +108,6 @@
 				7854A08D15B9202700026D40 /* main.m */,
 				7854A08F15B9202700026D40 /* Song Ticker-Prefix.pch */,
 				7854A09015B9202700026D40 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7854A0A415B9202800026D40 /* Song TickerTests */ = {
-			isa = PBXGroup;
-			children = (
-				7854A0AA15B9202800026D40 /* Song_TickerTests.h */,
-				7854A0AB15B9202800026D40 /* Song_TickerTests.m */,
-				7854A0A515B9202800026D40 /* Supporting Files */,
-			);
-			path = "Song TickerTests";
-			sourceTree = "<group>";
-		};
-		7854A0A515B9202800026D40 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7854A0A615B9202800026D40 /* Song TickerTests-Info.plist */,
-				7854A0A715B9202800026D40 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -173,25 +132,6 @@
 			productReference = 7854A07D15B9202700026D40 /* Song Ticker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7854A09D15B9202800026D40 /* Song TickerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7854A0B215B9202800026D40 /* Build configuration list for PBXNativeTarget "Song TickerTests" */;
-			buildPhases = (
-				7854A09915B9202800026D40 /* Sources */,
-				7854A09A15B9202800026D40 /* Frameworks */,
-				7854A09B15B9202800026D40 /* Resources */,
-				7854A09C15B9202800026D40 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7854A0A315B9202800026D40 /* PBXTargetDependency */,
-			);
-			name = "Song TickerTests";
-			productName = "Song TickerTests";
-			productReference = 7854A09E15B9202800026D40 /* Song TickerTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -213,7 +153,6 @@
 			projectRoot = "";
 			targets = (
 				7854A07C15B9202700026D40 /* Song Ticker */,
-				7854A09D15B9202800026D40 /* Song TickerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -225,35 +164,12 @@
 			files = (
 				7854A08C15B9202700026D40 /* InfoPlist.strings in Resources */,
 				7854A09215B9202700026D40 /* Credits.rtf in Resources */,
-				7854A09815B9202800026D40 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7854A09B15B9202800026D40 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7854A0A915B9202800026D40 /* InfoPlist.strings in Resources */,
+				7874867715B929380059D593 /* openitunes.scpt in Resources */,
+				7874867A15B9396F0059D593 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7854A09C15B9202800026D40 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7854A07915B9202700026D40 /* Sources */ = {
@@ -262,26 +178,11 @@
 			files = (
 				7854A08E15B9202700026D40 /* main.m in Sources */,
 				7854A09515B9202700026D40 /* AppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7854A09915B9202800026D40 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7854A0AC15B9202800026D40 /* Song_TickerTests.m in Sources */,
+				7874867E15B942530059D593 /* ScrollingTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7854A0A315B9202800026D40 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7854A07C15B9202700026D40 /* Song Ticker */;
-			targetProxy = 7854A0A215B9202800026D40 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7854A08A15B9202700026D40 /* InfoPlist.strings */ = {
@@ -300,20 +201,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		7854A09615B9202800026D40 /* MainMenu.xib */ = {
+		7874867815B9396F0059D593 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7854A09715B9202800026D40 /* en */,
+				7874867915B9396F0059D593 /* en */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		7854A0A715B9202800026D40 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7854A0A815B9202800026D40 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -388,34 +281,6 @@
 			};
 			name = Release;
 		};
-		7854A0B315B9202800026D40 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Song Ticker.app/Contents/MacOS/Song Ticker";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Song Ticker-Prefix.pch";
-				INFOPLIST_FILE = "Song TickerTests/Song TickerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		7854A0B415B9202800026D40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Song Ticker.app/Contents/MacOS/Song Ticker";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Song Ticker-Prefix.pch";
-				INFOPLIST_FILE = "Song TickerTests/Song TickerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -435,14 +300,7 @@
 				7854A0B115B9202800026D40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		7854A0B215B9202800026D40 /* Build configuration list for PBXNativeTarget "Song TickerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7854A0B315B9202800026D40 /* Debug */,
-				7854A0B415B9202800026D40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

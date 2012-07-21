@@ -12,20 +12,15 @@
 
 @synthesize window = _window;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
     scrollText = [[ScrollingTextView alloc] init];
     
-    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:statusMenu];
-    [statusItem setView:scrollText];
+    NSStatusItem* statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setHighlightMode:YES];
+    [statusItem setView:scrollText];
+    [statusItem setMenu:statusMenu];
     
-    NSMenuItem *item = [statusMenu insertItemWithTitle:@"Quit" 
-                                                action:@selector(quitApplication) 
-                                         keyEquivalent:@"" 
-                                               atIndex:0];
-    [item setTarget:self];
+    [scrollText setStatusItem:statusItem];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesPlayerInfoNotification:)
@@ -33,11 +28,11 @@
                                                           object:nil];
 }
 
-- (void)quitApplication{
+- (IBAction) quitApplication:(id)sender{
     [[NSApplication sharedApplication] terminate:nil];
 }
 
-- (void)openItunes{
+- (void) openItunes{
     NSString* path = [[NSBundle mainBundle] pathForResource:@"openitunes" ofType:@"scpt"];
     NSURL* url = [NSURL fileURLWithPath:path];
     NSDictionary* errors = [NSDictionary dictionary];
@@ -57,9 +52,9 @@
     NSString *title = [userInfo objectForKey:@"Name"];
     
     if ([state isEqualToString:@"Playing"]) {
-        [scrollText setText:[NSString stringWithFormat:@"Playing: %@ — %@", artist, title]];
+        [((ScrollingTextView*) scrollText) setText:[NSString stringWithFormat:@"Playing: %@ — %@", artist, title]];
     } else if ([state isEqualToString:@"Paused"]) {
-        [scrollText setText:[NSString stringWithFormat:@"Paused: %@ — %@", artist, title]];
+        [((ScrollingTextView*) scrollText) setText:[NSString stringWithFormat:@"Paused: %@ — %@", artist, title]];
     } else {
         return;
     }

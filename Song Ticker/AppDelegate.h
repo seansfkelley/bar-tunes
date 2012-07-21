@@ -12,9 +12,11 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
     IBOutlet NSMenu *statusMenu;
-    NSStatusItem *statusItem;
+    IBOutlet NSMenuItem *quitItem;
     ScrollingTextView *scrollText;
 }
+
+- (IBAction) quitApplication:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;
 
@@ -22,20 +24,23 @@
 
 /*
 To do:
- don't flip the text back to the beginning if only the play/pause state is changed (do this through actual state changes, not text changes)
+ don't flip the text back to the beginning if only the play/pause state is changed (do this through actual state changes, not text changes -- state = icon)
  draw icon on left that doesn't scroll so there is a visual left border
     play 
     pause
     no player found
  fade at edges?
  force to be always leftmost
- make it so the menu pops up
+ menu options
     set format string
     set itunes/spotify/both
+    slider: scroll speed
+    checkbox: show text when paused
     quit
- get itunes state at startup so something is shown
+ get itunes state at startup so something is shown, or just icon
  spotify support
  what's the CPU usage like? unreasonable? at least it doesn't use the dedicated GPU
  scroll speed constant, or a function of the length of the text?
  fiddle with parameters
+ app icon
 */
