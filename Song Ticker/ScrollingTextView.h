@@ -19,8 +19,17 @@
     float scrollCurrentOffset;
 }
 
+typedef enum playerState
+{
+    PLAY,
+    PAUSE,
+    STOP
+} PlayerState;
+
+- (void) clear;
+
 @property (nonatomic) NSString *text;
-@property NSString *state;
+@property PlayerState state;
 @property NSStatusItem *statusItem;
 
 @end

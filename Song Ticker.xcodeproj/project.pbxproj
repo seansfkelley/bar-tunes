@@ -12,9 +12,10 @@
 		7854A08E15B9202700026D40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A08D15B9202700026D40 /* main.m */; };
 		7854A09215B9202700026D40 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7854A09015B9202700026D40 /* Credits.rtf */; };
 		7854A09515B9202700026D40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A09415B9202700026D40 /* AppDelegate.m */; };
-		7874867715B929380059D593 /* openitunes.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 7874867615B929380059D593 /* openitunes.scpt */; };
 		7874867A15B9396F0059D593 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* MainMenu.xib */; };
 		7874867E15B942530059D593 /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7874867D15B942530059D593 /* ScrollingTextView.m */; };
+		788B5F8215BBD47F006D8691 /* SongMetadataTokenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */; };
+		788B5F8615BBF631006D8691 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B5F8515BBF631006D8691 /* ScriptingBridge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,10 +32,13 @@
 		7854A09315B9202700026D40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7854A09415B9202700026D40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7854A09F15B9202800026D40 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		7874867615B929380059D593 /* openitunes.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = openitunes.scpt; sourceTree = "<group>"; };
 		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
 		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
+		788B5F8015BBD47F006D8691 /* SongMetadataTokenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongMetadataTokenDelegate.h; sourceTree = "<group>"; };
+		788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongMetadataTokenDelegate.m; sourceTree = "<group>"; };
+		788B5F8415BBF59C006D8691 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		788B5F8515BBF631006D8691 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = ../../../../../System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7854A08215B9202700026D40 /* Cocoa.framework in Frameworks */,
+				788B5F8615BBF631006D8691 /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +60,6 @@
 				7854A08715B9202700026D40 /* Song Ticker */,
 				7854A08015B9202700026D40 /* Frameworks */,
 				7854A07E15B9202700026D40 /* Products */,
-				7874867615B929380059D593 /* openitunes.scpt */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +84,7 @@
 		7854A08315B9202700026D40 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				788B5F8515BBF631006D8691 /* ScriptingBridge.framework */,
 				7854A08415B9202700026D40 /* AppKit.framework */,
 				7854A08515B9202700026D40 /* CoreData.framework */,
 				7854A08615B9202700026D40 /* Foundation.framework */,
@@ -90,10 +95,13 @@
 		7854A08715B9202700026D40 /* Song Ticker */ = {
 			isa = PBXGroup;
 			children = (
+				788B5F8415BBF59C006D8691 /* iTunes.h */,
 				7854A09315B9202700026D40 /* AppDelegate.h */,
 				7854A09415B9202700026D40 /* AppDelegate.m */,
 				7874867C15B942530059D593 /* ScrollingTextView.h */,
 				7874867D15B942530059D593 /* ScrollingTextView.m */,
+				788B5F8015BBD47F006D8691 /* SongMetadataTokenDelegate.h */,
+				788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */,
 				7874867815B9396F0059D593 /* MainMenu.xib */,
 				7854A08815B9202700026D40 /* Supporting Files */,
 			);
@@ -164,7 +172,6 @@
 			files = (
 				7854A08C15B9202700026D40 /* InfoPlist.strings in Resources */,
 				7854A09215B9202700026D40 /* Credits.rtf in Resources */,
-				7874867715B929380059D593 /* openitunes.scpt in Resources */,
 				7874867A15B9396F0059D593 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +186,7 @@
 				7854A08E15B9202700026D40 /* main.m in Sources */,
 				7854A09515B9202700026D40 /* AppDelegate.m in Sources */,
 				7874867E15B942530059D593 /* ScrollingTextView.m in Sources */,
+				788B5F8215BBD47F006D8691 /* SongMetadataTokenDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,7 +35,10 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     text = t;
     stringSize = [text sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
-    if (stringSize.width + EXTRA_SPACING <= 300) {
+    if ([text isEqualToString:@""]) {
+        scrolling = NO;
+        [self setFrame:NSMakeRect(0, 0, 0, [self frame].size.height)];
+    } else if (stringSize.width + EXTRA_SPACING <= 300) {
         scrolling = NO;
         [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING, [self frame].size.height)];
     } else {
@@ -51,6 +54,10 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [self setFrame:NSMakeRect(0, 0, 250, [self frame].size.height)];
     }
     [self refresh];
+}
+
+- (void) clear {
+    [self setText:@""];
 }
 
 - (void) drawRect:(NSRect)dirtyRect {

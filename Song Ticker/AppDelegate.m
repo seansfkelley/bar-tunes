@@ -10,9 +10,13 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize itunes;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
+- (void) awakeFromNib {
+    itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    
+    [tokenField setTokenizingCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@""]];
+    
     scrollText = [[ScrollingTextView alloc] init];
     
     NSStatusItem* statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -22,14 +26,48 @@
     
     [scrollText setStatusItem:statusItem];
     
+    if ([itunes playerState] == iTunesEPlSPlaying) {
+        [scrollText setState:PLAY];
+        [self setDisplayStringFromiTunesState];
+    } else if ([itunes playerState] == iTunesEPlSPaused) {
+        [scrollText setState:PAUSE];
+        [self setDisplayStringFromiTunesState];
+    } else {
+        [scrollText setState:STOP];
+        [scrollText clear];
+    }
+    
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesPlayerInfoNotification:)
                                                             name:@"com.apple.iTunes.playerInfo"
                                                           object:nil];
 }
 
-- (IBAction) quitApplication:(id)sender{
+- (IBAction) closeWindowAndSetFormatString:(id)sender {
+    NSLog(@"%@", [tokenField objectValue]);
+    [formatWindow close];
+}
+
+- (IBAction) quitApplication:(id)sender {
     [[NSApplication sharedApplication] terminate:nil];
+}
+
+- (IBAction) bringFormatWindowToFront:(id)sender{
+    [NSApp activateIgnoringOtherApps:YES];
+    [formatWindow makeKeyAndOrderFront:nil];
+    // Initialize token field.
+}
+
+- (void) setDisplayStringFromiTunesState {
+    iTunesTrack *track = [itunes currentTrack];
+    [scrollText setText:[NSString stringWithFormat:@"%@ — %@", [track artist], [track name]]];
+}
+
+- (void) printNotification:(NSNotification*)note {
+    NSString *object = [note object];
+    NSString *name = [note name];
+    NSDictionary *userInfo = [note userInfo];
+    NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
 }
 
 - (void) openItunes{
@@ -40,23 +78,21 @@
     [appleScript executeAndReturnError:nil];
 }
 
-- (void) iTunesPlayerInfoNotification:(NSNotification*) note {
-//    NSString *object = [note object];
-//    NSString *name = [note name];
-//    NSDictionary *userInfo = [note userInfo];
-//    NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
-    
+- (void) iTunesPlayerInfoNotification:(NSNotification*)note {
     NSDictionary *userInfo = [note userInfo];
     NSString *state = [userInfo objectForKey:@"Player State"];
-    NSString *artist = [userInfo objectForKey:@"Artist"];
-    NSString *title = [userInfo objectForKey:@"Name"];
     
     if ([state isEqualToString:@"Playing"]) {
-        [((ScrollingTextView*) scrollText) setText:[NSString stringWithFormat:@"Playing: %@ — %@", artist, title]];
+        [scrollText setState:PLAY];
+        [self setDisplayStringFromiTunesState];
     } else if ([state isEqualToString:@"Paused"]) {
-        [((ScrollingTextView*) scrollText) setText:[NSString stringWithFormat:@"Paused: %@ — %@", artist, title]];
+        [scrollText setState:PAUSE];
+        [self setDisplayStringFromiTunesState];
+    } else if ([state isEqualToString:@"Stopped"]) {
+        [scrollText setState:STOP];
+        [scrollText clear];
     } else {
-        return;
+        [self printNotification:note];
     }
 }
 
