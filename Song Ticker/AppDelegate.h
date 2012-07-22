@@ -29,23 +29,30 @@
 
 /*
 To do:
+ need to listen to NSWorkspace notifications for opening/closing iTunes? [+set variable appropriately]
  show current settings for format string
+    later: for now, just use specialized % formatting
+    title, artist, album (album artist?) (track number?)
  draggable list of tokens?
  scroll while menu is selected?
  don't flip the text back to the beginning if only the play/pause state is changed (do this through actual state changes, not text changes -- state = icon)
  draw icon on left that doesn't scroll so there is a visual left border
     play 
     pause
-    no player found
+    stopped
+    no player found [add enum]
  fade at edges?
  force to be always leftmost
  menu options
     set format string
     set itunes/spotify/both
-    slider: scroll speed
+    slider: scroll speed (?)
     checkbox: show text when paused
+    checkbox: scroll around v. scroll side-to-side
     quit
  spotify support
+    what notifications does it publish?
+    incorporate the header
  what's the CPU usage like? unreasonable? at least it doesn't use the dedicated GPU
  scroll speed constant, or a function of the length of the text?
  fiddle with parameters

@@ -16,6 +16,7 @@
 
 BOOL menuVisible = NO;
 
+const int IMAGE_SIZE = 14;
 const int EXTRA_SPACING = 20;
 const int VERTICAL_OFFSET = 3;
 const int MAX_STATIC_WIDTH = 300;
@@ -24,10 +25,17 @@ const int MAX_SCROLLING_WIDTH = 250;
 const float SCROLL_SPEED = 0.33;
 const float INTERVAL = 1 / 30.0; // 30 FPS
 
+const NSDictionary *imageDict;
+
 - (id) init {
     self = [super init];
     drawStringAttributes = [[NSMutableDictionary alloc] init];
 	[drawStringAttributes setValue:[NSFont menuBarFontOfSize:11.0] forKey:NSFontAttributeName];
+    
+    imageDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSImage imageNamed:@"play@2x.png"], @"play",
+                                                             [NSImage imageNamed:@"playDown@2x.png"], @"playHi",
+                                                             [NSImage imageNamed:@"pause@2x.png"], @"pause",
+                                                             [NSImage imageNamed:@"pauseDown@2x.png"], @"pauseHi", nil];
     return self;
 }
 
@@ -40,7 +48,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [self setFrame:NSMakeRect(0, 0, 0, [self frame].size.height)];
     } else if (stringSize.width + EXTRA_SPACING <= 300) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING + IMAGE_SIZE, [self frame].size.height)];
     } else {
         scrolling = YES;
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL
@@ -51,7 +59,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         scrollLeft = YES;
         scrollMaxOffset = (stringSize.width) - 250;
         scrollCurrentOffset = 0;
-        [self setFrame:NSMakeRect(0, 0, 250, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + IMAGE_SIZE, [self frame].size.height)];
     }
     [self refresh];
 }
@@ -71,23 +79,34 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     } else {
         [drawStringAttributes setValue:[NSColor controlTextColor] forKey:NSForegroundColorAttributeName];
     }
-    
+
     if (scrolling) {
         scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
         if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACING || scrollCurrentOffset <= -EXTRA_SPACING) {
             scrollLeft = !scrollLeft;
         }
         NSPoint centerPoint;
-        centerPoint.x = -scrollCurrentOffset;
+        centerPoint.x = -scrollCurrentOffset + IMAGE_SIZE;
         centerPoint.y = VERTICAL_OFFSET;
         [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
         [self setNeedsDisplay:YES];
     } else {
         NSPoint centerPoint;
-        centerPoint.x = [self bounds].size.width / 2 - (stringSize.width / 2);
+        centerPoint.x = [self bounds].size.width / 2 - (stringSize.width / 2) + IMAGE_SIZE;
         centerPoint.y = VERTICAL_OFFSET;
         [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
+    };
+    
+    NSMutableString *filename;
+    if (state == PLAY) {
+        filename = [[NSMutableString alloc] initWithString:@"play"];
+    } else if (state == PAUSE) {
+        filename = [[NSMutableString alloc] initWithString:@"pause"];
     }
+    if (menuVisible) {
+        [filename appendString:@"Hi"];
+    }
+    [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
 }
 
 - (void) mouseDown:(NSEvent*)event {

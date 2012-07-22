@@ -12,6 +12,14 @@
 		7854A08E15B9202700026D40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A08D15B9202700026D40 /* main.m */; };
 		7854A09215B9202700026D40 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7854A09015B9202700026D40 /* Credits.rtf */; };
 		7854A09515B9202700026D40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7854A09415B9202700026D40 /* AppDelegate.m */; };
+		785F598815BCC2020061FBC7 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598015BCC2020061FBC7 /* pause.png */; };
+		785F598915BCC2020061FBC7 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598115BCC2020061FBC7 /* pause@2x.png */; };
+		785F598A15BCC2020061FBC7 /* pauseDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598215BCC2020061FBC7 /* pauseDown.png */; };
+		785F598B15BCC2020061FBC7 /* pauseDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598315BCC2020061FBC7 /* pauseDown@2x.png */; };
+		785F598C15BCC2020061FBC7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598415BCC2020061FBC7 /* play.png */; };
+		785F598D15BCC2020061FBC7 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598515BCC2020061FBC7 /* play@2x.png */; };
+		785F598E15BCC2020061FBC7 /* playDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598615BCC2020061FBC7 /* playDown.png */; };
+		785F598F15BCC2020061FBC7 /* playDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598715BCC2020061FBC7 /* playDown@2x.png */; };
 		7874867A15B9396F0059D593 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* MainMenu.xib */; };
 		7874867E15B942530059D593 /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7874867D15B942530059D593 /* ScrollingTextView.m */; };
 		788B5F8215BBD47F006D8691 /* SongMetadataTokenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */; };
@@ -32,6 +40,14 @@
 		7854A09315B9202700026D40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7854A09415B9202700026D40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7854A09F15B9202800026D40 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		785F598015BCC2020061FBC7 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		785F598115BCC2020061FBC7 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		785F598215BCC2020061FBC7 /* pauseDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseDown.png; sourceTree = "<group>"; };
+		785F598315BCC2020061FBC7 /* pauseDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseDown@2x.png"; sourceTree = "<group>"; };
+		785F598415BCC2020061FBC7 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		785F598515BCC2020061FBC7 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		785F598615BCC2020061FBC7 /* playDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playDown.png; sourceTree = "<group>"; };
+		785F598715BCC2020061FBC7 /* playDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playDown@2x.png"; sourceTree = "<group>"; };
 		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
 		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
@@ -103,6 +119,7 @@
 				788B5F8015BBD47F006D8691 /* SongMetadataTokenDelegate.h */,
 				788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */,
 				7874867815B9396F0059D593 /* MainMenu.xib */,
+				785F597F15BCC2020061FBC7 /* Status Icons */,
 				7854A08815B9202700026D40 /* Supporting Files */,
 			);
 			path = "Song Ticker";
@@ -118,6 +135,21 @@
 				7854A09015B9202700026D40 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		785F597F15BCC2020061FBC7 /* Status Icons */ = {
+			isa = PBXGroup;
+			children = (
+				785F598015BCC2020061FBC7 /* pause.png */,
+				785F598115BCC2020061FBC7 /* pause@2x.png */,
+				785F598215BCC2020061FBC7 /* pauseDown.png */,
+				785F598315BCC2020061FBC7 /* pauseDown@2x.png */,
+				785F598415BCC2020061FBC7 /* play.png */,
+				785F598515BCC2020061FBC7 /* play@2x.png */,
+				785F598615BCC2020061FBC7 /* playDown.png */,
+				785F598715BCC2020061FBC7 /* playDown@2x.png */,
+			);
+			path = "Status Icons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +205,14 @@
 				7854A08C15B9202700026D40 /* InfoPlist.strings in Resources */,
 				7854A09215B9202700026D40 /* Credits.rtf in Resources */,
 				7874867A15B9396F0059D593 /* MainMenu.xib in Resources */,
+				785F598815BCC2020061FBC7 /* pause.png in Resources */,
+				785F598915BCC2020061FBC7 /* pause@2x.png in Resources */,
+				785F598A15BCC2020061FBC7 /* pauseDown.png in Resources */,
+				785F598B15BCC2020061FBC7 /* pauseDown@2x.png in Resources */,
+				785F598C15BCC2020061FBC7 /* play.png in Resources */,
+				785F598D15BCC2020061FBC7 /* play@2x.png in Resources */,
+				785F598E15BCC2020061FBC7 /* playDown.png in Resources */,
+				785F598F15BCC2020061FBC7 /* playDown@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

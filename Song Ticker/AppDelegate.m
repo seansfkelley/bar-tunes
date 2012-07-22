@@ -37,6 +37,8 @@
         [scrollText clear];
     }
     
+    // NSImage *img = [[NSImage alloc] initWithContentsOfFile:@"/Users/skelley/Desktop/ATdrawing9.tiff"];
+    
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesPlayerInfoNotification:)
                                                             name:@"com.apple.iTunes.playerInfo"
