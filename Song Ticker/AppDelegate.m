@@ -12,7 +12,8 @@
 
 - (void) awakeFromNib {
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
+    spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
+        
     scrollText = [[ScrollingTextView alloc] init];
     
     NSStatusItem* statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -24,25 +25,17 @@
     
     formatString = @"%artist — %song";
     
-    if ([itunes playerState] == iTunesEPlSPlaying) {
-        [scrollText setState:PLAY];
-        [self setDisplayStringFromiTunesState];
-    } else if ([itunes playerState] == iTunesEPlSPaused) {
-        [scrollText setState:PAUSE];
-        [self setDisplayStringFromiTunesState];
-    } else {
-        [scrollText setState:STOP];
-        [scrollText clear];
-    }
+    [self setDisplayStringFromPlayerState:[self getItunesPlayerState]];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                        selector:@selector(iTunesPlayerInfoNotification:)
+                                                        selector:@selector(PlayerStateChangeNotification:)
                                                             name:@"com.apple.iTunes.playerInfo"
                                                           object:nil];
-}
-
-- (IBAction) quitApplication:(id)sender {
-    [[NSApplication sharedApplication] terminate:nil];
+    
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(PlayerStateChangeNotification:)
+                                                            name:@"com.spotify.client.PlaybackStateChanged"
+                                                          object:nil];
 }
 
 - (IBAction) bringFormatWindowToFront:(id)sender{
@@ -54,7 +47,65 @@
 - (IBAction) closeWindowAndSetFormatString:(id)sender {
     formatString = [formatField objectValue];
     [formatWindow close];
-    [self setDisplayStringFromiTunesState];
+    [self setDisplayStringFromPlayerState:[self getPlayerState]];
+}
+
+- (IBAction) setWatchItunes:(id)sender {
+    currentPlayer = itunes;
+    [itunesMenuItem setState:NSOnState];
+    [spotifyMenuItem setState:NSOffState];
+    [anyPlayerMenuItem setState:NSOffState];
+    [self setDisplayStringFromPlayerState:[self getItunesPlayerState]];
+}
+- (IBAction) setWatchSpotify:(id)sender {
+    currentPlayer = spotify;
+    [itunesMenuItem setState:NSOffState];
+    [spotifyMenuItem setState:NSOnState];
+    [anyPlayerMenuItem setState:NSOffState];
+    [self setDisplayStringFromPlayerState:[self getSpotifyPlayerState]];
+}
+- (IBAction) setWatchAny:(id)sender {
+    currentPlayer = nil;
+    [itunesMenuItem setState:NSOffState];
+    [spotifyMenuItem setState:NSOffState];
+    [anyPlayerMenuItem setState:NSOnState];
+}
+
+- (PlayerState) getPlayerState {
+    if (currentPlayer == nil) {
+        return STOP;
+    } else if (currentPlayer == itunes) {
+        return [self getItunesPlayerState];
+    } else if (currentPlayer == spotify) {
+        return [self getSpotifyPlayerState];
+    } else {
+        assert(NO);
+    }
+}
+
+- (PlayerState) getItunesPlayerState {
+    if ([itunes playerState] == iTunesEPlSPlaying) {
+        return PLAY;
+    } else if ([itunes playerState] == iTunesEPlSPaused) {
+        return PAUSE;
+    } else {
+        return STOP;
+    }
+}
+
+- (PlayerState) getSpotifyPlayerState {
+    if ([spotify playerState] == SpotifyEPlSPlaying) {
+        return PLAY;
+    } else if ([spotify playerState] == SpotifyEPlSPaused) {
+        return PAUSE;
+    } else {
+        return STOP;
+    }
+}
+
+
+- (IBAction) quitApplication:(id)sender {
+[[NSApplication sharedApplication] terminate:nil];
 }
 
 - (void) printNotification:(NSNotification*)note {
@@ -64,27 +115,24 @@
     NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
 }
 
-- (void) iTunesPlayerInfoNotification:(NSNotification*)note {
-    [self printNotification:note];
-    NSDictionary *userInfo = [note userInfo];
-    NSString *state = [userInfo objectForKey:@"Player State"];
-    
-    if ([state isEqualToString:@"Playing"]) {
-        [scrollText setState:PLAY];
-        [self setDisplayStringFromiTunesState];
-    } else if ([state isEqualToString:@"Paused"]) {
-        [scrollText setState:PAUSE];
-        [self setDisplayStringFromiTunesState];
-    } else if ([state isEqualToString:@"Stopped"]) {
-        [scrollText setState:STOP];
-        [scrollText clear];
-    } else {
-        [self printNotification:note];
-    }
+- (void) PlayerStateChangeNotification:(NSNotification*)note {
+    [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
-- (void) setDisplayStringFromiTunesState {
-    iTunesTrack *track = [itunes currentTrack];
+- (void) setDisplayStringFromPlayerState:(PlayerState)state {
+    if (currentPlayer == nil) {
+        [scrollText setState:STOP];
+        [scrollText clear];
+        return;
+    }
+    
+    [scrollText setState:state];
+    if (state == STOP) {
+        [scrollText clear];
+        return;
+    }
+    
+    id track = [currentPlayer currentTrack];
     // Could also be done with a string -> SEL dictionary...
     NSString *displayString = [formatString 
                      stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
