@@ -14,53 +14,57 @@
 @synthesize state;
 @synthesize statusItem;
 
-BOOL menuVisible = NO;
-
-const int IMAGE_SIZE = 14;
-const int EXTRA_SPACING = 20;
-const int VERTICAL_OFFSET = 3;
+const int IMAGE_WIDTH = 14;
+const int EXTRA_SPACE_SCROLL = 20;
+const int EXTRA_SPACE_STATIC = 6;
+const int VERTICAL_OFFSET = 4;
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
 
 const float SCROLL_SPEED = 0.33;
 const float INTERVAL = 1 / 30.0; // 30 FPS
 
-const NSDictionary *imageDict;
-
 - (id) init {
     self = [super init];
     drawStringAttributes = [[NSMutableDictionary alloc] init];
 	[drawStringAttributes setValue:[NSFont menuBarFontOfSize:11.0] forKey:NSFontAttributeName];
     
-    imageDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSImage imageNamed:@"play@2x.png"], @"play",
-                                                             [NSImage imageNamed:@"playDown@2x.png"], @"playHi",
-                                                             [NSImage imageNamed:@"pause@2x.png"], @"pause",
-                                                             [NSImage imageNamed:@"pauseDown@2x.png"], @"pauseHi", nil];
+    imageDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSImage imageNamed:@"play"], @"play",
+                                                             [NSImage imageNamed:@"playDown"], @"playHi",
+                                                             [NSImage imageNamed:@"pause"], @"pause",
+                                                             [NSImage imageNamed:@"pauseDown"], @"pauseHi", nil];
+    menuVisible = NO;
+    scrolling = NO;
+    
     return self;
 }
 
 - (void) setText:(NSString*)t {
-    text = t;
-    stringSize = [text sizeWithAttributes:drawStringAttributes];
+    NSSize stringSize = [t sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
-    if ([text isEqualToString:@""]) {
+    if ([t isEqualToString:@""]) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, 0, [self frame].size.height)];
-    } else if (stringSize.width + EXTRA_SPACING <= 300) {
+        [self setFrame:NSMakeRect(0, 0, IMAGE_WIDTH, [self frame].size.height)];
+    } else if (stringSize.width <= MAX_STATIC_WIDTH) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, stringSize.width + EXTRA_SPACING + IMAGE_SIZE, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, stringSize.width + IMAGE_WIDTH + EXTRA_SPACE_STATIC * 2, [self frame].size.height)];
     } else {
-        scrolling = YES;
+        
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL
                                                  target:self
                                                selector:@selector(refresh)
                                                userInfo:nil
                                                 repeats:YES];
-        scrollLeft = YES;
-        scrollMaxOffset = (stringSize.width) - 250;
-        scrollCurrentOffset = 0;
-        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + IMAGE_SIZE, [self frame].size.height)];
+        // Only a state change.
+        if (!scrolling || ![t isEqualToString:text]) {
+            scrollCurrentOffset = 0;
+            scrollLeft = YES;
+        }
+        scrollMaxOffset = (stringSize.width) - MAX_SCROLLING_WIDTH;
+        scrolling = YES;
+        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + IMAGE_WIDTH, [self frame].size.height)];
     }
+    text = t;
     [self refresh];
 }
 
@@ -82,17 +86,17 @@ const NSDictionary *imageDict;
 
     if (scrolling) {
         scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
-        if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACING || scrollCurrentOffset <= -EXTRA_SPACING) {
+        if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACE_SCROLL || scrollCurrentOffset <= -EXTRA_SPACE_SCROLL) {
             scrollLeft = !scrollLeft;
         }
         NSPoint centerPoint;
-        centerPoint.x = -scrollCurrentOffset + IMAGE_SIZE;
+        centerPoint.x = -scrollCurrentOffset + IMAGE_WIDTH;
         centerPoint.y = VERTICAL_OFFSET;
         [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
         [self setNeedsDisplay:YES];
     } else {
         NSPoint centerPoint;
-        centerPoint.x = [self bounds].size.width / 2 - (stringSize.width / 2) + IMAGE_SIZE;
+        centerPoint.x = IMAGE_WIDTH + EXTRA_SPACE_STATIC;
         centerPoint.y = VERTICAL_OFFSET;
         [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
     };

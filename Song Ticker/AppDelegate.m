@@ -10,12 +10,8 @@
 
 @implementation AppDelegate
 
-@synthesize itunes;
-
 - (void) awakeFromNib {
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
-    [tokenField setTokenizingCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@""]];
     
     scrollText = [[ScrollingTextView alloc] init];
     
@@ -25,6 +21,8 @@
     [statusItem setMenu:statusMenu];
     
     [scrollText setStatusItem:statusItem];
+    
+    formatString = @"%artist — %song";
     
     if ([itunes playerState] == iTunesEPlSPlaying) {
         [scrollText setState:PLAY];
@@ -37,17 +35,10 @@
         [scrollText clear];
     }
     
-    // NSImage *img = [[NSImage alloc] initWithContentsOfFile:@"/Users/skelley/Desktop/ATdrawing9.tiff"];
-    
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(iTunesPlayerInfoNotification:)
                                                             name:@"com.apple.iTunes.playerInfo"
                                                           object:nil];
-}
-
-- (IBAction) closeWindowAndSetFormatString:(id)sender {
-    NSLog(@"%@", [tokenField objectValue]);
-    [formatWindow close];
 }
 
 - (IBAction) quitApplication:(id)sender {
@@ -57,12 +48,13 @@
 - (IBAction) bringFormatWindowToFront:(id)sender{
     [NSApp activateIgnoringOtherApps:YES];
     [formatWindow makeKeyAndOrderFront:nil];
-    // Initialize token field.
+    [formatField setObjectValue:formatString];
 }
 
-- (void) setDisplayStringFromiTunesState {
-    iTunesTrack *track = [itunes currentTrack];
-    [scrollText setText:[NSString stringWithFormat:@"%@ — %@", [track artist], [track name]]];
+- (IBAction) closeWindowAndSetFormatString:(id)sender {
+    formatString = [formatField objectValue];
+    [formatWindow close];
+    [self setDisplayStringFromiTunesState];
 }
 
 - (void) printNotification:(NSNotification*)note {
@@ -72,15 +64,8 @@
     NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
 }
 
-- (void) openItunes{
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"openitunes" ofType:@"scpt"];
-    NSURL* url = [NSURL fileURLWithPath:path];
-    NSDictionary* errors = [NSDictionary dictionary];
-    NSAppleScript* appleScript = [[NSAppleScript alloc] initWithContentsOfURL:url error:&errors];
-    [appleScript executeAndReturnError:nil];
-}
-
 - (void) iTunesPlayerInfoNotification:(NSNotification*)note {
+    [self printNotification:note];
     NSDictionary *userInfo = [note userInfo];
     NSString *state = [userInfo objectForKey:@"Player State"];
     
@@ -96,6 +81,21 @@
     } else {
         [self printNotification:note];
     }
+}
+
+- (void) setDisplayStringFromiTunesState {
+    iTunesTrack *track = [itunes currentTrack];
+    // Could also be done with a string -> SEL dictionary...
+    NSString *displayString = [formatString 
+                     stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
+    displayString = [displayString 
+                     stringByReplacingOccurrencesOfString:@"%album" withString:[track album]];
+    displayString = [displayString 
+                     stringByReplacingOccurrencesOfString:@"%song" withString:[track name]];
+    displayString = [displayString 
+                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%d", [track trackNumber]]];
+    
+    [scrollText setText:displayString];
 }
 
 @end

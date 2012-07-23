@@ -9,14 +9,18 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
-    NSStatusItem *statusItem;
-    NSTimer *timer;
+    BOOL menuVisible;
+    
     NSMutableDictionary *drawStringAttributes;
-    NSSize stringSize;
+    
+    NSTimer *timer;
     BOOL scrolling;
     BOOL scrollLeft;
     int scrollMaxOffset;
     float scrollCurrentOffset;
+    
+    const NSDictionary *imageDict;
+    NSImage *currentImage;
 }
 
 typedef enum playerState
