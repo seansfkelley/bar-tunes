@@ -22,7 +22,6 @@
 		785F598F15BCC2020061FBC7 /* playDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F598715BCC2020061FBC7 /* playDown@2x.png */; };
 		7874867A15B9396F0059D593 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* MainMenu.xib */; };
 		7874867E15B942530059D593 /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7874867D15B942530059D593 /* ScrollingTextView.m */; };
-		788B5F8215BBD47F006D8691 /* SongMetadataTokenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */; };
 		788B5F8615BBF631006D8691 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B5F8515BBF631006D8691 /* ScriptingBridge.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +51,6 @@
 		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
 		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
-		788B5F8015BBD47F006D8691 /* SongMetadataTokenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongMetadataTokenDelegate.h; sourceTree = "<group>"; };
-		788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongMetadataTokenDelegate.m; sourceTree = "<group>"; };
 		788B5F8415BBF59C006D8691 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		788B5F8515BBF631006D8691 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = ../../../../../System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,8 +115,6 @@
 				7854A09415B9202700026D40 /* AppDelegate.m */,
 				7874867C15B942530059D593 /* ScrollingTextView.h */,
 				7874867D15B942530059D593 /* ScrollingTextView.m */,
-				788B5F8015BBD47F006D8691 /* SongMetadataTokenDelegate.h */,
-				788B5F8115BBD47F006D8691 /* SongMetadataTokenDelegate.m */,
 				7874867815B9396F0059D593 /* MainMenu.xib */,
 				785F597F15BCC2020061FBC7 /* Status Icons */,
 				7854A08815B9202700026D40 /* Supporting Files */,
@@ -228,7 +223,6 @@
 				7854A08E15B9202700026D40 /* main.m in Sources */,
 				7854A09515B9202700026D40 /* AppDelegate.m in Sources */,
 				7874867E15B942530059D593 /* ScrollingTextView.m in Sources */,
-				788B5F8215BBD47F006D8691 /* SongMetadataTokenDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

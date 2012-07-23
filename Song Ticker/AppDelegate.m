@@ -23,9 +23,9 @@
     
     [scrollText setStatusItem:statusItem];
     
+    // Default startup options. Replace with saved information from user.
     formatString = @"%artist — %song";
-    
-    [self setDisplayStringFromPlayerState:[self getItunesPlayerState]];
+    [self setWatchItunes:nil];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(PlayerStateChangeNotification:)
@@ -84,7 +84,9 @@
 }
 
 - (PlayerState) getItunesPlayerState {
-    if ([itunes playerState] == iTunesEPlSPlaying) {
+    if (![itunes isRunning]) {
+        return STOP;
+    } else if ([itunes playerState] == iTunesEPlSPlaying) {
         return PLAY;
     } else if ([itunes playerState] == iTunesEPlSPaused) {
         return PAUSE;
@@ -94,7 +96,9 @@
 }
 
 - (PlayerState) getSpotifyPlayerState {
-    if ([spotify playerState] == SpotifyEPlSPlaying) {
+    if (![spotify isRunning]) {
+        return STOP;
+    } else if ([spotify playerState] == SpotifyEPlSPlaying) {
         return PLAY;
     } else if ([spotify playerState] == SpotifyEPlSPaused) {
         return PAUSE;
@@ -105,7 +109,7 @@
 
 
 - (IBAction) quitApplication:(id)sender {
-[[NSApplication sharedApplication] terminate:nil];
+    [[NSApplication sharedApplication] terminate:nil];
 }
 
 - (void) printNotification:(NSNotification*)note {
@@ -120,7 +124,7 @@
 }
 
 - (void) setDisplayStringFromPlayerState:(PlayerState)state {
-    if (currentPlayer == nil) {
+    if (currentPlayer == nil || ![currentPlayer isRunning]) {
         [scrollText setState:STOP];
         [scrollText clear];
         return;
@@ -132,7 +136,8 @@
         return;
     }
     
-    id track = [currentPlayer currentTrack];
+    // We know that iTunes and Spotify both support this message.
+    id track = [((id) currentPlayer) currentTrack];
     // Could also be done with a string -> SEL dictionary...
     NSString *displayString = [formatString 
                      stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
