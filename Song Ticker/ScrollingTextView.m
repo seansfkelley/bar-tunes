@@ -16,7 +16,7 @@
 
 const int IMAGE_WIDTH = 18;
 const int EXTRA_SPACE_SCROLL = 20;
-const int EXTRA_SPACE_STATIC = 6;
+const int EXTRA_SPACE_STATIC = 3;
 const int VERTICAL_OFFSET = 4;
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
@@ -68,11 +68,12 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + IMAGE_WIDTH, [self frame].size.height)];
     }
     text = t;
-    [self refresh];
+    [self setNeedsDisplay:YES];
 }
 
 - (void) clear {
     [self setText:@""];
+    [self setNeedsDisplay:YES];
 }
 
 - (void) drawRect:(NSRect)dirtyRect {

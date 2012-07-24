@@ -10,65 +10,39 @@
 
 @implementation AppDelegate
 
+@synthesize formatString;
+
 - (void) awakeFromNib {
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
-        
+    
     scrollText = [[ScrollingTextView alloc] init];
+    
+    [formatHandler setAppDelegate:self];
+    [formatHandler setAnchor:scrollText];
+    
+    [menuHandler setAppDelegate:self];
     
     NSStatusItem* statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setHighlightMode:YES];
     [statusItem setView:scrollText];
-    [statusItem setMenu:statusMenu];
+    [statusItem setMenu:menuHandler];
     
     [scrollText setStatusItem:statusItem];
     
     // Default startup options. Replace with saved information from user.
     formatString = @"%artist — %song";
-    [self setWatchItunes:nil];
+    [menuHandler setWatchItunes:nil];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                        selector:@selector(PlayerStateChangeNotification:)
+                                                        selector:@selector(playerStateChangeNotification:)
                                                             name:@"com.apple.iTunes.playerInfo"
                                                           object:nil];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
-                                                        selector:@selector(PlayerStateChangeNotification:)
+                                                        selector:@selector(playerStateChangeNotification:)
                                                             name:@"com.spotify.client.PlaybackStateChanged"
                                                           object:nil];
-}
-
-- (IBAction) bringFormatWindowToFront:(id)sender{
-    [NSApp activateIgnoringOtherApps:YES];
-    [formatWindow makeKeyAndOrderFront:nil];
-    [formatField setObjectValue:formatString];
-}
-
-- (IBAction) closeWindowAndSetFormatString:(id)sender {
-    formatString = [formatField objectValue];
-    [formatWindow close];
-    [self setDisplayStringFromPlayerState:[self getPlayerState]];
-}
-
-- (IBAction) setWatchItunes:(id)sender {
-    currentPlayer = itunes;
-    [itunesMenuItem setState:NSOnState];
-    [spotifyMenuItem setState:NSOffState];
-    [anyPlayerMenuItem setState:NSOffState];
-    [self setDisplayStringFromPlayerState:[self getItunesPlayerState]];
-}
-- (IBAction) setWatchSpotify:(id)sender {
-    currentPlayer = spotify;
-    [itunesMenuItem setState:NSOffState];
-    [spotifyMenuItem setState:NSOnState];
-    [anyPlayerMenuItem setState:NSOffState];
-    [self setDisplayStringFromPlayerState:[self getSpotifyPlayerState]];
-}
-- (IBAction) setWatchAny:(id)sender {
-    currentPlayer = nil;
-    [itunesMenuItem setState:NSOffState];
-    [spotifyMenuItem setState:NSOffState];
-    [anyPlayerMenuItem setState:NSOnState];
 }
 
 - (PlayerState) getPlayerState {
@@ -107,6 +81,23 @@
     }
 }
 
+- (void) setCurrentPlayer:(Player)p {
+    if (p == ITUNES) {
+        currentPlayer = itunes;
+    } else if (p == SPOTIFY) {
+        currentPlayer = spotify;
+    } else if (p == ANY) {
+        currentPlayer = nil;
+    } else {
+        assert(NO);
+    }
+    [self setDisplayStringFromPlayerState:[self getPlayerState]];
+}
+
+- (void) setFormatString:(NSString *)f {
+    formatString = f;
+    [self setDisplayStringFromPlayerState:[self getPlayerState]];
+}
 
 - (IBAction) quitApplication:(id)sender {
     [[NSApplication sharedApplication] terminate:nil];
@@ -119,7 +110,7 @@
     NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
 }
 
-- (void) PlayerStateChangeNotification:(NSNotification*)note {
+- (void) playerStateChangeNotification:(NSNotification*)note {
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
