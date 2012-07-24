@@ -41,6 +41,7 @@
 
 /*
 To do:
+ popdown from menubar for setting format string? instead of full-fledged window
  need to listen to NSWorkspace notifications for opening/closing iTunes? [+set variable appropriately]
  scroll while menu is selected?
  icon

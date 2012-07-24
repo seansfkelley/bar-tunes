@@ -14,7 +14,7 @@
 @synthesize state;
 @synthesize statusItem;
 
-const int IMAGE_WIDTH = 14;
+const int IMAGE_WIDTH = 18;
 const int EXTRA_SPACE_SCROLL = 20;
 const int EXTRA_SPACE_STATIC = 6;
 const int VERTICAL_OFFSET = 4;
@@ -30,9 +30,12 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 	[drawStringAttributes setValue:[NSFont menuBarFontOfSize:11.0] forKey:NSFontAttributeName];
     
     imageDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSImage imageNamed:@"play"], @"play",
-                                                             [NSImage imageNamed:@"playDown"], @"playHi",
+                                                             [NSImage imageNamed:@"playHighlight"], @"playHi",
                                                              [NSImage imageNamed:@"pause"], @"pause",
-                                                             [NSImage imageNamed:@"pauseDown"], @"pauseHi", nil];
+                                                             [NSImage imageNamed:@"pauseHighlight"], @"pauseHi",
+                                                             [NSImage imageNamed:@"note"], @"note",
+                                                             [NSImage imageNamed:@"noteHighlight"], @"noteHi",
+                                                             nil];
     menuVisible = NO;
     scrolling = NO;
     
@@ -106,6 +109,8 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         filename = [[NSMutableString alloc] initWithString:@"play"];
     } else if (state == PAUSE) {
         filename = [[NSMutableString alloc] initWithString:@"pause"];
+    } else {
+        filename = [[NSMutableString alloc] initWithString:@"note"];
     }
     if (menuVisible) {
         [filename appendString:@"Hi"];
