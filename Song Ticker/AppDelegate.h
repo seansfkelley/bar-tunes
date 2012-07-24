@@ -46,9 +46,13 @@ To do (ordered by approximate priority):
  format popup should 
     listen to esc as cancel
     be closed when the menu is opened
+ test format popup with fullscreen, opening other windows, etc.
  save format string/app selections
  implement any-player option (what is appropriate logic for this: last player to send play notification [that is NOT overridden by a pause]?)
  force to be always leftmost
+ help with interpolation
+    help button with popup/make text appear
+    permanent small text underneath text field
  menu options
     [alternate] show icon on [left/right]
     slider: scroll speed (?)
@@ -56,6 +60,7 @@ To do (ordered by approximate priority):
     checkbox: scroll around v. scroll side-to-side
  MVC separation -- controllers = views = models now (format, menu handlers)
  app icon
+ remove deprecated call from MAAttachedWindow
 
 Questions:
  what's the CPU usage like? unreasonable? at least it doesn't use the dedicated GPU
