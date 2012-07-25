@@ -48,10 +48,10 @@
 To do (ordered by approximate priority):
  force to be always leftmost
  menu options
-    [alternate] show icon on [left/right]
     slider: scroll speed (?)
     checkbox: show text when paused
-    checkbox: scroll around v. scroll side-to-side
+    checkbox: show play/pause icons
+    checkbox: scroll around v. scroll side-to-side [or just permanently switch?]
  shrink menubar icon
  MVC separation -- controllers = views = models now (format, menu handlers)
  app icon

@@ -120,18 +120,21 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 
 - (void) setDisplayedPlayer:(Player)p {
     displayedPlayer = p;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:[self displayedPlayer] forKey:playerDefaultsKey];
+    [defaults synchronize];
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
 - (void) setFormatString:(NSString *)f {
     formatString = f;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:formatString forKey:formatStringDefaultsKey];
+    [defaults synchronize];
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
 - (IBAction) quitApplication:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:formatString forKey:formatStringDefaultsKey];
-    [defaults setInteger:[self displayedPlayer] forKey:playerDefaultsKey];
     [[NSApplication sharedApplication] terminate:nil];
 }
 
