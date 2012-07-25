@@ -46,11 +46,7 @@
 
 /*
 To do (ordered by approximate priority):
- implement any-player option (what is appropriate logic for this: last player to send play notification [that is NOT overridden by a pause]?)
  force to be always leftmost
- help with interpolation
-    help button with popup/make text appear
-    permanent small text underneath text field
  menu options
     [alternate] show icon on [left/right]
     slider: scroll speed (?)

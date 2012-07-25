@@ -15,6 +15,11 @@
 @interface FormatWindowHandler : NSView <NSWindowDelegate> {
     MAAttachedWindow *formatWindow;
     IBOutlet NSTextField *formatTextField;
+    
+    IBOutlet NSButton *albumButton;
+    IBOutlet NSButton *artistButton;
+    IBOutlet NSButton *numberButton;
+    IBOutlet NSButton *songButton;
 }
 
 @property AppDelegate *appDelegate;
@@ -23,5 +28,10 @@
 - (IBAction) bringFormatWindowToFront:(id)sender;
 - (void) closeWindowWithoutSettingString:(id)sender;
 - (IBAction) closeWindowAndSetFormatString:(id)sender;
+
+- (IBAction) insertAlbumTag:(id)sender;
+- (IBAction) insertArtistTag:(id)sender;
+- (IBAction) insertNumberTag:(id)sender;
+- (IBAction) insertSongTag:(id)sender;
 
 @end
