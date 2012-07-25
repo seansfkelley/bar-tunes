@@ -12,10 +12,13 @@
 
 @synthesize formatString;
 @synthesize displayedPlayer;
+@synthesize currentPlayer;
 
 NSString *formatStringDefaultsKey = @"formatString";
 NSString *playerDefaultsKey = @"player";
 
+NSString *itunesNoteName = @"com.apple.iTunes.playerInfo";
+NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 
 - (void) awakeFromNib {
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
@@ -36,18 +39,14 @@ NSString *playerDefaultsKey = @"player";
     [scrollText setStatusItem:statusItem];
     [scrollText setFormatWindow:formatHandler];
     
-    // Default startup options. Replace with saved information from user.
-    
-    [menuHandler setWatchItunes:nil];
-    
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
-                                                            name:@"com.apple.iTunes.playerInfo"
+                                                            name:itunesNoteName
                                                           object:nil];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
-                                                            name:@"com.spotify.client.PlaybackStateChanged"
+                                                            name:spotifyNoteName
                                                           object:nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -58,14 +57,26 @@ NSString *playerDefaultsKey = @"player";
     
     Player p = [defaults integerForKey:playerDefaultsKey];
     [menuHandler setWatch:p];
+    
+    if ([self getItunesPlayerState] == PLAY) {
+        [self setCurrentPlayer:ITUNES];
+    } else if ([self getSpotifyPlayerState] == PLAY) {
+        [self setCurrentPlayer:SPOTIFY];
+    } else if ([self getItunesPlayerState] == PAUSE) {
+        [self setCurrentPlayer:ITUNES];
+    } else if ([self getSpotifyPlayerState] == PAUSE) {
+        [self setCurrentPlayer:SPOTIFY];
+    } else {
+        [self setCurrentPlayer:NONE];
+    }
 }
 
 - (PlayerState) getPlayerState {
-    if (displayedPlayer == ITUNES) {
+    if (displayedPlayer == ITUNES || (displayedPlayer == ANY && currentPlayer == ITUNES)) {
         return [self getItunesPlayerState];
-    } else if (displayedPlayer == SPOTIFY) {
+    } else if (displayedPlayer == SPOTIFY  || (displayedPlayer == ANY && currentPlayer == SPOTIFY)) {
         return [self getSpotifyPlayerState];
-    } else if (displayedPlayer == ANY) {
+    } else if (displayedPlayer == ANY && currentPlayer == NONE) {
         return STOP;
     } else {
         assert(NO);
@@ -97,9 +108,10 @@ NSString *playerDefaultsKey = @"player";
 }
 
 - (id) getCurrentTrack {
-    if (displayedPlayer == ITUNES) {
+    // We know that iTunes and Spotify both support the currentTrack message.
+    if (displayedPlayer == ITUNES || (displayedPlayer == ANY && currentPlayer == ITUNES)) {
         return [itunes currentTrack];
-    } else if (displayedPlayer == SPOTIFY) {
+    } else if (displayedPlayer == SPOTIFY  || (displayedPlayer == ANY && currentPlayer == SPOTIFY)) {
         return [spotify currentTrack];
     } else {
         assert(NO);
@@ -109,6 +121,11 @@ NSString *playerDefaultsKey = @"player";
 - (void) setDisplayedPlayer:(Player)p {
     displayedPlayer = p;
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
+}
+
+- (void) setCurrentPlayer:(Player)p {
+    currentPlayer = p;
+    // [menuHandler setWatchAnyCurrentPlayer:currentPlayer];
 }
 
 - (void) setFormatString:(NSString *)f {
@@ -135,6 +152,24 @@ NSString *playerDefaultsKey = @"player";
 }
 
 - (void) playerStateChangeNotification:(NSNotification*)note {
+    // Both iTunes and Spotify have a Player State -> Playing in their userInfo.
+    NSString *state = [[note userInfo] objectForKey:@"Player State"];
+    NSString *player = [note name];
+    if ([state isEqualToString:@"Playing"]) {
+        if ([player isEqualToString:itunesNoteName]) {
+            [self setCurrentPlayer:ITUNES];
+        } else if ([player isEqualToString:spotifyNoteName]) {
+            [self setCurrentPlayer:SPOTIFY];
+        } else {
+            assert(NO);
+        }
+    } else if ([state isEqualToString:@"Paused"] || [state isEqualToString:@"Stopped"]) {
+        if ([player isEqualToString:itunesNoteName] && [self getSpotifyPlayerState] == PLAY) {
+            [self setCurrentPlayer:SPOTIFY];
+        } else if ([player isEqualToString:spotifyNoteName] && [self getItunesPlayerState] == PLAY) {
+            [self setCurrentPlayer:ITUNES];
+        }
+    }
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
