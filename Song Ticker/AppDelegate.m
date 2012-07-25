@@ -23,12 +23,13 @@
     
     [menuHandler setAppDelegate:self];
     
-    NSStatusItem* statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setHighlightMode:YES];
     [statusItem setView:scrollText];
     [statusItem setMenu:menuHandler];
     
     [scrollText setStatusItem:statusItem];
+    [scrollText setFormatWindow:formatHandler];
     
     // Default startup options. Replace with saved information from user.
     formatString = @"%artist — %song";
@@ -101,6 +102,10 @@
 
 - (IBAction) quitApplication:(id)sender {
     [[NSApplication sharedApplication] terminate:nil];
+}
+
+- (void) closeFormatWindowWithoutSaving {
+    [formatHandler closeWindowWithoutSettingString:self];
 }
 
 - (void) printNotification:(NSNotification*)note {

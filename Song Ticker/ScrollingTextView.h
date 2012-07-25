@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FormatWindowHandler.h"
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
     BOOL menuVisible;
@@ -35,5 +36,6 @@ typedef enum playerState
 @property (nonatomic) NSString *text;
 @property PlayerState state;
 @property NSStatusItem *statusItem;
+@property FormatWindowHandler *formatWindow;
 
 @end

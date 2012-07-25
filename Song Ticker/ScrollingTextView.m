@@ -13,10 +13,11 @@
 @synthesize text;
 @synthesize state;
 @synthesize statusItem;
+@synthesize formatWindow;
 
 const int IMAGE_WIDTH = 18;
 const int EXTRA_SPACE_SCROLL = 20;
-const int EXTRA_SPACE_STATIC = 3;
+const int EXTRA_SPACE_STATIC = 0;
 const int VERTICAL_OFFSET = 4;
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
@@ -131,6 +132,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 
 - (void) menuWillOpen:(NSMenu*)menu {
     menuVisible = YES;
+    [formatWindow closeWindowWithoutSettingString:self];
     [self setNeedsDisplay:YES];
 }
 

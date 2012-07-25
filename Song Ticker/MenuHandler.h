@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 
-@interface MenuHandler : NSMenu <NSWindowDelegate> {
+@interface MenuHandler : NSMenu {
     IBOutlet NSMenuItem *itunesMenuItem;
     IBOutlet NSMenuItem *spotifyMenuItem;
     IBOutlet NSMenuItem *anyPlayerMenuItem;

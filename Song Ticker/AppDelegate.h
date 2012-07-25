@@ -16,6 +16,10 @@
 #import "ScrollingTextView.h"
 #import "FormatWindowHandler.h"
 
+@class MenuHandler;
+@class FormatWindowHandler;
+@class ScrollingTextView;
+
 typedef enum player {
     ITUNES,
     SPOTIFY,
@@ -43,9 +47,6 @@ typedef enum player {
 
 /*
 To do (ordered by approximate priority):
- format popup should 
-    listen to esc as cancel
-    be closed when the menu is opened
  test format popup with fullscreen, opening other windows, etc.
  save format string/app selections
  implement any-player option (what is appropriate logic for this: last player to send play notification [that is NOT overridden by a pause]?)
@@ -58,6 +59,7 @@ To do (ordered by approximate priority):
     slider: scroll speed (?)
     checkbox: show text when paused
     checkbox: scroll around v. scroll side-to-side
+ shrink menubar icon
  MVC separation -- controllers = views = models now (format, menu handlers)
  app icon
  remove deprecated call from MAAttachedWindow
@@ -67,5 +69,6 @@ Questions:
  how to handle crash/force-quit of application we're listening to?
  why is itunes being kept open?
  scroll while menu is selected?
+ need so much extra space while scrolling?
  scroll speed constant, or a function of the length of the text
 */

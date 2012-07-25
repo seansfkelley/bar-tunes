@@ -13,29 +13,33 @@
 @synthesize appDelegate;
 @synthesize anchor;
 
-- (IBAction) bringFormatWindowToFront:(NSMenuItem*)sender{
+- (IBAction) bringFormatWindowToFront:(id)sender{
     NSRect anchorFrame = [[anchor window] frame];
-    formatMAWindow = [[MAAttachedWindow alloc] initWithView:self
+    formatWindow = [[MAAttachedWindow alloc] initWithView:self
                                             attachedToPoint:NSMakePoint(anchorFrame.origin.x + anchorFrame.size.width / 2, anchorFrame.origin.y)
                                                      onSide:NSMinYEdge
                                                  atDistance:5.0];
-    [formatMAWindow setDelegate:self];
+    [formatWindow setDelegate:self];
     [NSApp activateIgnoringOtherApps:YES];
-    [formatMAWindow makeKeyAndOrderFront:self];
+    [formatWindow makeKeyAndOrderFront:self];
     [formatTextField setObjectValue:[appDelegate formatString]];
 }
 
 - (void) closeWindowWithoutSettingString:(id)sender {
-    [formatMAWindow orderOut:self];
+    [formatWindow orderOut:self];
 }
 
 - (IBAction) closeWindowAndSetFormatString:(id)sender {
     [appDelegate setFormatString:[formatTextField objectValue]];
-    [formatMAWindow orderOut:self];
+    [formatWindow orderOut:self];
 }
 
 - (void) windowDidResignKey:(NSNotification *)note {
     [self closeWindowWithoutSettingString:self];
+}
+
+- (void) cancelOperation:(id)sender {
+    [self closeWindowWithoutSettingString:sender];
 }
 
 @end
