@@ -49,15 +49,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
                                                             name:spotifyNoteName
                                                           object:nil];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    formatString = [defaults objectForKey:formatStringDefaultsKey];
-    if (formatString == nil) {
-        formatString = @"%artist — %song";
-    }
-    
-    Player p = [defaults integerForKey:playerDefaultsKey];
-    [menuHandler setWatch:p];
-    
     if ([self getItunesPlayerState] == PLAY) {
         [self setCurrentPlayer:ITUNES];
     } else if ([self getSpotifyPlayerState] == PLAY) {
@@ -69,6 +60,15 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     } else {
         [self setCurrentPlayer:NONE];
     }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    formatString = [defaults objectForKey:formatStringDefaultsKey];
+    if (formatString == nil) {
+        formatString = @"%artist — %song";
+    }
+    
+    Player p = [defaults integerForKey:playerDefaultsKey];
+    [menuHandler setWatch:p];
 }
 
 - (PlayerState) getPlayerState {
@@ -121,11 +121,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 - (void) setDisplayedPlayer:(Player)p {
     displayedPlayer = p;
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
-}
-
-- (void) setCurrentPlayer:(Player)p {
-    currentPlayer = p;
-    [menuHandler setWatchAnyCurrentPlayer:currentPlayer];
 }
 
 - (void) setFormatString:(NSString *)f {

@@ -38,7 +38,7 @@
 // Which player is "current", i.e., was the last to play a song (preferring iTunes in the 
 // event of a tie-break). Not necessarily the player being displayed; should be referenced
 // when watchingPlayer is ANY.
-@property (nonatomic) Player currentPlayer;
+@property Player currentPlayer;
 
 - (IBAction) quitApplication:(id)sender;
 
