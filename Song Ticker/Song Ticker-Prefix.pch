@@ -8,8 +8,8 @@
 typedef enum player {
     ITUNES,
     SPOTIFY,
-    ANY,
-    NONE
+    ANY, // Use whichever player is currently playing.
+    NONE // For use with currentPlayer only, and only if nothing is currently playing.
 } Player;
 
 typedef enum playerState {

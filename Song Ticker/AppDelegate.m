@@ -31,7 +31,17 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     
     [menuHandler setAppDelegate:self];
     
-    NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
+    NSStatusItem *statusItem = nil;
+    
+    // Undocumented behavior; may not always work. Fallback to standard behavior.
+    if ([systemStatusBar respondsToSelector: @selector (_statusItemWithLength:withPriority:)]) {
+        statusItem = [systemStatusBar _statusItemWithLength:0 withPriority:0];
+        [statusItem setLength:NSVariableStatusItemLength];
+    } else {
+        statusItem = [systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
+    }
+    
     [statusItem setHighlightMode:YES];
     [statusItem setView:scrollText];
     [statusItem setMenu:menuHandler];

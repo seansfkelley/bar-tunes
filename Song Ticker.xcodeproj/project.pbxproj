@@ -59,6 +59,7 @@
 		785F599D15BE76D60061FBC7 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
 		786F152615BE935F004C36B1 /* FormatWindowHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatWindowHandler.h; sourceTree = "<group>"; };
 		786F152715BE935F004C36B1 /* FormatWindowHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatWindowHandler.m; sourceTree = "<group>"; };
+		786F154D15BFE07A004C36B1 /* NSStatusBar+Undocumented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+Undocumented.h"; sourceTree = "<group>"; };
 		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
 		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		786F152D15BFA0BE004C36B1 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				786F154D15BFE07A004C36B1 /* NSStatusBar+Undocumented.h */,
 				788B5F8415BBF59C006D8691 /* iTunes.h */,
 				785F599115BD1E410061FBC7 /* Spotify.h */,
 				78FC2E5015BE8C0F00293304 /* MAAttachedWindow.h */,

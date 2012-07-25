@@ -15,6 +15,7 @@
 #import "MenuHandler.h"
 #import "ScrollingTextView.h"
 #import "FormatWindowHandler.h"
+#import "NSStatusBar+Undocumented.h"
 
 @class MenuHandler;
 @class FormatWindowHandler;
@@ -37,7 +38,7 @@
 
 // Which player is "current", i.e., was the last to play a song (preferring iTunes in the 
 // event of a tie-break). Not necessarily the player being displayed; should be referenced
-// when watchingPlayer is ANY.
+// when displayedPlayer is ANY.
 @property Player currentPlayer;
 
 - (IBAction) quitApplication:(id)sender;
@@ -46,7 +47,6 @@
 
 /*
 To do (ordered by approximate priority):
- force to be always leftmost
  menu options
     slider: scroll speed (?)
     checkbox: show text when paused
