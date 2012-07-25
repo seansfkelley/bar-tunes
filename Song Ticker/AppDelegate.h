@@ -51,17 +51,19 @@ To do (ordered by approximate priority):
     slider: scroll speed (?)
     checkbox: show text when paused
     checkbox: show play/pause icons
-    checkbox: scroll around v. scroll side-to-side [or just permanently switch?]
+    [alternate] scroll around v. scroll side-to-side [or just permanently switch?]
+ buttons in display should replace selection, else append and deselect
  shrink menubar icon
  MVC separation -- controllers = views = models now (format, menu handlers)
  app icon
  remove deprecated call from MAAttachedWindow
 
 Questions:
- what's the CPU usage like? unreasonable? at least it doesn't use the dedicated GPU
  how to handle crash/force-quit of application we're listening to?
+ only allow one instance of each format string item?
  why is itunes being kept open?
  scroll while menu is selected?
- need so much extra space while scrolling?
- scroll speed constant, or a function of the length of the text
+ need so much extra space at edges while scrolling?
+ drop amount of space needed by a few pixels?
+ scroll speed constant, or a function of the length of the text?
 */
