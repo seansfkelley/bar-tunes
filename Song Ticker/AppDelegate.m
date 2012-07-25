@@ -125,7 +125,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 
 - (void) setCurrentPlayer:(Player)p {
     currentPlayer = p;
-    // [menuHandler setWatchAnyCurrentPlayer:currentPlayer];
+    [menuHandler setWatchAnyCurrentPlayer:currentPlayer];
 }
 
 - (void) setFormatString:(NSString *)f {

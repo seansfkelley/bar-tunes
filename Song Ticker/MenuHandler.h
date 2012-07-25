@@ -23,5 +23,6 @@
 - (IBAction) setWatchItunes:(id)sender;
 - (IBAction) setWatchSpotify:(id)sender;
 - (IBAction) setWatchAny:(id)sender;
+- (void) setWatchAnyCurrentPlayer:(Player)p;
 
 @end

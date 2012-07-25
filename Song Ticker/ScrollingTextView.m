@@ -44,6 +44,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) setText:(NSString*)t {
+    BOOL textChanged = ![t isEqualToString:text];
     NSSize stringSize = [t sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
     if ([t isEqualToString:@""]) {
@@ -59,8 +60,8 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
                                                selector:@selector(refresh)
                                                userInfo:nil
                                                 repeats:YES];
-        // Only a state change.
-        if (!scrolling || ![t isEqualToString:text]) {
+        // More than just a state change.
+        if (!scrolling || textChanged) {
             scrollCurrentOffset = 0;
             scrollLeft = YES;
         }
@@ -70,6 +71,10 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     }
     text = t;
     [self setNeedsDisplay:YES];
+    
+    if (textChanged) {
+        [[statusItem menu] cancelTracking];
+    }
 }
 
 - (void) clear {

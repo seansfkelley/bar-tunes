@@ -45,4 +45,16 @@
     [anyPlayerMenuItem setState:NSOnState];
 }
 
+- (void) setWatchAnyCurrentPlayer:(Player)p {
+    if (p == ITUNES) {
+        [anyPlayerMenuItem setTitle:@"Current Player: iTunes"];
+    } else if (p == SPOTIFY) {
+        [anyPlayerMenuItem setTitle:@"Current Player: Spotify"];
+    } else if (p == NONE) {
+        [anyPlayerMenuItem setTitle:@"Current Player"];
+    } else {
+        assert(NO);
+    }
+}
+
 @end
