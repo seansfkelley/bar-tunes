@@ -20,12 +20,6 @@
 @class FormatWindowHandler;
 @class ScrollingTextView;
 
-typedef enum player {
-    ITUNES,
-    SPOTIFY,
-    ANY
-} Player;
-
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
     IBOutlet FormatWindowHandler *formatHandler;
@@ -42,13 +36,12 @@ typedef enum player {
 
 - (IBAction) quitApplication:(id)sender;
 - (void) setCurrentPlayer:(Player)p;
+- (Player) getCurrentPlayer;
 
 @end
 
 /*
 To do (ordered by approximate priority):
- test format popup with fullscreen, opening other windows, etc.
- save format string/app selections
  implement any-player option (what is appropriate logic for this: last player to send play notification [that is NOT overridden by a pause]?)
  force to be always leftmost
  help with interpolation

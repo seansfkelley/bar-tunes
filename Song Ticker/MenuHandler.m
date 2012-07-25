@@ -12,6 +12,18 @@
 
 @synthesize appDelegate;
 
+- (void) setWatch:(Player)p {
+    if (p == ITUNES) {
+        [self setWatchItunes:nil];
+    } else if (p == SPOTIFY) {
+        [self setWatchSpotify:nil];
+    } else if (p == ANY) {
+        [self setWatchAny:nil];
+    } else {
+        assert(NO);
+    }
+}
+
 - (IBAction) setWatchItunes:(id)sender {
     [appDelegate setCurrentPlayer:ITUNES];
     [itunesMenuItem setState:NSOnState];

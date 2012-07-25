@@ -4,4 +4,17 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+
+typedef enum player {
+    ITUNES,
+    SPOTIFY,
+    ANY
+} Player;
+
+typedef enum playerState {
+    PLAY,
+    PAUSE,
+    STOP
+} PlayerState;
+
 #endif

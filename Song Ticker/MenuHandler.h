@@ -19,6 +19,7 @@
 
 @property (nonatomic) AppDelegate *appDelegate;
 
+- (void) setWatch:(Player)p;
 - (IBAction) setWatchItunes:(id)sender;
 - (IBAction) setWatchSpotify:(id)sender;
 - (IBAction) setWatchAny:(id)sender;

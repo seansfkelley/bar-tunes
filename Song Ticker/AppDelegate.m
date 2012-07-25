@@ -12,6 +12,10 @@
 
 @synthesize formatString;
 
+NSString *formatStringDefaultsKey = @"formatString";
+NSString *playerDefaultsKey = @"player";
+
+
 - (void) awakeFromNib {
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
@@ -32,7 +36,7 @@
     [scrollText setFormatWindow:formatHandler];
     
     // Default startup options. Replace with saved information from user.
-    formatString = @"%artist — %song";
+    
     [menuHandler setWatchItunes:nil];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
@@ -44,6 +48,15 @@
                                                         selector:@selector(playerStateChangeNotification:)
                                                             name:@"com.spotify.client.PlaybackStateChanged"
                                                           object:nil];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    formatString = [defaults objectForKey:formatStringDefaultsKey];
+    if (formatString == nil) {
+        formatString = @"%artist — %song";
+    }
+    
+    Player p = [defaults integerForKey:playerDefaultsKey];
+    [menuHandler setWatch:p];
 }
 
 - (PlayerState) getPlayerState {
@@ -95,12 +108,27 @@
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
+- (Player) getCurrentPlayer {
+    if (currentPlayer == itunes) {
+        return ITUNES;
+    } else if (currentPlayer == spotify) {
+        return SPOTIFY;
+    } else if (currentPlayer == nil) {
+        return ANY;
+    } else {
+        assert(NO);
+    }
+}
+
 - (void) setFormatString:(NSString *)f {
     formatString = f;
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
 - (IBAction) quitApplication:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:formatString forKey:formatStringDefaultsKey];
+    [defaults setInteger:[self getCurrentPlayer] forKey:playerDefaultsKey];
     [[NSApplication sharedApplication] terminate:nil];
 }
 
