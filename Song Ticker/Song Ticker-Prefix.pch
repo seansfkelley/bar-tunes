@@ -8,7 +8,8 @@
 typedef enum player {
     ITUNES,
     SPOTIFY,
-    ANY
+    ANY,
+    NONE
 } Player;
 
 typedef enum playerState {

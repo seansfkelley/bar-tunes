@@ -25,21 +25,21 @@
 }
 
 - (IBAction) setWatchItunes:(id)sender {
-    [appDelegate setCurrentPlayer:ITUNES];
+    [appDelegate setDisplayedPlayer:ITUNES];
     [itunesMenuItem setState:NSOnState];
     [spotifyMenuItem setState:NSOffState];
     [anyPlayerMenuItem setState:NSOffState];
 }
 
 - (IBAction) setWatchSpotify:(id)sender {
-    [appDelegate setCurrentPlayer:SPOTIFY];
+    [appDelegate setDisplayedPlayer:SPOTIFY];
     [itunesMenuItem setState:NSOffState];
     [spotifyMenuItem setState:NSOnState];
     [anyPlayerMenuItem setState:NSOffState];
 }
 
 - (IBAction) setWatchAny:(id)sender {
-    [appDelegate setCurrentPlayer:ANY];
+    [appDelegate setDisplayedPlayer:ANY];
     [itunesMenuItem setState:NSOffState];
     [spotifyMenuItem setState:NSOffState];
     [anyPlayerMenuItem setState:NSOnState];

@@ -28,15 +28,19 @@
     
     iTunesApplication *itunes;
     SpotifyApplication *spotify;
-    
-    SBApplication *currentPlayer;
 }
 
 @property (nonatomic) NSString *formatString;
 
+// Which player we are displaying, or ANY if the current player should be used.
+@property (nonatomic) Player displayedPlayer;
+
+// Which player is "current", i.e., was the last to play a song (preferring iTunes in the 
+// event of a tie-break). Not necessarily the player being displayed; should be referenced
+// when watchingPlayer is ANY.
+// @property (nonatomic) Player currentPlayer;
+
 - (IBAction) quitApplication:(id)sender;
-- (void) setCurrentPlayer:(Player)p;
-- (Player) getCurrentPlayer;
 
 @end
 

@@ -11,6 +11,7 @@
 @implementation AppDelegate
 
 @synthesize formatString;
+@synthesize displayedPlayer;
 
 NSString *formatStringDefaultsKey = @"formatString";
 NSString *playerDefaultsKey = @"player";
@@ -60,12 +61,12 @@ NSString *playerDefaultsKey = @"player";
 }
 
 - (PlayerState) getPlayerState {
-    if (currentPlayer == nil) {
-        return STOP;
-    } else if (currentPlayer == itunes) {
+    if (displayedPlayer == ITUNES) {
         return [self getItunesPlayerState];
-    } else if (currentPlayer == spotify) {
+    } else if (displayedPlayer == SPOTIFY) {
         return [self getSpotifyPlayerState];
+    } else if (displayedPlayer == ANY) {
+        return STOP;
     } else {
         assert(NO);
     }
@@ -95,29 +96,19 @@ NSString *playerDefaultsKey = @"player";
     }
 }
 
-- (void) setCurrentPlayer:(Player)p {
-    if (p == ITUNES) {
-        currentPlayer = itunes;
-    } else if (p == SPOTIFY) {
-        currentPlayer = spotify;
-    } else if (p == ANY) {
-        currentPlayer = nil;
+- (id) getCurrentTrack {
+    if (displayedPlayer == ITUNES) {
+        return [itunes currentTrack];
+    } else if (displayedPlayer == SPOTIFY) {
+        return [spotify currentTrack];
     } else {
         assert(NO);
     }
-    [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
-- (Player) getCurrentPlayer {
-    if (currentPlayer == itunes) {
-        return ITUNES;
-    } else if (currentPlayer == spotify) {
-        return SPOTIFY;
-    } else if (currentPlayer == nil) {
-        return ANY;
-    } else {
-        assert(NO);
-    }
+- (void) setDisplayedPlayer:(Player)p {
+    displayedPlayer = p;
+    [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
 - (void) setFormatString:(NSString *)f {
@@ -128,7 +119,7 @@ NSString *playerDefaultsKey = @"player";
 - (IBAction) quitApplication:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:formatString forKey:formatStringDefaultsKey];
-    [defaults setInteger:[self getCurrentPlayer] forKey:playerDefaultsKey];
+    [defaults setInteger:[self displayedPlayer] forKey:playerDefaultsKey];
     [[NSApplication sharedApplication] terminate:nil];
 }
 
@@ -148,12 +139,6 @@ NSString *playerDefaultsKey = @"player";
 }
 
 - (void) setDisplayStringFromPlayerState:(PlayerState)state {
-    if (currentPlayer == nil || ![currentPlayer isRunning]) {
-        [scrollText setState:STOP];
-        [scrollText clear];
-        return;
-    }
-    
     [scrollText setState:state];
     if (state == STOP) {
         [scrollText clear];
@@ -161,7 +146,7 @@ NSString *playerDefaultsKey = @"player";
     }
     
     // We know that iTunes and Spotify both support this message.
-    id track = [((id) currentPlayer) currentTrack];
+    id track = [self getCurrentTrack];
     // Could also be done with a string -> SEL dictionary...
     NSString *displayString = [formatString 
                      stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
