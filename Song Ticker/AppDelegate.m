@@ -14,17 +14,16 @@
 @synthesize displayedPlayer;
 @synthesize currentPlayer;
 
-NSString *formatStringDefaultsKey = @"formatString";
-NSString *playerDefaultsKey = @"player";
-
 NSString *itunesNoteName = @"com.apple.iTunes.playerInfo";
 NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 
 - (void) awakeFromNib {
+    NSString *defaultPrefsFile = [[NSBundle mainBundle] pathForResource:@"DefaultPreferences" ofType:@"plist"];
+    NSDictionary *defaultPreferences = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPreferences];
+    
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
-    
-    scrollText = [[ScrollingTextView alloc] init];
     
     [formatHandler setAppDelegate:self];
     [formatHandler setAnchor:scrollText];
@@ -72,12 +71,12 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    formatString = [defaults objectForKey:formatStringDefaultsKey];
+    formatString = [defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING];
     if (formatString == nil) {
         formatString = @"%artist — %song";
     }
     
-    Player p = [defaults integerForKey:playerDefaultsKey];
+    Player p = [defaults integerForKey:DEFAULTS_KEY_PLAYER];
     [menuHandler setWatch:p];
 }
 
@@ -131,7 +130,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 - (void) setDisplayedPlayer:(Player)p {
     displayedPlayer = p;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:[self displayedPlayer] forKey:playerDefaultsKey];
+    [defaults setInteger:[self displayedPlayer] forKey:DEFAULTS_KEY_PLAYER];
     [defaults synchronize];
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
@@ -139,7 +138,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 - (void) setFormatString:(NSString *)f {
     formatString = f;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:formatString forKey:formatStringDefaultsKey];
+    [defaults setObject:formatString forKey:DEFAULTS_KEY_FORMAT_STRING];
     [defaults synchronize];
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
@@ -198,7 +197,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     displayString = [displayString 
                      stringByReplacingOccurrencesOfString:@"%song" withString:[track name]];
     displayString = [displayString 
-                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%d", [track trackNumber]]];
+                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [track trackNumber]]];
     
     [scrollText setText:displayString];
 }

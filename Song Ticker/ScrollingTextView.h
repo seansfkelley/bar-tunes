@@ -10,6 +10,12 @@
 #import "FormatWindowHandler.h"
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
+    IBOutlet NSMenuItem *showIconsMenuItem;
+    BOOL showIcons;
+    
+    IBOutlet NSMenuItem *showPauseTextMenuItem;
+    BOOL showPauseText;
+    
     BOOL menuVisible;
     
     NSMutableDictionary *drawStringAttributes;
@@ -25,9 +31,11 @@
 }
 
 - (void) clear;
+- (IBAction) toggleShowIcons:(id)sender;
+- (IBAction) toggleShowPauseText:(id)sender;
 
 @property (nonatomic) NSString *text;
-@property PlayerState state;
+@property (nonatomic) PlayerState state;
 @property NSStatusItem *statusItem;
 @property FormatWindowHandler *formatWindow;
 

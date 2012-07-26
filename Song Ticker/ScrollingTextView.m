@@ -16,7 +16,7 @@
 @synthesize formatWindow;
 
 const int IMAGE_WIDTH = 18;
-const int EXTRA_SPACE_SCROLL = 20;
+const int EXTRA_SPACE_SCROLL = 16;
 const int EXTRA_SPACE_STATIC = 3;
 const int VERTICAL_OFFSET = 4;
 const int MAX_STATIC_WIDTH = 300;
@@ -40,21 +40,32 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     menuVisible = NO;
     scrolling = NO;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    showIcons = [defaults boolForKey:DEFAULTS_KEY_SHOW_ICONS];
+    showPauseText = [defaults boolForKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT];
+    
     return self;
+}
+
+- (void) awakeFromNib {
+    [showIconsMenuItem setState: showIcons ? NSOnState : NSOffState];
+    [showPauseTextMenuItem setState: showPauseText ? NSOnState : NSOffState];
 }
 
 - (void) setText:(NSString*)t {
     BOOL textChanged = ![t isEqualToString:text];
     NSSize stringSize = [t sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
-    if ([t isEqualToString:@""]) {
+    
+    if ([t isEqualToString:@""] || (!showPauseText && [self state] == PAUSE)) {
         scrolling = NO;
         [self setFrame:NSMakeRect(0, 0, IMAGE_WIDTH, [self frame].size.height)];
     } else if (stringSize.width <= MAX_STATIC_WIDTH) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, stringSize.width + IMAGE_WIDTH + EXTRA_SPACE_STATIC * 2, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, stringSize.width +
+                                        (showIcons ? IMAGE_WIDTH : 0) +
+                                        EXTRA_SPACE_STATIC * 2, [self frame].size.height)];
     } else {
-        
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL
                                                  target:self
                                                selector:@selector(refresh)
@@ -67,7 +78,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         }
         scrollMaxOffset = (stringSize.width) - MAX_SCROLLING_WIDTH;
         scrolling = YES;
-        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + IMAGE_WIDTH, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + (showIcons ? IMAGE_WIDTH : 0), [self frame].size.height)];
     }
     text = t;
     [self setNeedsDisplay:YES];
@@ -94,22 +105,24 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [drawStringAttributes setValue:[NSColor controlTextColor] forKey:NSForegroundColorAttributeName];
     }
 
-    if (scrolling) {
-        scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
-        if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACE_SCROLL || scrollCurrentOffset <= -EXTRA_SPACE_SCROLL) {
-            scrollLeft = !scrollLeft;
+    if (showPauseText || state != PAUSE) {
+        if (scrolling) {
+            scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
+            if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACE_SCROLL || scrollCurrentOffset <= -EXTRA_SPACE_SCROLL) {
+                scrollLeft = !scrollLeft;
+            }
+            NSPoint centerPoint;
+            centerPoint.x = -scrollCurrentOffset + (showIcons ? IMAGE_WIDTH : 0);
+            centerPoint.y = VERTICAL_OFFSET;
+            [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
+            [self setNeedsDisplay:YES];
+        } else if (![text isEqualToString:@""]) {
+            NSPoint centerPoint;
+            centerPoint.x = (showIcons ? IMAGE_WIDTH : 0) + EXTRA_SPACE_STATIC;
+            centerPoint.y = VERTICAL_OFFSET;
+            [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
         }
-        NSPoint centerPoint;
-        centerPoint.x = -scrollCurrentOffset + IMAGE_WIDTH;
-        centerPoint.y = VERTICAL_OFFSET;
-        [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
-        [self setNeedsDisplay:YES];
-    } else {
-        NSPoint centerPoint;
-        centerPoint.x = IMAGE_WIDTH + EXTRA_SPACE_STATIC;
-        centerPoint.y = VERTICAL_OFFSET;
-        [text drawAtPoint:centerPoint withAttributes:drawStringAttributes];
-    };
+    }
     
     NSMutableString *filename;
     if (state == PLAY) {
@@ -122,7 +135,43 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     if (menuVisible) {
         [filename appendString:@"Hi"];
     }
-    [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+    if (state == STOP || showIcons) {
+        [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+    } else if (state == PAUSE && !showPauseText) {
+        if (menuVisible) {
+            [[imageDict objectForKey:@"noteHi"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+        } else {
+            [[imageDict objectForKey:@"note"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+        }
+    }
+}
+
+- (void) setState:(PlayerState)ps {
+    state = ps;
+    if (state == PAUSE && !showPauseText) {
+        [self clear];
+    }
+}
+
+- (IBAction) toggleShowIcons:(id)sender {
+    showIcons = [showIconsMenuItem state] != NSOnState;
+    [showIconsMenuItem setState:showIcons ? NSOnState : NSOffState];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:showIcons forKey:DEFAULTS_KEY_SHOW_ICONS];
+    [defaults synchronize];
+    // Trigger a recalculation of the menu item size.
+    [self setText:[self text]];
+}
+
+// Basically c'n'p from toggleShowIcons.
+- (IBAction) toggleShowPauseText:(id)sender {
+    showPauseText = [showPauseTextMenuItem state] != NSOnState;
+    [showPauseTextMenuItem setState:showPauseText ? NSOnState : NSOffState];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:showPauseText forKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT];
+    [defaults synchronize];
+    // Trigger a recalculation of the menu item size.
+    [self setText:[self text]];
 }
 
 - (void) mouseDown:(NSEvent*)event {

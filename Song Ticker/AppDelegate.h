@@ -24,8 +24,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
     IBOutlet FormatWindowHandler *formatHandler;
-    
-    ScrollingTextView *scrollText;
+    IBOutlet ScrollingTextView *scrollText;
     
     iTunesApplication *itunes;
     SpotifyApplication *spotify;
@@ -49,21 +48,17 @@
 To do (ordered by approximate priority):
  menu options
     slider: scroll speed (?)
-    checkbox: show text when paused
-    checkbox: show play/pause icons
     [alternate] scroll around v. scroll side-to-side [or just permanently switch?]
  buttons in display should replace selection, else append and deselect
- shrink menubar icon
- MVC separation -- controllers = views = models now (format, menu handlers)
+
+ DO ACTUAL MVC IT SHOULDNT BE THAT HARD.
+    multiple models for switching between players? or one model that is changed when the player changes?
  app icon
- remove deprecated call from MAAttachedWindow
 
 Questions:
  how to handle crash/force-quit of application we're listening to?
  only allow one instance of each format string item?
  why is itunes being kept open?
  scroll while menu is selected?
- need so much extra space at edges while scrolling?
- drop amount of space needed by a few pixels?
  scroll speed constant, or a function of the length of the text?
 */

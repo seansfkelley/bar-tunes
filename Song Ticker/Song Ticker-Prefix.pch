@@ -6,10 +6,10 @@
     #import <Cocoa/Cocoa.h>
 
 typedef enum player {
+    NONE, // For use with currentPlayer only, and only if nothing is currently playing.
+    ANY,  // Use whichever player is currently playing.
     ITUNES,
-    SPOTIFY,
-    ANY, // Use whichever player is currently playing.
-    NONE // For use with currentPlayer only, and only if nothing is currently playing.
+    SPOTIFY
 } Player;
 
 typedef enum playerState {
@@ -17,5 +17,10 @@ typedef enum playerState {
     PAUSE,
     STOP
 } PlayerState;
+
+#define DEFAULTS_KEY_FORMAT_STRING @"formatString"
+#define DEFAULTS_KEY_PLAYER @"player"
+#define DEFAULTS_KEY_SHOW_ICONS @"showIcons"
+#define DEFAULTS_KEY_SHOW_PAUSE_TEXT @"showPauseText"
 
 #endif
