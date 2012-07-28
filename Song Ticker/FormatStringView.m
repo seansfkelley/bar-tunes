@@ -29,7 +29,7 @@
     [songButton   setAttributedTitle:[[NSAttributedString alloc] initWithString:@"%song" attributes:buttonTitleAttrs]];
 }
 
-- (IBAction) bringFormatWindowToFrontWithDelegate:(id)delegate{
+- (void) bringFormatWindowToFrontWithDelegate:(id<NSWindowDelegate>)delegate{
     NSRect anchorFrame = [[anchor window] frame];
     formatWindow = [[MAAttachedWindow alloc] initWithView:self
                                             attachedToPoint:NSMakePoint(anchorFrame.origin.x + anchorFrame.size.width / 2, anchorFrame.origin.y)
@@ -41,7 +41,7 @@
     [formatTextField setObjectValue:[model formatString]];
 }
 
-- (IBAction) closeWindow:(id)sender {
+- (void) closeWindow:(id)sender {
     [formatWindow orderOut:self];
 }
 

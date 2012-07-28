@@ -86,6 +86,7 @@
 		78FC2E4715BE791100293304 /* MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuHandler.m; sourceTree = "<group>"; };
 		78FC2E5015BE8C0F00293304 /* MAAttachedWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
 		78FC2E5115BE8C0F00293304 /* MAAttachedWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
+		78FE49A915C4773200D68AFF /* DisplayPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayPackage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,13 +147,8 @@
 				7854A09415B9202700026D40 /* AppDelegate.m */,
 				78FC2E4615BE791100293304 /* MenuHandler.h */,
 				78FC2E4715BE791100293304 /* MenuHandler.m */,
-				788FFCAD15C46A6700C6182E /* DisplayModel.h */,
-				788FFCAE15C46A6700C6182E /* DisplayModel.m */,
-				788FFCB015C46C6F00C6182E /* DisplayController.h */,
-				788FFCB115C46C6F00C6182E /* DisplayController.m */,
-				7874867C15B942530059D593 /* ScrollingTextView.h */,
-				7874867D15B942530059D593 /* ScrollingTextView.m */,
 				7874867815B9396F0059D593 /* MainMenu.xib */,
+				78FE49A815C4771400D68AFF /* Display */,
 				788FFCB615C46F5200C6182E /* Format String */,
 				786F152D15BFA0BE004C36B1 /* Library */,
 				785F597F15BCC2020061FBC7 /* Status Icons */,
@@ -217,6 +213,20 @@
 				786F152715BE935F004C36B1 /* FormatStringView.m */,
 			);
 			name = "Format String";
+			sourceTree = "<group>";
+		};
+		78FE49A815C4771400D68AFF /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				78FE49A915C4773200D68AFF /* DisplayPackage.h */,
+				788FFCAD15C46A6700C6182E /* DisplayModel.h */,
+				788FFCAE15C46A6700C6182E /* DisplayModel.m */,
+				788FFCB015C46C6F00C6182E /* DisplayController.h */,
+				788FFCB115C46C6F00C6182E /* DisplayController.m */,
+				7874867C15B942530059D593 /* ScrollingTextView.h */,
+				7874867D15B942530059D593 /* ScrollingTextView.m */,
+			);
+			name = Display;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

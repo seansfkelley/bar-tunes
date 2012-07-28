@@ -24,11 +24,24 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
     
-    formatModel = [[FormatStringModel alloc] init];
-    [formatView setAnchor:scrollText];
-    [formatView setModel:formatModel];
+    // Display MVC
+    displayModel = [[DisplayModel alloc] init];
+    [displayView setModel:displayModel];
+    [displayController setModel:displayModel];
     
-    [formatModel addObserver:self forKeyPath:@"formatString" options:NSKeyValueObservingOptionNew context:nil];
+    // Display other
+    [displayView setFormatController:formatController];
+    
+    // Format MVC
+    formatModel = [[FormatStringModel alloc] init];
+    [formatView setModel:formatModel];
+    [formatController setModel:formatModel];
+    [formatController setView:formatView];
+    
+    // Format other
+    [formatView setAnchor:displayView];
+    
+    [formatModel addObserver:displayController forKeyPath:@"formatString" options:NSKeyValueObservingOptionNew context:nil];
     
     [menuHandler setAppDelegate:self];
     
@@ -44,11 +57,11 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     }
     
     [statusItem setHighlightMode:YES];
-    [statusItem setView:scrollText];
+    [statusItem setView:displayView];
     [statusItem setMenu:menuHandler];
     
-    [scrollText setStatusItem:statusItem];
-    [scrollText setFormatWindow:formatView];
+    [displayView setStatusItem:statusItem];
+    [displayView setFormatController:formatController];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
@@ -81,10 +94,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     
     Player p = [defaults integerForKey:DEFAULTS_KEY_PLAYER];
     [menuHandler setWatch:p];
-}
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"%@", change );
 }
 
 - (PlayerState) getPlayerState {
@@ -180,9 +189,9 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 }
 
 - (void) setDisplayStringFromPlayerState:(PlayerState)state {
-    [scrollText setState:state];
+    [displayModel setState:state];
     if (state == STOP) {
-        [scrollText clear];
+        [displayModel setText:@""];
         return;
     }
     
@@ -198,7 +207,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     displayString = [displayString 
                      stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [track trackNumber]]];
     
-    [scrollText setText:displayString];
+    [displayModel setText:displayString];
 }
 
 @end

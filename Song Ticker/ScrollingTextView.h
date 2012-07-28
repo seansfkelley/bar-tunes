@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FormatWindowView.h"
+#import "DisplayModel.h"
+#import "FormatStringController.h"
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
@@ -27,11 +28,17 @@
     NSImage *currentImage;
 }
 
-- (void) clear;
+typedef enum changeType {
+    PLAYER_STATE,
+    DISPLAY_TEXT
+} ChangeType;
 
-@property (nonatomic) NSString *text;
-@property (nonatomic) PlayerState state;
+@property DisplayModel *model;
+
+// Should be called after any change in the model.
+- (void) resize:(ChangeType)c;
+
 @property NSStatusItem *statusItem;
-@property FormatWindowView *formatWindow;
+@property FormatStringController *formatController;
 
 @end

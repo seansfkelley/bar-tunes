@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "DisplayModel.h"
 
-@interface DisplayController : NSObject {
-    DisplayModel *model;
-}
+@interface DisplayController : NSObject
+
+@property DisplayModel *model;
 
 - (IBAction) toggleShowIcons:(id)sender;
 - (IBAction) toggleShowPauseText:(id)sender;
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @end

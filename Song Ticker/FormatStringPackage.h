@@ -6,7 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "FormatStringModel.h"
 #import "FormatStringController.h"
 #import "FormatStringView.h"

@@ -10,12 +10,10 @@
 #import "FormatStringModel.h"
 #import "FormatStringView.h"
 
-@interface FormatStringController : NSObject <NSWindowDelegate> {
-    FormatStringModel *model;
-    FormatStringView *view;
-}
+@interface FormatStringController : NSObject <NSWindowDelegate>
 
-- (FormatStringController*) initWithModel:(FormatStringModel*)m withView:(FormatStringView*)v;
+@property FormatStringModel *model;
+@property FormatStringView *view;
 
 - (IBAction) popupWindow:(id)sender;
 - (IBAction) cancel:(id)sender;

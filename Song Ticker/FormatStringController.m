@@ -10,12 +10,8 @@
 
 @implementation FormatStringController
 
-- (FormatStringController*) initWithModel:(FormatStringModel*)m withView:(FormatStringView*)v{
-    self = [super init];
-    model = m;
-    view = v;
-    return self;
-}
+@synthesize model;
+@synthesize view;
 
 - (IBAction) popupWindow:(id)sender {
     [view bringFormatWindowToFrontWithDelegate:self];

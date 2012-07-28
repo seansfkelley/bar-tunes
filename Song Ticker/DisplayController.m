@@ -10,11 +10,7 @@
 
 @implementation DisplayController
 
-- (DisplayController*) initWithModel:(DisplayModel*)m {
-    self = [super init];
-    model = m;
-    return self;
-}
+@synthesize model;
 
 - (IBAction) toggleShowIcons:(NSMenuItem*)sender {
     BOOL showIcons = [sender state] != NSOnState;
@@ -33,6 +29,12 @@
     [defaults setBool:showPauseText forKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT];
     [defaults synchronize];
     [model setShowPauseText:showPauseText];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSString *formatString = [change valueForKey:@"new"];
+    // Do interpolation here, of course.
+    [model setText:formatString];
 }
 
 @end

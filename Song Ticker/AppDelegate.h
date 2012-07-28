@@ -12,22 +12,25 @@
 #import <Cocoa/Cocoa.h>
 #import "iTunes.h"
 #import "Spotify.h"
+#import "FormatStringPackage.h"
+#import "DisplayPackage.h"
 #import "MenuHandler.h"
 #import "ScrollingTextView.h"
-#import "FormatWindowView.h"
-#import "FormatStringModel.h"
 #import "NSStatusBar+Undocumented.h"
 
 @class MenuHandler;
-@class FormatWindowView;
 @class ScrollingTextView;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
-    IBOutlet ScrollingTextView *scrollText;
     
-    IBOutlet FormatWindowView *formatView;
     FormatStringModel *formatModel;
+    IBOutlet FormatStringController *formatController;
+    IBOutlet FormatStringView *formatView;
+    
+    DisplayModel *displayModel;
+    IBOutlet DisplayController *displayController;
+    IBOutlet ScrollingTextView *displayView;
     
     iTunesApplication *itunes;
     SpotifyApplication *spotify;
