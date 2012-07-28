@@ -10,7 +10,6 @@
 
 @implementation AppDelegate
 
-@synthesize formatString;
 @synthesize displayedPlayer;
 @synthesize currentPlayer;
 
@@ -25,8 +24,11 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     itunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     spotify = [SBApplication applicationWithBundleIdentifier:@"com.spotify.client"];
     
-    [formatHandler setAppDelegate:self];
-    [formatHandler setAnchor:scrollText];
+    formatModel = [[FormatStringModel alloc] init];
+    [formatView setAnchor:scrollText];
+    [formatView setModel:formatModel];
+    
+    [formatModel addObserver:self forKeyPath:@"formatString" options:NSKeyValueObservingOptionNew context:nil];
     
     [menuHandler setAppDelegate:self];
     
@@ -46,7 +48,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     [statusItem setMenu:menuHandler];
     
     [scrollText setStatusItem:statusItem];
-    [scrollText setFormatWindow:formatHandler];
+    [scrollText setFormatWindow:formatView];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
@@ -71,13 +73,18 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    formatString = [defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING];
+    NSString *formatString = [defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING];
     if (formatString == nil) {
         formatString = @"%artist — %song";
     }
+    [formatModel setFormatString:formatString];
     
     Player p = [defaults integerForKey:DEFAULTS_KEY_PLAYER];
     [menuHandler setWatch:p];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"%@", change );
 }
 
 - (PlayerState) getPlayerState {
@@ -135,20 +142,12 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     [self setDisplayStringFromPlayerState:[self getPlayerState]];
 }
 
-- (void) setFormatString:(NSString *)f {
-    formatString = f;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:formatString forKey:DEFAULTS_KEY_FORMAT_STRING];
-    [defaults synchronize];
-    [self setDisplayStringFromPlayerState:[self getPlayerState]];
-}
-
 - (IBAction) quitApplication:(id)sender {
     [[NSApplication sharedApplication] terminate:nil];
 }
 
 - (void) closeFormatWindowWithoutSaving {
-    [formatHandler closeWindowWithoutSettingString:self];
+    // [formatHandler closeWindowWithoutSettingString:self];
 }
 
 - (void) printNotification:(NSNotification*)note {
@@ -190,7 +189,7 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     // We know that iTunes and Spotify both support this message.
     id track = [self getCurrentTrack];
     // Could also be done with a string -> SEL dictionary...
-    NSString *displayString = [formatString 
+    NSString *displayString = [[formatModel formatString]
                      stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
     displayString = [displayString 
                      stringByReplacingOccurrencesOfString:@"%album" withString:[track album]];

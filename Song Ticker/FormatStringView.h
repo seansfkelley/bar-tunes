@@ -10,9 +10,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MAAttachedWindow.h"
-#import "AppDelegate.h"
+#import "FormatStringModel.h"
 
-@interface FormatWindowView : NSView <NSWindowDelegate> {
+@interface FormatStringView : NSView {
     MAAttachedWindow *formatWindow;
     IBOutlet NSTextField *formatTextField;
     
@@ -22,12 +22,13 @@
     IBOutlet NSButton *songButton;
 }
 
-@property AppDelegate *appDelegate;
+@property FormatStringModel *model;
 @property NSView *anchor;
 
-- (IBAction) bringFormatWindowToFront:(id)sender;
-- (void) closeWindowWithoutSettingString:(id)sender;
-- (IBAction) closeWindowAndSetFormatString:(id)sender;
+- (NSString*) formatFieldContents;
+
+- (void) bringFormatWindowToFrontWithDelegate:(id<NSWindowDelegate>)delegate;
+- (void) closeWindow:(id)sender;
 
 - (IBAction) insertAlbumTag:(id)sender;
 - (IBAction) insertArtistTag:(id)sender;

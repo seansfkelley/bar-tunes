@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FormatWindowView.h"
+#import "FormatStringView.h"
 
-@implementation FormatWindowView
+@implementation FormatStringView
 
-@synthesize appDelegate;
+@synthesize model;
 @synthesize anchor;
 
 - (void) awakeFromNib {
@@ -27,42 +27,26 @@
     [artistButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@"%artist" attributes:buttonTitleAttrs]];
     [numberButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@"%number" attributes:buttonTitleAttrs]];
     [songButton   setAttributedTitle:[[NSAttributedString alloc] initWithString:@"%song" attributes:buttonTitleAttrs]];
-} 
+}
 
-- (IBAction) bringFormatWindowToFront:(id)sender{
+- (IBAction) bringFormatWindowToFrontWithDelegate:(id)delegate{
     NSRect anchorFrame = [[anchor window] frame];
     formatWindow = [[MAAttachedWindow alloc] initWithView:self
                                             attachedToPoint:NSMakePoint(anchorFrame.origin.x + anchorFrame.size.width / 2, anchorFrame.origin.y)
                                                      onSide:NSMinYEdge
                                                  atDistance:5.0];
-    [formatWindow setDelegate:self];
+    [formatWindow setDelegate:delegate];
     [NSApp activateIgnoringOtherApps:YES];
     [formatWindow makeKeyAndOrderFront:self];
-    [formatTextField setObjectValue:[appDelegate formatString]];
+    [formatTextField setObjectValue:[model formatString]];
 }
 
-- (void) closeWindowWithoutSettingString:(id)sender {
+- (IBAction) closeWindow:(id)sender {
     [formatWindow orderOut:self];
 }
 
-- (IBAction) closeWindowAndSetFormatString:(id)sender {
-    NSString *formatString = [[formatTextField objectValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    // Best-effort check to enforce something probably sensible is being entered.
-    if (![formatString isEqualToString:@""] && ([formatString rangeOfString:@"%album"].location != NSNotFound || 
-                                                [formatString rangeOfString:@"%artist"].location != NSNotFound || 
-                                                [formatString rangeOfString:@"%number"].location != NSNotFound ||
-                                                [formatString rangeOfString:@"%song"].location != NSNotFound)) {
-        [appDelegate setFormatString:formatString];
-    }
-    [formatWindow orderOut:self];
-}
-
-- (void) windowDidResignKey:(NSNotification *)note {
-    [self closeWindowWithoutSettingString:self];
-}
-
-- (void) cancelOperation:(id)sender {
-    [self closeWindowWithoutSettingString:sender];
+- (NSString*) formatFieldContents {
+    return  [[formatTextField objectValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 - (IBAction) insertAlbumTag:(id)sender {

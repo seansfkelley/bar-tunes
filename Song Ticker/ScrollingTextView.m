@@ -153,25 +153,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     }
 }
 
-- (IBAction) toggleShowIcons:(id)sender {
-    showIcons = [showIconsMenuItem state] != NSOnState;
-    [showIconsMenuItem setState:showIcons ? NSOnState : NSOffState];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:showIcons forKey:DEFAULTS_KEY_SHOW_ICONS];
-    [defaults synchronize];
-    // Trigger a recalculation of the menu item size.
-    [self setText:[self text]];
-}
-
-// Basically c'n'p from toggleShowIcons.
-- (IBAction) toggleShowPauseText:(id)sender {
-    showPauseText = [showPauseTextMenuItem state] != NSOnState;
-    [showPauseTextMenuItem setState:showPauseText ? NSOnState : NSOffState];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:showPauseText forKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT];
-    [defaults synchronize];
-    // Trigger a recalculation of the menu item size.
-    [self setText:[self text]];
+self setText:[self text]];
 }
 
 - (void) mouseDown:(NSEvent*)event {

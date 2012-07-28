@@ -11,10 +11,7 @@
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
-    BOOL showIcons;
-    
     IBOutlet NSMenuItem *showPauseTextMenuItem;
-    BOOL showPauseText;
     
     BOOL menuVisible;
     
@@ -31,8 +28,6 @@
 }
 
 - (void) clear;
-- (IBAction) toggleShowIcons:(id)sender;
-- (IBAction) toggleShowPauseText:(id)sender;
 
 @property (nonatomic) NSString *text;
 @property (nonatomic) PlayerState state;

@@ -15,6 +15,7 @@
 #import "MenuHandler.h"
 #import "ScrollingTextView.h"
 #import "FormatWindowView.h"
+#import "FormatStringModel.h"
 #import "NSStatusBar+Undocumented.h"
 
 @class MenuHandler;
@@ -23,14 +24,14 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
-    IBOutlet FormatWindowView *formatHandler;
     IBOutlet ScrollingTextView *scrollText;
+    
+    IBOutlet FormatWindowView *formatView;
+    FormatStringModel *formatModel;
     
     iTunesApplication *itunes;
     SpotifyApplication *spotify;
 }
-
-@property (nonatomic) NSString *formatString;
 
 // Which player we are displaying, or ANY if the current player should be used.
 @property (nonatomic) Player displayedPlayer;
