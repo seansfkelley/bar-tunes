@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FormatWindowHandler.h"
+#import "FormatWindowView.h"
 
-@implementation FormatWindowHandler
+@implementation FormatWindowView
 
 @synthesize appDelegate;
 @synthesize anchor;

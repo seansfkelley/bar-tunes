@@ -7,23 +7,23 @@
 //
 
 @class MenuHandler;
-@class FormatWindowHandler;
+@class FormatWindowView;
 
 #import <Cocoa/Cocoa.h>
 #import "iTunes.h"
 #import "Spotify.h"
 #import "MenuHandler.h"
 #import "ScrollingTextView.h"
-#import "FormatWindowHandler.h"
+#import "FormatWindowView.h"
 #import "NSStatusBar+Undocumented.h"
 
 @class MenuHandler;
-@class FormatWindowHandler;
+@class FormatWindowView;
 @class ScrollingTextView;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
-    IBOutlet FormatWindowHandler *formatHandler;
+    IBOutlet FormatWindowView *formatHandler;
     IBOutlet ScrollingTextView *scrollText;
     
     iTunesApplication *itunes;
@@ -46,19 +46,28 @@
 
 /*
 To do (ordered by approximate priority):
- menu options
-    slider: scroll speed (?)
-    [alternate] scroll around v. scroll side-to-side [or just permanently switch?]
- buttons in display should replace selection, else append and deselect
-
  DO ACTUAL MVC IT SHOULDNT BE THAT HARD.
     multiple models for switching between players? or one model that is changed when the player changes?
+ 
+ menu options
+    slider: scroll speed (?)
+    scroll type
+        circular
+        bounce
+        never (truncate)
+ buttons in display should replace selection if any, else append
+
  app icon
+ support undo for editing format string?
+ remove stupid header comments
 
 Questions:
  how to handle crash/force-quit of application we're listening to?
- only allow one instance of each format string item?
- why is itunes being kept open?
+ when and why is itunes being kept open?
  scroll while menu is selected?
- scroll speed constant, or a function of the length of the text?
+ scroll speed:
+    constant?
+    function of length?
+    user selected?
+    combination of user selected/function of length?
 */

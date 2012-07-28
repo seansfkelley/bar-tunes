@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FormatWindowHandler.h"
+#import "FormatWindowView.h"
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
@@ -37,6 +37,6 @@
 @property (nonatomic) NSString *text;
 @property (nonatomic) PlayerState state;
 @property NSStatusItem *statusItem;
-@property FormatWindowHandler *formatWindow;
+@property FormatWindowView *formatWindow;
 
 @end

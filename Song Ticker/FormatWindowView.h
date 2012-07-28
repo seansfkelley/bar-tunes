@@ -12,7 +12,7 @@
 #import "MAAttachedWindow.h"
 #import "AppDelegate.h"
 
-@interface FormatWindowHandler : NSView <NSWindowDelegate> {
+@interface FormatWindowView : NSView <NSWindowDelegate> {
     MAAttachedWindow *formatWindow;
     IBOutlet NSTextField *formatTextField;
     
