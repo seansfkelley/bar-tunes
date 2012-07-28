@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 #import "DisplayModel.h"
 
 @interface DisplayController : NSObject
@@ -16,6 +17,7 @@
 - (IBAction) toggleShowIcons:(id)sender;
 - (IBAction) toggleShowPauseText:(id)sender;
 
+// Called when the format string changes.
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @end

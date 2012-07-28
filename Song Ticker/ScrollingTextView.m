@@ -155,4 +155,15 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     [self setNeedsDisplay:YES];
 }
 
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    ChangeType c;
+    if ([keyPath isEqualToString:@"text"]) {
+        c = DISPLAY_TEXT;
+    } else if ([keyPath isEqualToString:@"state"]) {
+        c = PLAYER_STATE;
+    }
+    [self resize:c];
+}
+
+
 @end

@@ -7,7 +7,12 @@
 //
 
 @class MenuHandler;
-@class FormatWindowView;
+@class FormatStringModel;
+@class FormatStringView;
+@class FormatStringController;
+@class DisplayModel;
+@class ScrollingTextView;
+@class DisplayController;
 
 #import <Cocoa/Cocoa.h>
 #import "iTunes.h"
@@ -17,9 +22,6 @@
 #import "MenuHandler.h"
 #import "ScrollingTextView.h"
 #import "NSStatusBar+Undocumented.h"
-
-@class MenuHandler;
-@class ScrollingTextView;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet MenuHandler *menuHandler;
@@ -35,6 +37,11 @@
     iTunesApplication *itunes;
     SpotifyApplication *spotify;
 }
+
+- (NSString*) album;
+- (NSString*) artist;
+- (NSString*) name;
+- (NSInteger) trackNumber;
 
 // Which player we are displaying, or ANY if the current player should be used.
 @property (nonatomic) Player displayedPlayer;

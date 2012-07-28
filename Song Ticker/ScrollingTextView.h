@@ -41,4 +41,7 @@ typedef enum changeType {
 @property NSStatusItem *statusItem;
 @property FormatStringController *formatController;
 
+// Called when the display state changes.
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+
 @end

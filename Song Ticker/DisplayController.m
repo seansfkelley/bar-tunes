@@ -32,9 +32,22 @@
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSString *formatString = [change valueForKey:@"new"];
-    // Do interpolation here, of course.
-    [model setText:formatString];
+    AppDelegate *app = (__bridge AppDelegate*) context;
+    // Change in player state or player info.
+    NSString *displayString = [change valueForKey:@"new"];
+    if ([displayString class] == [NSNull class]) {
+        return;
+    }
+    NSLog(@"%@", change);
+    displayString = [displayString
+                     stringByReplacingOccurrencesOfString:@"%artist" withString:[app artist]];
+    displayString = [displayString
+                     stringByReplacingOccurrencesOfString:@"%album" withString:[app album]];
+    displayString = [displayString
+                     stringByReplacingOccurrencesOfString:@"%song" withString:[app name]];
+    displayString = [displayString
+                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [app trackNumber]]];
+    [model setText:displayString];
 }
 
 @end

@@ -41,7 +41,10 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     // Format other
     [formatView setAnchor:displayView];
     
-    [formatModel addObserver:displayController forKeyPath:@"formatString" options:NSKeyValueObservingOptionNew context:nil];
+    // Link up listeners
+    [formatModel addObserver:displayController forKeyPath:@"formatString" options:NSKeyValueObservingOptionNew context:(__bridge void *)(self)];
+    [displayModel addObserver:displayView forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     
     [menuHandler setAppDelegate:self];
     
@@ -61,7 +64,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     [statusItem setMenu:menuHandler];
     
     [displayView setStatusItem:statusItem];
-    [displayView setFormatController:formatController];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
@@ -86,14 +88,13 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    Player p = [defaults integerForKey:DEFAULTS_KEY_PLAYER];
+    [menuHandler setWatch:p];
     NSString *formatString = [defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING];
     if (formatString == nil) {
         formatString = @"%artist — %song";
     }
     [formatModel setFormatString:formatString];
-    
-    Player p = [defaults integerForKey:DEFAULTS_KEY_PLAYER];
-    [menuHandler setWatch:p];
 }
 
 - (PlayerState) getPlayerState {
@@ -148,15 +149,12 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:[self displayedPlayer] forKey:DEFAULTS_KEY_PLAYER];
     [defaults synchronize];
-    [self setDisplayStringFromPlayerState:[self getPlayerState]];
+    // Janky refresh.
+    [formatModel setFormatString:[formatModel formatString]];
 }
 
 - (IBAction) quitApplication:(id)sender {
     [[NSApplication sharedApplication] terminate:nil];
-}
-
-- (void) closeFormatWindowWithoutSaving {
-    // [formatHandler closeWindowWithoutSettingString:self];
 }
 
 - (void) printNotification:(NSNotification*)note {
@@ -185,29 +183,35 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
             [self setCurrentPlayer:ITUNES];
         }
     }
-    [self setDisplayStringFromPlayerState:[self getPlayerState]];
+    [formatModel setFormatString:[formatModel formatString]];
 }
 
-- (void) setDisplayStringFromPlayerState:(PlayerState)state {
-    [displayModel setState:state];
-    if (state == STOP) {
-        [displayModel setText:@""];
-        return;
+- (NSString*) album {
+    if ([displayModel state] != STOP) {
+        return [[self getCurrentTrack] album];
     }
-    
-    // We know that iTunes and Spotify both support this message.
-    id track = [self getCurrentTrack];
-    // Could also be done with a string -> SEL dictionary...
-    NSString *displayString = [[formatModel formatString]
-                     stringByReplacingOccurrencesOfString:@"%artist" withString:[track artist]];
-    displayString = [displayString 
-                     stringByReplacingOccurrencesOfString:@"%album" withString:[track album]];
-    displayString = [displayString 
-                     stringByReplacingOccurrencesOfString:@"%song" withString:[track name]];
-    displayString = [displayString 
-                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [track trackNumber]]];
-    
-    [displayModel setText:displayString];
+    return @"";
+}
+
+- (NSString*) artist {
+    if ([displayModel state] != STOP) {
+        return [[self getCurrentTrack] artist];
+    }
+    return @"";
+}
+
+- (NSString*) name {
+    if ([displayModel state] != STOP) {
+        return [[self getCurrentTrack] name];
+    }
+    return @"";
+}
+
+- (NSInteger) trackNumber {
+    if ([displayModel state] != STOP) {
+        return [[self getCurrentTrack] trackNumber];
+    }
+    return 0;
 }
 
 @end
