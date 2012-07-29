@@ -25,11 +25,7 @@
 @end
 
 /*
-To do (ordered by approximate priority):
- app icon
-
 Questions:
  how to handle crash/force-quit of application we're listening to?
  when and why is itunes being kept open?
- scroll while menu is selected?
 */

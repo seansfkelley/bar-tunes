@@ -139,7 +139,14 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 
 // We have to manage our own events if we're sitting inside a status item.
 - (void) mouseDown:(NSEvent*)event {
+    NSTimer *updateWhileTracking = [NSTimer timerWithTimeInterval:INTERVAL
+                                                           target:self
+                                                         selector:@selector(refresh)
+                                                         userInfo:nil
+                                                          repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:updateWhileTracking forMode:NSEventTrackingRunLoopMode];
     [statusItem popUpStatusItemMenu:[statusItem menu]];
+    [updateWhileTracking invalidate];
     [self setNeedsDisplay:YES];
 }
 
@@ -148,6 +155,10 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"menuVisible"]) {
+        [self setNeedsDisplay:YES];
+        return;
+    }
     BOOL textChanged = NO;
     if ([keyPath isEqualToString:@"text"]) {
         textChanged = ![[change objectForKey:@"new"] isEqualToString:[change objectForKey:@"old"]];
