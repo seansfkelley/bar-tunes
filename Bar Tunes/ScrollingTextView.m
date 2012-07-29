@@ -32,7 +32,6 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
                                                              [NSImage imageNamed:@"noteHighlight"], @"noteHi",
                                                              nil];
     scrolling = NO;
-    
     return self;
 }
 
@@ -127,24 +126,27 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [filename appendString:@"Hi"];
     }
     if (state == STOP || [model showIcons]) {
-        [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+        [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
     } else if (state == PAUSE && ![model showPauseText]) {
         if ([model menuVisible]) {
-            [[imageDict objectForKey:@"noteHi"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+            [[imageDict objectForKey:@"noteHi"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
         } else {
-            [[imageDict objectForKey:@"note"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
+            [[imageDict objectForKey:@"note"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
         }
     }
 }
 
 // We have to manage our own events if we're sitting inside a status item.
 - (void) mouseDown:(NSEvent*)event {
-    NSTimer *updateWhileTracking = [NSTimer timerWithTimeInterval:INTERVAL
-                                                           target:self
-                                                         selector:@selector(refresh)
-                                                         userInfo:nil
-                                                          repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:updateWhileTracking forMode:NSEventTrackingRunLoopMode];
+    NSTimer *updateWhileTracking;
+    if (scrolling) {
+        updateWhileTracking = [NSTimer timerWithTimeInterval:INTERVAL
+                                                      target:self
+                                                    selector:@selector(refresh)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:updateWhileTracking forMode:NSEventTrackingRunLoopMode];
+    }
     [statusItem popUpStatusItemMenu:[statusItem menu]];
     [updateWhileTracking invalidate];
     [self setNeedsDisplay:YES];

@@ -43,7 +43,7 @@
 }
 
 - (NSTextView*) getTextView {
-    NSResponder * responder = [[self window] firstResponder];
+    NSResponder *responder = [[self window] firstResponder];
     if ((responder != nil) && [responder isKindOfClass:[NSTextView class]]) {
         return (NSTextView*) responder;
     }

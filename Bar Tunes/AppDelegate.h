@@ -33,4 +33,6 @@
  to go through enum every single time?
  
  fix leaks during refactoring
+ 
+ move string-insertion code from format view to format controller
 */
