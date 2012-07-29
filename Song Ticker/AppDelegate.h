@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class MenuHandler;
+@class PlayerControlView;
 @class FormatStringModel;
 @class FormatStringView;
 @class FormatStringController;
@@ -19,37 +19,22 @@
 #import "Spotify.h"
 #import "FormatStringPackage.h"
 #import "DisplayPackage.h"
-#import "MenuHandler.h"
-#import "ScrollingTextView.h"
+#import "PlayerPackage.h"
 #import "NSStatusBar+Undocumented.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    IBOutlet MenuHandler *menuHandler;
-    
     FormatStringModel *formatModel;
-    IBOutlet FormatStringController *formatController;
     IBOutlet FormatStringView *formatView;
+    IBOutlet FormatStringController *formatController;
     
     DisplayModel *displayModel;
-    IBOutlet DisplayController *displayController;
     IBOutlet ScrollingTextView *displayView;
+    IBOutlet DisplayController *displayController;
     
-    iTunesApplication *itunes;
-    SpotifyApplication *spotify;
+    PlayerModel *playerModel;
+    IBOutlet PlayerControlView *playerControlView;
+    IBOutlet PlayerController *playerController;
 }
-
-- (NSString*) album;
-- (NSString*) artist;
-- (NSString*) name;
-- (NSInteger) trackNumber;
-
-// Which player we are displaying, or ANY if the current player should be used.
-@property (nonatomic) Player displayedPlayer;
-
-// Which player is "current", i.e., was the last to play a song (preferring iTunes in the 
-// event of a tie-break). Not necessarily the player being displayed; should be referenced
-// when displayedPlayer is ANY.
-@property Player currentPlayer;
 
 - (IBAction) quitApplication:(id)sender;
 
@@ -57,9 +42,6 @@
 
 /*
 To do (ordered by approximate priority):
- DO ACTUAL MVC IT SHOULDNT BE THAT HARD.
-    multiple models for switching between players? or one model that is changed when the player changes?
- 
  menu options
     slider: scroll speed (?)
     scroll type

@@ -11,43 +11,52 @@
 @implementation DisplayController
 
 @synthesize model;
+@synthesize playerModel;
+@synthesize formatModel;
 
-- (IBAction) toggleShowIcons:(NSMenuItem*)sender {
-    BOOL showIcons = [sender state] != NSOnState;
-    [sender setState:showIcons ? NSOnState : NSOffState];
+- (void) awakeFromNib {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self setShowIcons:[defaults boolForKey:DEFAULTS_KEY_SHOW_ICONS]];
+    [self setShowPauseText:[defaults boolForKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT]];
+}
+
+- (void) setShowIcons:(BOOL)showIcons {
+    [showIconsMenuItem setState:showIcons ? NSOnState : NSOffState];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:showIcons forKey:DEFAULTS_KEY_SHOW_ICONS];
     [defaults synchronize];
     [model setShowIcons:showIcons];
 }
 
-// Basically c'n'p from toggleShowIcons.
-- (IBAction) toggleShowPauseText:(NSMenuItem*)sender {
-    BOOL showPauseText = [sender state] != NSOnState;
-    [sender setState:showPauseText ? NSOnState : NSOffState];
+- (void) setShowPauseText:(BOOL)showPauseText {
+    [showPauseTextMenuItem setState:showPauseText ? NSOnState : NSOffState];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:showPauseText forKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT];
     [defaults synchronize];
     [model setShowPauseText:showPauseText];
 }
 
+- (IBAction) toggleShowIcons:(NSMenuItem*)sender {
+    [self setShowIcons:[sender state] != NSOnState];
+}
+
+- (IBAction) toggleShowPauseText:(NSMenuItem*)sender {
+    [self setShowPauseText:[sender state] != NSOnState];
+}
+
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    AppDelegate *app = (__bridge AppDelegate*) context;
-    // Change in player state or player info.
-    NSString *displayString = [change valueForKey:@"new"];
-    if ([displayString class] == [NSNull class]) {
-        return;
-    }
-    NSLog(@"%@", change);
+    NSLog(@"Updating display model.");
+    NSString *displayString = [formatModel formatString];
     displayString = [displayString
-                     stringByReplacingOccurrencesOfString:@"%artist" withString:[app artist]];
+                     stringByReplacingOccurrencesOfString:@"%artist" withString:[playerModel artist]];
     displayString = [displayString
-                     stringByReplacingOccurrencesOfString:@"%album" withString:[app album]];
+                     stringByReplacingOccurrencesOfString:@"%album" withString:[playerModel album]];
     displayString = [displayString
-                     stringByReplacingOccurrencesOfString:@"%song" withString:[app name]];
+                     stringByReplacingOccurrencesOfString:@"%song" withString:[playerModel name]];
     displayString = [displayString
-                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [app trackNumber]]];
+                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [playerModel trackNumber]]];
     [model setText:displayString];
+    [model setState:[playerModel state]];
 }
 
 @end

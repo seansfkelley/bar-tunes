@@ -6,18 +6,16 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class AppDelegate;
-
 #import <Foundation/Foundation.h>
-#import "AppDelegate.h"
+#import "PlayerModel.h"
 
-@interface MenuHandler : NSMenu {
+@interface PlayerControlView : NSMenu {
     IBOutlet NSMenuItem *itunesMenuItem;
     IBOutlet NSMenuItem *spotifyMenuItem;
     IBOutlet NSMenuItem *anyPlayerMenuItem;
 }
 
-@property (nonatomic) AppDelegate *appDelegate;
+@property PlayerModel *model;
 
 - (void) setWatch:(Player)p;
 - (IBAction) setWatchItunes:(id)sender;

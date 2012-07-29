@@ -33,8 +33,10 @@
 		788FFCB515C46E2A00C6182E /* FormatStringController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788FFCB415C46E2A00C6182E /* FormatStringController.m */; };
 		78FC2E4415BE77AB00293304 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC2E4215BE77AB00293304 /* pause.png */; };
 		78FC2E4515BE77AB00293304 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC2E4315BE77AB00293304 /* pause@2x.png */; };
-		78FC2E4815BE791100293304 /* MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FC2E4715BE791100293304 /* MenuHandler.m */; };
+		78FC2E4815BE791100293304 /* PlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FC2E4715BE791100293304 /* PlayerControlView.m */; };
 		78FC2E5715BE8F1E00293304 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FC2E5115BE8C0F00293304 /* MAAttachedWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		78FE49AC15C48C2200D68AFF /* PlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FE49AB15C48C2200D68AFF /* PlayerModel.m */; };
+		78FE49B115C4AC3100D68AFF /* PlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FE49B015C4AC3100D68AFF /* PlayerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,11 +84,16 @@
 		788FFCB715C46F7000C6182E /* FormatStringPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormatStringPackage.h; sourceTree = "<group>"; };
 		78FC2E4215BE77AB00293304 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		78FC2E4315BE77AB00293304 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
-		78FC2E4615BE791100293304 /* MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuHandler.h; sourceTree = "<group>"; };
-		78FC2E4715BE791100293304 /* MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuHandler.m; sourceTree = "<group>"; };
+		78FC2E4615BE791100293304 /* PlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerControlView.h; sourceTree = "<group>"; };
+		78FC2E4715BE791100293304 /* PlayerControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerControlView.m; sourceTree = "<group>"; };
 		78FC2E5015BE8C0F00293304 /* MAAttachedWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
 		78FC2E5115BE8C0F00293304 /* MAAttachedWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
 		78FE49A915C4773200D68AFF /* DisplayPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayPackage.h; sourceTree = "<group>"; };
+		78FE49AA15C48C2200D68AFF /* PlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerModel.h; sourceTree = "<group>"; };
+		78FE49AB15C48C2200D68AFF /* PlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerModel.m; sourceTree = "<group>"; };
+		78FE49AD15C48DCD00D68AFF /* PlayerPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerPackage.h; sourceTree = "<group>"; };
+		78FE49AF15C4AC3100D68AFF /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
+		78FE49B015C4AC3100D68AFF /* PlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,9 +152,8 @@
 			children = (
 				7854A09315B9202700026D40 /* AppDelegate.h */,
 				7854A09415B9202700026D40 /* AppDelegate.m */,
-				78FC2E4615BE791100293304 /* MenuHandler.h */,
-				78FC2E4715BE791100293304 /* MenuHandler.m */,
 				7874867815B9396F0059D593 /* MainMenu.xib */,
+				78FE49AE15C48DF300D68AFF /* Player */,
 				78FE49A815C4771400D68AFF /* Display */,
 				788FFCB615C46F5200C6182E /* Format String */,
 				786F152D15BFA0BE004C36B1 /* Library */,
@@ -229,6 +235,20 @@
 			name = Display;
 			sourceTree = "<group>";
 		};
+		78FE49AE15C48DF300D68AFF /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				78FE49AD15C48DCD00D68AFF /* PlayerPackage.h */,
+				78FE49AA15C48C2200D68AFF /* PlayerModel.h */,
+				78FE49AB15C48C2200D68AFF /* PlayerModel.m */,
+				78FE49AF15C4AC3100D68AFF /* PlayerController.h */,
+				78FE49B015C4AC3100D68AFF /* PlayerController.m */,
+				78FC2E4615BE791100293304 /* PlayerControlView.h */,
+				78FC2E4715BE791100293304 /* PlayerControlView.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -308,13 +328,15 @@
 				7854A08E15B9202700026D40 /* main.m in Sources */,
 				7854A09515B9202700026D40 /* AppDelegate.m in Sources */,
 				7874867E15B942530059D593 /* ScrollingTextView.m in Sources */,
-				78FC2E4815BE791100293304 /* MenuHandler.m in Sources */,
+				78FC2E4815BE791100293304 /* PlayerControlView.m in Sources */,
 				78FC2E5715BE8F1E00293304 /* MAAttachedWindow.m in Sources */,
 				786F152815BE935F004C36B1 /* FormatStringView.m in Sources */,
 				788FFCAB15C3A96F00C6182E /* FormatStringModel.m in Sources */,
 				788FFCAF15C46A6700C6182E /* DisplayModel.m in Sources */,
 				788FFCB215C46C6F00C6182E /* DisplayController.m in Sources */,
 				788FFCB515C46E2A00C6182E /* FormatStringController.m in Sources */,
+				78FE49AC15C48C2200D68AFF /* PlayerModel.m in Sources */,
+				78FE49B115C4AC3100D68AFF /* PlayerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

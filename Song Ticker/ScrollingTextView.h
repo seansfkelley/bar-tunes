@@ -11,9 +11,6 @@
 #import "FormatStringController.h"
 
 @interface ScrollingTextView : NSView <NSMenuDelegate> {
-    IBOutlet NSMenuItem *showIconsMenuItem;
-    IBOutlet NSMenuItem *showPauseTextMenuItem;
-    
     BOOL menuVisible;
     
     NSMutableDictionary *drawStringAttributes;
@@ -41,7 +38,7 @@ typedef enum changeType {
 @property NSStatusItem *statusItem;
 @property FormatStringController *formatController;
 
-// Called when the display state changes.
+// Called when the display state or text changes.
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @end

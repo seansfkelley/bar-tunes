@@ -6,11 +6,16 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MenuHandler.h"
+#import "PlayerControlView.h"
 
-@implementation MenuHandler
+@implementation PlayerControlView
 
-@synthesize appDelegate;
+@synthesize model;
+
+- (void) awakeFromNib {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self setWatch:[defaults integerForKey:DEFAULTS_KEY_PLAYER]];
+}
 
 - (void) setWatch:(Player)p {
     if (p == ITUNES) {
@@ -25,21 +30,21 @@
 }
 
 - (IBAction) setWatchItunes:(id)sender {
-    [appDelegate setDisplayedPlayer:ITUNES];
+    [model setDisplayPlayer:ITUNES];
     [itunesMenuItem setState:NSOnState];
     [spotifyMenuItem setState:NSOffState];
     [anyPlayerMenuItem setState:NSOffState];
 }
 
 - (IBAction) setWatchSpotify:(id)sender {
-    [appDelegate setDisplayedPlayer:SPOTIFY];
+    [model setDisplayPlayer:SPOTIFY];
     [itunesMenuItem setState:NSOffState];
     [spotifyMenuItem setState:NSOnState];
     [anyPlayerMenuItem setState:NSOffState];
 }
 
 - (IBAction) setWatchAny:(id)sender {
-    [appDelegate setDisplayedPlayer:ANY];
+    [model setDisplayPlayer:ANY];
     [itunesMenuItem setState:NSOffState];
     [spotifyMenuItem setState:NSOffState];
     [anyPlayerMenuItem setState:NSOnState];

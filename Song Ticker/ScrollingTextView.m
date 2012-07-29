@@ -156,6 +156,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"Updating display view.");
     ChangeType c;
     if ([keyPath isEqualToString:@"text"]) {
         c = DISPLAY_TEXT;
