@@ -7,6 +7,7 @@
 
 const int VERTICAL_OFFSET = 4;
 const int IMAGE_WIDTH = 18;
+const int IMAGE_HEIGHT = 22;
 
 const int PX_BEFORE_SCROLLS = 16;
 const int PX_BETWEEN_SCROLLS = 40;
@@ -68,10 +69,6 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         scrolling = YES;
         [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + ([model showIcons] ? IMAGE_WIDTH : 0), [self frame].size.height)];
     }
-    
-    if (textChanged) {
-        [[statusItem menu] cancelTracking];
-    }
     [self setNeedsDisplay:YES];
 }
 
@@ -126,14 +123,20 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [filename appendString:@"Hi"];
     }
     if (state == STOP || [model showIcons]) {
-        [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [self drawImage:[imageDict objectForKey:filename]];
     } else if (state == PAUSE && ![model showPauseText]) {
         if ([model menuVisible]) {
-            [[imageDict objectForKey:@"noteHi"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+            [self drawImage:[imageDict objectForKey:@"noteHi"]];
         } else {
-            [[imageDict objectForKey:@"note"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+            [self drawImage:[imageDict objectForKey:@"note"]];
         }
     }
+}
+
+- (void) drawImage:(NSImage*)img {
+    // Clear the space of text before we draw the image over it.
+    [statusItem drawStatusBarBackgroundInRect:NSMakeRect(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT) withHighlight:[model menuVisible]];
+    [img drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 }
 
 // We have to manage our own events if we're sitting inside a status item.
@@ -166,6 +169,9 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         textChanged = ![[change objectForKey:@"new"] isEqualToString:[change objectForKey:@"old"]];
     }
     [self resize:textChanged];
+    if (textChanged) {
+        [[statusItem menu] cancelTracking];
+    }
 }
 
 
