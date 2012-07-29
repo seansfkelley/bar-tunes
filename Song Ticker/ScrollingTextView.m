@@ -20,7 +20,7 @@ const int VERTICAL_OFFSET = 4;
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
 
-const float SCROLL_SPEED = 0.33;
+const float SCROLL_SPEED = 0.40;
 const float INTERVAL = 1 / 30.0; // 30 FPS
 
 - (id) init {

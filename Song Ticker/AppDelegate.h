@@ -42,8 +42,6 @@
 
 /*
 To do (ordered by approximate priority):
- finish tweaking MVC -- still some grossness in the display and delegate
- increase scroll speed
  circular scroll
  buttons in display should replace selection if any, else append
 
@@ -55,9 +53,4 @@ Questions:
  how to handle crash/force-quit of application we're listening to?
  when and why is itunes being kept open?
  scroll while menu is selected?
- scroll speed:
-    constant?
-    function of length?
-    user selected?
-    combination of user selected/function of length?
 */
