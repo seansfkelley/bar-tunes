@@ -95,7 +95,6 @@
 						<string key="NSTitle">Show Play/Pause Icons</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<int key="NSState">1</int>
 						<reference key="NSOnImage" ref="220654110"/>
 						<reference key="NSMixedImage" ref="670801261"/>
 					</object>
@@ -119,7 +118,7 @@
 					</object>
 					<object class="NSMenuItem" id="704615400">
 						<reference key="NSMenu" ref="39211898"/>
-						<string key="NSTitle">Set Display Format</string>
+						<string key="NSTitle">Set Display Format...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="220654110"/>
@@ -995,7 +994,7 @@ A</bytes>
 						<reference key="object" ref="59992079"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="503810349"/>
-							<object class="IBNSLayoutConstraint" id="557589121">
+							<object class="IBNSLayoutConstraint" id="957695375">
 								<reference key="firstItem" ref="59992079"/>
 								<int key="firstAttribute">7</int>
 								<int key="relation">0</int>
@@ -1115,7 +1114,7 @@ A</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1845</int>
-						<reference key="object" ref="557589121"/>
+						<reference key="object" ref="957695375"/>
 						<reference key="parent" ref="59992079"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1164,7 +1163,7 @@ A</bytes>
 				<string key="1178.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1179.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array key="1278.IBNSViewMetadataConstraints">
-					<reference ref="557589121"/>
+					<reference ref="957695375"/>
 				</array>
 				<boolean value="NO" key="1278.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="1278.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

@@ -13,7 +13,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
                                                         selector:@selector(playerStateChangeNotification:)
                                                             name:itunesNoteName
                                                           object:nil];
-    
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(playerStateChangeNotification:)
                                                             name:spotifyNoteName
@@ -22,7 +21,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 }
 
 - (void) playerStateChangeNotification:(NSNotification*)note {
-    [model willChangeValueForKey:@"player"];
     // Both iTunes and Spotify have a Player State -> Playing in their userInfo.
     NSString *state = [[note userInfo] objectForKey:@"Player State"];
     NSString *player = [note name];
@@ -35,20 +33,25 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
             assert(NO);
         }
     } else if ([state isEqualToString:@"Paused"] || [state isEqualToString:@"Stopped"]) {
-        if ([player isEqualToString:itunesNoteName] && [model spotifyPlayerState] == PLAY) {
+        if ([player isEqualToString:itunesNoteName] && [model stateFor:SPOTIFY] == PLAY) {
             [model setCurrentPlayer:SPOTIFY];
-        } else if ([player isEqualToString:spotifyNoteName] && [model itunesPlayerState] == PLAY) {
+        } else if ([player isEqualToString:spotifyNoteName] && [model stateFor:ITUNES] == PLAY) {
             [model setCurrentPlayer:ITUNES];
         }
     }
-    [model didChangeValueForKey:@"player"];
+    
+    if ([player isEqualToString:itunesNoteName]) {
+        [model copyInfoFrom:[note userInfo] for:ITUNES];
+    } else if ([player isEqualToString:spotifyNoteName]) {
+        [model copyInfoFrom:[note userInfo] for:SPOTIFY];
+    }
 }
 
-//- (void) printNotification:(NSNotification*)note {
-//    NSString *object = [note object];
-//    NSString *name = [note name];
-//    NSDictionary *userInfo = [note userInfo];
-//    NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
-//}
+- (void) printNotification:(NSNotification*)note {
+    NSString *object = [note object];
+    NSString *name = [note name];
+    NSDictionary *userInfo = [note userInfo];
+    NSLog(@"<%p>%s: object: %@ name: %@ userInfo: %@", self, __PRETTY_FUNCTION__, object, name, userInfo);
+}
 
 @end

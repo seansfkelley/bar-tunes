@@ -19,14 +19,9 @@
     [formatView setAnchor:displayView];
     
     // Player component MVC
-    playerModel = [[PlayerModel alloc] init];
+    playerModel = [[UnifiedPlayerModel alloc] init];
     [playerControlView setModel:playerModel];
     [playerController setModel:playerModel];
-    
-    // Player other
-    [playerModel setItunes:[SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"]];
-    [playerModel setSpotify:[SBApplication applicationWithBundleIdentifier:@"com.spotify.client"]];
-    [playerModel initialize];
     
     // Set up other models
     [displayController setFormatModel:formatModel];

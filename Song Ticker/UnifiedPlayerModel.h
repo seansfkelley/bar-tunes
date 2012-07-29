@@ -1,19 +1,15 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
 #import "Spotify.h"
+#import "SinglePlayerModel.h"
 
-@interface PlayerModel : NSObject {
+@interface UnifiedPlayerModel : NSObject {
+    SinglePlayerModel *itunesModel;
+    SinglePlayerModel *spotifyModel;
+    
     Player displayPlayer;
     Player currentPlayer;
-    
-    BOOL initialized;
 }
-
-@property iTunesApplication *itunes;
-@property SpotifyApplication *spotify;
-
-@property (nonatomic, readonly) PlayerState itunesPlayerState;
-@property (nonatomic, readonly) PlayerState spotifyPlayerState;
 
 // Set which player we would like to see, or ANY (to use whichever player is currently active).
 - (void) setDisplayPlayer:(Player)p;
@@ -28,11 +24,14 @@
 // Get the state of the player. Returns STOP if there is no player.
 - (PlayerState) state;
 
-- (void) initialize;
+// Get the state for a particular player.
+- (PlayerState) stateFor:(Player)p;
+
+- (void) copyInfoFrom:(NSDictionary*)info for:(Player)p;
 
 - (NSString*) album;
 - (NSString*) artist;
 - (NSString*) name;
-- (NSInteger) trackNumber;
+- (NSString*) trackNumber;
 
 @end

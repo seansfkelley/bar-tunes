@@ -2,7 +2,7 @@
 #import "DisplayModel.h"
 #import "ScrollingTextView.h"
 #import "FormatStringPackage.h"
-#import "PlayerModel.h"
+#import "UnifiedPlayerModel.h"
 
 @interface DisplayController : NSObject <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
@@ -11,7 +11,7 @@
 
 @property DisplayModel *model;
 @property ScrollingTextView *view;
-@property PlayerModel *playerModel;
+@property UnifiedPlayerModel *playerModel;
 @property FormatStringModel *formatModel;
 
 - (void) setShowIcons:(BOOL)showIcons;

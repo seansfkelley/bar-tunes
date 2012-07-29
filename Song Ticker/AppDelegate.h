@@ -15,7 +15,7 @@
     IBOutlet ScrollingTextView *displayView;
     IBOutlet DisplayController *displayController;
     
-    PlayerModel *playerModel;
+    UnifiedPlayerModel *playerModel;
     IBOutlet PlayerControlView *playerControlView;
     IBOutlet PlayerController *playerController;
 }
@@ -27,5 +27,5 @@
 /*
 Questions:
  how to handle crash/force-quit of application we're listening to?
- when and why is itunes being kept open?
+ option for Open at Login
 */

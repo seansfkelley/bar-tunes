@@ -1,5 +1,5 @@
 #import "iTunes.h"
 #import "Spotify.h"
-#import "PlayerModel.h"
+#import "UnifiedPlayerModel.h"
 #import "PlayerControlView.h"
 #import "PlayerController.h"

@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "PlayerModel.h"
+#import "UnifiedPlayerModel.h"
 
 @interface PlayerController : NSObject
 
-@property PlayerModel *model;
+@property UnifiedPlayerModel *model;
 
 @end

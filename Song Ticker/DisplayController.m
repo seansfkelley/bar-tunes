@@ -48,7 +48,7 @@
     displayString = [displayString
                      stringByReplacingOccurrencesOfString:@"%song" withString:[playerModel name]];
     displayString = [displayString
-                     stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [playerModel trackNumber]]];
+                     stringByReplacingOccurrencesOfString:@"%number" withString:[playerModel trackNumber]];
     // Fire state event first: if we switch to a paused player, we have paused-text-display off, and
     // the current player is playing, there is a flicker of text if the state (and hence text-hiding)
     // update comes after.

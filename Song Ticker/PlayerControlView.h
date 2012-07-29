@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "PlayerModel.h"
+#import "UnifiedPlayerModel.h"
 
 @interface PlayerControlView : NSMenu {
     IBOutlet NSMenuItem *itunesMenuItem;
@@ -7,7 +7,7 @@
     IBOutlet NSMenuItem *anyPlayerMenuItem;
 }
 
-@property PlayerModel *model;
+@property UnifiedPlayerModel *model;
 
 - (void) setWatch:(Player)p;
 - (IBAction) setWatchItunes:(id)sender;

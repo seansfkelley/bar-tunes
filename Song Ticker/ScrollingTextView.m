@@ -46,7 +46,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     NSSize stringSize = [t sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
     
-    if ([t isEqualToString:@""] || (![model showPauseText] && [model state] == PAUSE)) {
+    if ([t isEqualToString:@""] || (![model showPauseText] && [model state] == PAUSE) || [model state] == STOP) {
         scrolling = NO;
         [self setFrame:NSMakeRect(0, 0, IMAGE_WIDTH, [self frame].size.height)];
     } else if (stringSize.width <= MAX_STATIC_WIDTH) {
