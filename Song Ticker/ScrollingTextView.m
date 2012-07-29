@@ -131,6 +131,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     }
 }
 
+// We have to manage our own events if we're sitting inside a status item.
 - (void) mouseDown:(NSEvent*)event {
     [statusItem popUpStatusItemMenu:[statusItem menu]];
     [self setNeedsDisplay:YES];
@@ -141,7 +142,11 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self resize:[keyPath isEqualToString:@"text"]];
+    BOOL textChanged = NO;
+    if ([keyPath isEqualToString:@"text"]) {
+        textChanged = ![[change objectForKey:@"new"] isEqualToString:[change objectForKey:@"old"]];
+    }
+    [self resize:textChanged];
 }
 
 

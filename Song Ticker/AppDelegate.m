@@ -47,7 +47,8 @@
     
     // Update display listeners
     [displayModel addObserver:displayView forKeyPath:@"state" options:0 context:nil];
-    [displayModel addObserver:displayView forKeyPath:@"text" options:0 context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"text" options:NSKeyValueObservingOptionNew |
+                                                                     NSKeyValueObservingOptionOld context:nil];
     [displayModel addObserver:displayView forKeyPath:@"showIcons" options:0 context:nil];
     [displayModel addObserver:displayView forKeyPath:@"showPauseText" options:0 context:nil];
     [displayModel addObserver:displayView forKeyPath:@"menuVisible" options:0 context:nil];

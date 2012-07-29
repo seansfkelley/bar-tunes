@@ -16,4 +16,10 @@
 @synthesize showPauseText;
 @synthesize menuVisible;
 
+- (DisplayModel*) init {
+    self = [super init];
+    text = @"";
+    return self;
+}
+
 @end
