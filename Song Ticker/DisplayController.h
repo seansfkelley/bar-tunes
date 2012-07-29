@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "DisplayModel.h"
-#import "FormatStringModel.h"
+#import "ScrollingTextView.h"
+#import "FormatStringPackage.h"
 #import "PlayerModel.h"
 
-@interface DisplayController : NSObject {
+@interface DisplayController : NSObject <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
     IBOutlet NSMenuItem *showPauseTextMenuItem;
 }
 
 @property DisplayModel *model;
+@property ScrollingTextView *view;
 @property PlayerModel *playerModel;
 @property FormatStringModel *formatModel;
 

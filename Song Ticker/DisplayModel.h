@@ -14,5 +14,7 @@
 @property PlayerState state;
 @property BOOL showIcons;
 @property BOOL showPauseText;
+// Transient
+@property BOOL menuVisible;
 
 @end

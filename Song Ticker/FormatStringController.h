@@ -23,4 +23,7 @@
 - (void) windowDidResignKey:(NSNotification *)note;
 - (void) cancelOperation:(id)sender;
 
+// Called when the menu-visible state of the drop-down changes.
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+
 @end

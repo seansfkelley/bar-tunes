@@ -12,7 +12,6 @@
 
 @synthesize model;
 @synthesize statusItem;
-@synthesize formatController;
 
 const int IMAGE_WIDTH = 18;
 const int EXTRA_SPACE_SCROLL = 16;
@@ -36,7 +35,6 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
                                                              [NSImage imageNamed:@"note"], @"note",
                                                              [NSImage imageNamed:@"noteHighlight"], @"noteHi",
                                                              nil];
-    menuVisible = NO;
     scrolling = NO;
     
     return self;
@@ -83,8 +81,8 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) refresh {
-    [statusItem drawStatusBarBackgroundInRect:[self bounds] withHighlight:menuVisible];
-    if (menuVisible) {
+    [statusItem drawStatusBarBackgroundInRect:[self bounds] withHighlight:[model menuVisible]];
+    if ([model menuVisible]) {
         [drawStringAttributes setValue:[NSColor selectedMenuItemTextColor] forKey:NSForegroundColorAttributeName];
     } else {
         [drawStringAttributes setValue:[NSColor controlTextColor] forKey:NSForegroundColorAttributeName];
@@ -119,13 +117,13 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     } else {
         filename = [[NSMutableString alloc] initWithString:@"note"];
     }
-    if (menuVisible) {
+    if ([model menuVisible]) {
         [filename appendString:@"Hi"];
     }
     if (state == STOP || [model showIcons]) {
         [[imageDict objectForKey:filename] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
     } else if (state == PAUSE && ![model showPauseText]) {
-        if (menuVisible) {
+        if ([model menuVisible]) {
             [[imageDict objectForKey:@"noteHi"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
         } else {
             [[imageDict objectForKey:@"note"] drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:1];
@@ -134,25 +132,12 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) mouseDown:(NSEvent*)event {
-    [[statusItem menu] setDelegate:self];
     [statusItem popUpStatusItemMenu:[statusItem menu]];
     [self setNeedsDisplay:YES];
 }
 
 - (void) rightMouseDown:(NSEvent*)event {
     [self mouseDown:event];
-}
-
-- (void) menuWillOpen:(NSMenu*)menu {
-    menuVisible = YES;
-    [formatController cancel:menu];
-    [self setNeedsDisplay:YES];
-}
-
-- (void) menuDidClose:(NSMenu *)menu {
-    menuVisible = NO;
-    [[statusItem menu] setDelegate:nil];
-    [self setNeedsDisplay:YES];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

@@ -11,6 +11,7 @@
 @implementation DisplayController
 
 @synthesize model;
+@synthesize view;
 @synthesize playerModel;
 @synthesize formatModel;
 
@@ -36,6 +37,14 @@
 
 - (IBAction) toggleShowPauseText:(NSMenuItem*)sender {
     [self setShowPauseText:[sender state] != NSOnState];
+}
+
+- (void) menuWillOpen:(NSMenu*)menu {
+    [model setMenuVisible:YES];
+}
+
+- (void) menuDidClose:(NSMenu *)menu {
+    [model setMenuVisible:NO];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

@@ -37,7 +37,6 @@
 - (PlayerState) state;
 
 - (void) initialize;
-- (void) firePlayerInfoChange;
 
 - (NSString*) album;
 - (NSString*) artist;

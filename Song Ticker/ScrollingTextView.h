@@ -10,9 +10,7 @@
 #import "DisplayModel.h"
 #import "FormatStringController.h"
 
-@interface ScrollingTextView : NSView <NSMenuDelegate> {
-    BOOL menuVisible;
-    
+@interface ScrollingTextView : NSView {
     NSMutableDictionary *drawStringAttributes;
     
     NSTimer *timer;
@@ -31,7 +29,6 @@
 - (void) resize:(BOOL)textChanged;
 
 @property NSStatusItem *statusItem;
-@property FormatStringController *formatController;
 
 // Called when the display state or text changes.
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;

@@ -40,4 +40,10 @@
     [self cancel:self];
 }
 
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([[change objectForKey:@"new"] isEqual:[NSNumber numberWithInt:1]]) {
+        [self cancel:object];
+    }
+}
+
 @end

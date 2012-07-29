@@ -42,12 +42,9 @@
 
 /*
 To do (ordered by approximate priority):
- menu options
-    slider: scroll speed (?)
-    scroll type
-        circular
-        bounce
-        never (truncate)
+ finish tweaking MVC -- still some grossness in the display and delegate
+ increase scroll speed
+ circular scroll
  buttons in display should replace selection if any, else append
 
  app icon

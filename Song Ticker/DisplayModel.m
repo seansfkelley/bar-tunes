@@ -14,5 +14,6 @@
 @synthesize state;
 @synthesize showIcons;
 @synthesize showPauseText;
+@synthesize menuVisible;
 
 @end
