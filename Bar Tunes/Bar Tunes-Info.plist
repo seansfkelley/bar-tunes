@@ -7,9 +7,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.icns</string>
+	<string>icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>copmutar.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.the-gypsy-spaceship.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

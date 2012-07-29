@@ -61,7 +61,7 @@ typedef enum _MAWindowPosition {
     
     @private
     NSColor *_MABackgroundColor;
-    __weak NSView *_view;
+    /* __weak */ NSView *_view; /* We reuse the same view -- no need for weak reference. */
     /* __weak */ NSWindow *_window;
     NSPoint _point;
     MAWindowPosition _side;

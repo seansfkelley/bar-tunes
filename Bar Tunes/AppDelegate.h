@@ -5,6 +5,7 @@
 #import "DisplayPackage.h"
 #import "PlayerPackage.h"
 #import "NSStatusBar+Undocumented.h"
+#import "LaunchAtLoginController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     FormatStringModel *formatModel;
@@ -18,13 +19,16 @@
     UnifiedPlayerModel *playerModel;
     IBOutlet PlayerControlView *playerControlView;
     IBOutlet PlayerController *playerController;
+    
+    IBOutlet NSMenuItem *loginItemMenuItem;
 }
 
+- (IBAction) toggleSetLoginItem:(id)sender;
 - (IBAction) quitApplication:(id)sender;
 
 @end
 
 /*
-Questions:
- option for Open at Login
+ refactor unified class to refer directly to models instead of having
+ to go through enum every single time?
 */

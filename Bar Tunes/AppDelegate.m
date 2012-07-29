@@ -65,6 +65,9 @@
     [statusItem setMenu:playerControlView];
     
     [displayView setStatusItem:statusItem];
+    
+    LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
+    [loginItemMenuItem setState: [launchController launchAtLogin] ? NSOnState :NSOffState];
 }
 
 - (void) initializePreferences {
@@ -76,6 +79,13 @@
     [playerControlView setWatch:(Player) [defaults integerForKey:DEFAULTS_KEY_PLAYER]];
     
     [formatModel setFormatString:[defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING]];
+}
+
+- (IBAction) toggleSetLoginItem:(id)sender {
+    LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
+    BOOL currentSetting = [loginItemMenuItem state] == NSOnState;
+    [launchController setLaunchAtLogin:!currentSetting];
+    [loginItemMenuItem setState:(!currentSetting) ? NSOnState : NSOffState];
 }
 
 - (IBAction) quitApplication:(id)sender {

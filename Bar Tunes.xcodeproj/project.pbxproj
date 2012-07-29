@@ -21,6 +21,8 @@
 		785F599A15BE75E30061FBC7 /* noteHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F599815BE75E30061FBC7 /* noteHighlight.png */; };
 		785F599E15BE76D60061FBC7 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F599D15BE76D60061FBC7 /* note.png */; };
 		7863778115C517FB000693F3 /* SinglePlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7863778015C517FB000693F3 /* SinglePlayerModel.m */; };
+		7863778415C52821000693F3 /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7863778315C526B4000693F3 /* LaunchAtLoginController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7863778615C528B6000693F3 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7863778515C528B6000693F3 /* icon.icns */; };
 		78690BA115C12C6E00E383A9 /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */; };
 		786F152815BE935F004C36B1 /* FormatStringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786F152715BE935F004C36B1 /* FormatStringView.m */; };
 		7874867A15B9396F0059D593 /* UI Elements.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* UI Elements.xib */; };
@@ -63,6 +65,9 @@
 		785F599D15BE76D60061FBC7 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
 		7863777F15C517FB000693F3 /* SinglePlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerModel.h; sourceTree = "<group>"; };
 		7863778015C517FB000693F3 /* SinglePlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerModel.m; sourceTree = "<group>"; };
+		7863778215C526B4000693F3 /* LaunchAtLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchAtLoginController.h; sourceTree = "<group>"; };
+		7863778315C526B4000693F3 /* LaunchAtLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchAtLoginController.m; sourceTree = "<group>"; };
+		7863778515C528B6000693F3 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultPreferences.plist; sourceTree = "<group>"; };
 		786F152615BE935F004C36B1 /* FormatStringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatStringView.h; sourceTree = "<group>"; };
 		786F152715BE935F004C36B1 /* FormatStringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatStringView.m; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 		7854A08815B9202700026D40 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7863778515C528B6000693F3 /* icon.icns */,
 				7854A08915B9202700026D40 /* Bar Tunes-Info.plist */,
 				7854A08D15B9202700026D40 /* main.m */,
 				7854A08F15B9202700026D40 /* Bar Tunes-Prefix.pch */,
@@ -201,6 +207,8 @@
 				785F599115BD1E410061FBC7 /* Spotify.h */,
 				78FC2E5015BE8C0F00293304 /* MAAttachedWindow.h */,
 				78FC2E5115BE8C0F00293304 /* MAAttachedWindow.m */,
+				7863778215C526B4000693F3 /* LaunchAtLoginController.h */,
+				7863778315C526B4000693F3 /* LaunchAtLoginController.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 				78FC2E4415BE77AB00293304 /* pause.png in Resources */,
 				78FC2E4515BE77AB00293304 /* pause@2x.png in Resources */,
 				78690BA115C12C6E00E383A9 /* DefaultPreferences.plist in Resources */,
+				7863778615C528B6000693F3 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +345,7 @@
 				78FE49AC15C48C2200D68AFF /* UnifiedPlayerModel.m in Sources */,
 				78FE49B115C4AC3100D68AFF /* PlayerController.m in Sources */,
 				7863778115C517FB000693F3 /* SinglePlayerModel.m in Sources */,
+				7863778415C52821000693F3 /* LaunchAtLoginController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +417,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
 				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
 			};
@@ -419,6 +430,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
 				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
 			};

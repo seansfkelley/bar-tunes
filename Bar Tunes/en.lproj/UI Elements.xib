@@ -124,6 +124,14 @@
 						<reference key="NSOnImage" ref="220654110"/>
 						<reference key="NSMixedImage" ref="670801261"/>
 					</object>
+					<object class="NSMenuItem" id="985519016">
+						<reference key="NSMenu" ref="39211898"/>
+						<string key="NSTitle">Start Bar Tunes at Login</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="220654110"/>
+						<reference key="NSMixedImage" ref="670801261"/>
+					</object>
 					<object class="NSMenuItem" id="356340162">
 						<reference key="NSMenu" ref="39211898"/>
 						<bool key="NSIsDisabled">YES</bool>
@@ -468,6 +476,22 @@ A</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">loginItemMenuItem</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="985519016"/>
+					</object>
+					<int key="connectionID">1878</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleSetLoginItem:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="985519016"/>
+					</object>
+					<int key="connectionID">1879</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">spotifyMenuItem</string>
 						<reference key="source" ref="39211898"/>
 						<reference key="destination" ref="305275618"/>
@@ -685,6 +709,7 @@ A</bytes>
 							<reference ref="836155359"/>
 							<reference ref="801055715"/>
 							<reference ref="5146111"/>
+							<reference ref="985519016"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1150,6 +1175,11 @@ A</bytes>
 						<reference key="object" ref="679442591"/>
 						<reference key="parent" ref="565403474"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1877</int>
+						<reference key="object" ref="985519016"/>
+						<reference key="parent" ref="39211898"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1199,6 +1229,7 @@ A</bytes>
 				<string key="1844.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1845.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1864.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1877.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="420.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="494.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="536.CustomClassName">PlayerControlView</string>
@@ -1233,7 +1264,7 @@ A</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1876</int>
+			<int key="maxID">1879</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1256,6 +1287,7 @@ A</bytes>
 						<string key="displayView">ScrollingTextView</string>
 						<string key="formatController">FormatStringController</string>
 						<string key="formatView">FormatStringView</string>
+						<string key="loginItemMenuItem">NSMenuItem</string>
 						<string key="playerControlView">PlayerControlView</string>
 						<string key="playerController">PlayerController</string>
 					</dictionary>
@@ -1275,6 +1307,10 @@ A</bytes>
 						<object class="IBToOneOutletInfo" key="formatView">
 							<string key="name">formatView</string>
 							<string key="candidateClassName">FormatStringView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginItemMenuItem">
+							<string key="name">loginItemMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="playerControlView">
 							<string key="name">playerControlView</string>
