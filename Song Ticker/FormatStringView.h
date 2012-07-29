@@ -5,6 +5,7 @@
 @interface FormatStringView : NSView {
     MAAttachedWindow *formatWindow;
     IBOutlet NSTextField *formatTextField;
+    NSTextView *formatTextView;
     
     IBOutlet NSButton *albumButton;
     IBOutlet NSButton *artistButton;

@@ -26,10 +26,7 @@
 
 /*
 To do (ordered by approximate priority):
- buttons in display should replace selection if any, else append
-
  app icon
- support undo for editing format string?
 
 Questions:
  how to handle crash/force-quit of application we're listening to?

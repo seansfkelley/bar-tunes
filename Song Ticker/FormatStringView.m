@@ -27,10 +27,11 @@
                                             attachedToPoint:NSMakePoint(anchorFrame.origin.x + anchorFrame.size.width / 2, anchorFrame.origin.y)
                                                      onSide:NSMinYEdge
                                                  atDistance:5.0];
+    
     [formatWindow setDelegate:delegate];
+    [formatTextField setObjectValue:[model formatString]];
     [NSApp activateIgnoringOtherApps:YES];
     [formatWindow makeKeyAndOrderFront:self];
-    [formatTextField setObjectValue:[model formatString]];
 }
 
 - (void) closeWindow:(id)sender {
@@ -41,20 +42,56 @@
     return  [[formatTextField objectValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
+- (NSTextView*) getTextView {
+    NSResponder * responder = [[self window] firstResponder];
+    if ((responder != nil) && [responder isKindOfClass:[NSTextView class]]) {
+        return (NSTextView*) responder;
+    }
+    return nil;
+}
+
+- (void) insertString:(NSString*)s {
+    NSTextView *textView = [self getTextView];
+    if (textView != nil) {
+        [textView insertText:s];
+    } else {
+        [formatTextField setStringValue:[[NSString alloc] initWithFormat:@"%@%@", [formatTextField stringValue], s]];
+    }
+}
+
 - (IBAction) insertAlbumTag:(id)sender {
-    [formatTextField setStringValue:[[NSString alloc] initWithFormat:@"%@%%album", [formatTextField stringValue]]];    
+    [self insertString:@"%album"];
 }
 
 - (IBAction) insertArtistTag:(id)sender {
-    [formatTextField setStringValue:[[NSString alloc] initWithFormat:@"%@%%artist", [formatTextField stringValue]]];
+    [self insertString:@"%artist"];
 }
 
 - (IBAction) insertNumberTag:(id)sender {
-    [formatTextField setStringValue:[[NSString alloc] initWithFormat:@"%@%%number", [formatTextField stringValue]]];
+    [self insertString:@"%number"];
 }
 
 - (IBAction) insertSongTag:(id)sender {
-    [formatTextField setStringValue:[[NSString alloc] initWithFormat:@"%@%%song", [formatTextField stringValue]]];
+    [self insertString:@"%song"];
+}
+
+// No Edit menu; we have to support this type of stuff manually.
+- (BOOL) performKeyEquivalent:(NSEvent *)e {
+    NSTextView *textView = [self getTextView];
+    if (([e type] == NSKeyDown) && ([e modifierFlags] & NSCommandKeyMask)) {
+        bool handled = NO;
+        if ([e keyCode] == 0) { // Cmd-A
+            [textView selectAll:self];
+            handled = YES;
+        } else if ([e keyCode] == 6) { // Cmd-Z
+            if ([[textView undoManager] canUndo]) {
+                [[textView undoManager] undo];
+                handled = YES;
+            }
+        }
+        return handled;
+    }
+    return NO;
 }
 
 @end
