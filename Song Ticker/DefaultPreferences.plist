@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>player</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>formatString</key>
 	<string>%artist — %song</string>
 	<key>showIcons</key>

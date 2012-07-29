@@ -40,15 +40,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7854A07D15B9202700026D40 /* Song Ticker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Song Ticker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7854A07D15B9202700026D40 /* Bar Tunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bar Tunes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7854A08115B9202700026D40 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7854A08415B9202700026D40 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7854A08515B9202700026D40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7854A08615B9202700026D40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7854A08915B9202700026D40 /* Song Ticker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Song Ticker-Info.plist"; sourceTree = "<group>"; };
+		7854A08915B9202700026D40 /* Bar Tunes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bar Tunes-Info.plist"; sourceTree = "<group>"; };
 		7854A08B15B9202700026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7854A08D15B9202700026D40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7854A08F15B9202700026D40 /* Song Ticker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Song Ticker-Prefix.pch"; sourceTree = "<group>"; };
+		7854A08F15B9202700026D40 /* Bar Tunes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bar Tunes-Prefix.pch"; sourceTree = "<group>"; };
 		7854A09115B9202700026D40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		7854A09315B9202700026D40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7854A09415B9202700026D40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		7854A07215B9202700026D40 = {
 			isa = PBXGroup;
 			children = (
-				7854A08715B9202700026D40 /* Song Ticker */,
+				7854A08715B9202700026D40 /* Bar Tunes */,
 				7854A08015B9202700026D40 /* Frameworks */,
 				7854A07E15B9202700026D40 /* Products */,
 			);
@@ -121,7 +121,7 @@
 		7854A07E15B9202700026D40 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7854A07D15B9202700026D40 /* Song Ticker.app */,
+				7854A07D15B9202700026D40 /* Bar Tunes.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,7 +147,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		7854A08715B9202700026D40 /* Song Ticker */ = {
+		7854A08715B9202700026D40 /* Bar Tunes */ = {
 			isa = PBXGroup;
 			children = (
 				7854A09315B9202700026D40 /* AppDelegate.h */,
@@ -160,16 +160,17 @@
 				785F597F15BCC2020061FBC7 /* Status Icons */,
 				7854A08815B9202700026D40 /* Supporting Files */,
 			);
+			name = "Bar Tunes";
 			path = "Song Ticker";
 			sourceTree = "<group>";
 		};
 		7854A08815B9202700026D40 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7854A08915B9202700026D40 /* Song Ticker-Info.plist */,
+				7854A08915B9202700026D40 /* Bar Tunes-Info.plist */,
 				7854A08A15B9202700026D40 /* InfoPlist.strings */,
 				7854A08D15B9202700026D40 /* main.m */,
-				7854A08F15B9202700026D40 /* Song Ticker-Prefix.pch */,
+				7854A08F15B9202700026D40 /* Bar Tunes-Prefix.pch */,
 				7854A09015B9202700026D40 /* Credits.rtf */,
 				78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */,
 			);
@@ -252,9 +253,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7854A07C15B9202700026D40 /* Song Ticker */ = {
+		7854A07C15B9202700026D40 /* Bar Tunes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7854A0AF15B9202800026D40 /* Build configuration list for PBXNativeTarget "Song Ticker" */;
+			buildConfigurationList = 7854A0AF15B9202800026D40 /* Build configuration list for PBXNativeTarget "Bar Tunes" */;
 			buildPhases = (
 				7854A07915B9202700026D40 /* Sources */,
 				7854A07A15B9202700026D40 /* Frameworks */,
@@ -264,9 +265,9 @@
 			);
 			dependencies = (
 			);
-			name = "Song Ticker";
+			name = "Bar Tunes";
 			productName = "Song Ticker";
-			productReference = 7854A07D15B9202700026D40 /* Song Ticker.app */;
+			productReference = 7854A07D15B9202700026D40 /* Bar Tunes.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -277,7 +278,7 @@
 			attributes = {
 				LastUpgradeCheck = 0440;
 			};
-			buildConfigurationList = 7854A07715B9202700026D40 /* Build configuration list for PBXProject "Song Ticker" */;
+			buildConfigurationList = 7854A07715B9202700026D40 /* Build configuration list for PBXProject "Bar Tunes" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -289,7 +290,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7854A07C15B9202700026D40 /* Song Ticker */,
+				7854A07C15B9202700026D40 /* Bar Tunes */,
 			);
 		};
 /* End PBXProject section */
@@ -422,9 +423,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Song Ticker-Prefix.pch";
-				INFOPLIST_FILE = "Song Ticker/Song Ticker-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
+				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -434,9 +435,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Song Ticker-Prefix.pch";
-				INFOPLIST_FILE = "Song Ticker/Song Ticker-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
+				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -444,7 +445,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7854A07715B9202700026D40 /* Build configuration list for PBXProject "Song Ticker" */ = {
+		7854A07715B9202700026D40 /* Build configuration list for PBXProject "Bar Tunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7854A0AD15B9202800026D40 /* Debug */,
@@ -453,7 +454,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7854A0AF15B9202800026D40 /* Build configuration list for PBXNativeTarget "Song Ticker" */ = {
+		7854A0AF15B9202800026D40 /* Build configuration list for PBXNativeTarget "Bar Tunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7854A0B015B9202800026D40 /* Debug */,

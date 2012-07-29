@@ -11,7 +11,7 @@ const int IMAGE_WIDTH = 18;
 const int PX_BEFORE_SCROLLS = 16;
 const int PX_BETWEEN_SCROLLS = 40;
 
-const int EXTRA_SPACE_STATIC = 3;
+const int EXTRA_SPACE_STATIC = 4;
 
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
