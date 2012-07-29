@@ -22,7 +22,6 @@
 		785F599E15BE76D60061FBC7 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F599D15BE76D60061FBC7 /* note.png */; };
 		7863778115C517FB000693F3 /* SinglePlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7863778015C517FB000693F3 /* SinglePlayerModel.m */; };
 		7863778415C52821000693F3 /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7863778315C526B4000693F3 /* LaunchAtLoginController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7863778615C528B6000693F3 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7863778515C528B6000693F3 /* icon.icns */; };
 		78690BA115C12C6E00E383A9 /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */; };
 		786F152815BE935F004C36B1 /* FormatStringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786F152715BE935F004C36B1 /* FormatStringView.m */; };
 		7874867A15B9396F0059D593 /* UI Elements.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* UI Elements.xib */; };
@@ -32,6 +31,7 @@
 		788FFCAF15C46A6700C6182E /* DisplayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788FFCAE15C46A6700C6182E /* DisplayModel.m */; };
 		788FFCB215C46C6F00C6182E /* DisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788FFCB115C46C6F00C6182E /* DisplayController.m */; };
 		788FFCB515C46E2A00C6182E /* FormatStringController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788FFCB415C46E2A00C6182E /* FormatStringController.m */; };
+		78A1E04815C532910037B0C7 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 78A1E04715C532910037B0C7 /* icon.icns */; };
 		78FC2E4415BE77AB00293304 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC2E4215BE77AB00293304 /* pause.png */; };
 		78FC2E4515BE77AB00293304 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC2E4315BE77AB00293304 /* pause@2x.png */; };
 		78FC2E4815BE791100293304 /* PlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FC2E4715BE791100293304 /* PlayerControlView.m */; };
@@ -67,7 +67,6 @@
 		7863778015C517FB000693F3 /* SinglePlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerModel.m; sourceTree = "<group>"; };
 		7863778215C526B4000693F3 /* LaunchAtLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchAtLoginController.h; sourceTree = "<group>"; };
 		7863778315C526B4000693F3 /* LaunchAtLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchAtLoginController.m; sourceTree = "<group>"; };
-		7863778515C528B6000693F3 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultPreferences.plist; sourceTree = "<group>"; };
 		786F152615BE935F004C36B1 /* FormatStringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatStringView.h; sourceTree = "<group>"; };
 		786F152715BE935F004C36B1 /* FormatStringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatStringView.m; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		788FFCB315C46E2A00C6182E /* FormatStringController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatStringController.h; sourceTree = "<group>"; };
 		788FFCB415C46E2A00C6182E /* FormatStringController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatStringController.m; sourceTree = "<group>"; };
 		788FFCB715C46F7000C6182E /* FormatStringPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormatStringPackage.h; sourceTree = "<group>"; };
+		78A1E04715C532910037B0C7 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		78FC2E4215BE77AB00293304 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		78FC2E4315BE77AB00293304 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
 		78FC2E4615BE791100293304 /* PlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerControlView.h; sourceTree = "<group>"; };
@@ -164,14 +164,13 @@
 				785F597F15BCC2020061FBC7 /* Status Icons */,
 				7854A08815B9202700026D40 /* Supporting Files */,
 			);
-			name = "Bar Tunes";
-			path = "Song Ticker";
+			path = "Bar Tunes";
 			sourceTree = "<group>";
 		};
 		7854A08815B9202700026D40 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7863778515C528B6000693F3 /* icon.icns */,
+				78A1E04715C532910037B0C7 /* icon.icns */,
 				7854A08915B9202700026D40 /* Bar Tunes-Info.plist */,
 				7854A08D15B9202700026D40 /* main.m */,
 				7854A08F15B9202700026D40 /* Bar Tunes-Prefix.pch */,
@@ -273,7 +272,7 @@
 			dependencies = (
 			);
 			name = "Bar Tunes";
-			productName = "Song Ticker";
+			productName = "Bar Tunes";
 			productReference = 7854A07D15B9202700026D40 /* Bar Tunes.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -321,7 +320,7 @@
 				78FC2E4415BE77AB00293304 /* pause.png in Resources */,
 				78FC2E4515BE77AB00293304 /* pause@2x.png in Resources */,
 				78690BA115C12C6E00E383A9 /* DefaultPreferences.plist in Resources */,
-				7863778615C528B6000693F3 /* icon.icns in Resources */,
+				78A1E04815C532910037B0C7 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,8 +414,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
-				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				GCC_PREFIX_HEADER = "Bar Tunes/Bar Tunes-Prefix.pch";
+				INFOPLIST_FILE = "Bar Tunes/Bar Tunes-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
@@ -428,8 +427,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Song Ticker/Bar Tunes-Prefix.pch";
-				INFOPLIST_FILE = "Song Ticker/Bar Tunes-Info.plist";
+				GCC_PREFIX_HEADER = "Bar Tunes/Bar Tunes-Prefix.pch";
+				INFOPLIST_FILE = "Bar Tunes/Bar Tunes-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Bar Tunes";
 				WRAPPER_EXTENSION = app;
