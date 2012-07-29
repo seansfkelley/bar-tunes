@@ -105,6 +105,7 @@
 }
 
 - (void) setDisplayPlayer:(Player)p {
+    assert(p != NONE);
     [self willChangeValueForKey:@"player"];
     displayPlayer = p;
     [self didChangeValueForKey:@"player"];
