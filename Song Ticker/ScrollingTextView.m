@@ -13,14 +13,18 @@
 @synthesize model;
 @synthesize statusItem;
 
-const int IMAGE_WIDTH = 18;
-const int EXTRA_SPACE_SCROLL = 16;
-const int EXTRA_SPACE_STATIC = 3;
 const int VERTICAL_OFFSET = 4;
+const int IMAGE_WIDTH = 18;
+
+const int PX_BEFORE_SCROLLS = 16;
+const int PX_BETWEEN_SCROLLS = 40;
+
+const int EXTRA_SPACE_STATIC = 3;
+
 const int MAX_STATIC_WIDTH = 300;
 const int MAX_SCROLLING_WIDTH = 250;
 
-const float SCROLL_SPEED = 0.40;
+const float SCROLL_SPEED = 0.5;
 const float INTERVAL = 1 / 30.0; // 30 FPS
 
 - (id) init {
@@ -55,9 +59,10 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [self setFrame:NSMakeRect(0, 0, IMAGE_WIDTH, [self frame].size.height)];
     } else if (stringSize.width <= MAX_STATIC_WIDTH) {
         scrolling = NO;
-        [self setFrame:NSMakeRect(0, 0, stringSize.width +
-                                  ([model showIcons] ? IMAGE_WIDTH : 0) +
-                                  EXTRA_SPACE_STATIC * 2, [self frame].size.height)];
+        [self setFrame:NSMakeRect(0,
+                                  0,
+                                  stringSize.width +([model showIcons] ? IMAGE_WIDTH : 0),
+                                  [self frame].size.height)];
     } else {
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL
                                                  target:self
@@ -66,10 +71,9 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
                                                 repeats:YES];
         // More than just a state change.
         if (!scrolling || textChanged) {
-            scrollCurrentOffset = 0;
-            scrollLeft = YES;
+            scrollCurrentOffset = -PX_BEFORE_SCROLLS;
         }
-        scrollMaxOffset = (stringSize.width) - MAX_SCROLLING_WIDTH;
+        stringPixelLength = stringSize.width;
         scrolling = YES;
         [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + ([model showIcons] ? IMAGE_WIDTH : 0), [self frame].size.height)];
     }
@@ -92,14 +96,24 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     if ([model showPauseText] || state != PAUSE) {
         NSString *t = [model text];
         if (scrolling) {
-            scrollCurrentOffset += scrollLeft ? SCROLL_SPEED : -SCROLL_SPEED;
-            if (scrollCurrentOffset >= scrollMaxOffset + EXTRA_SPACE_SCROLL || scrollCurrentOffset <= -EXTRA_SPACE_SCROLL) {
-                scrollLeft = !scrollLeft;
+            scrollCurrentOffset += SCROLL_SPEED;
+            if (scrollCurrentOffset >= stringPixelLength) {
+                scrollCurrentOffset = -PX_BETWEEN_SCROLLS;
             }
+            
             NSPoint centerPoint;
-            centerPoint.x = -scrollCurrentOffset + ([model showIcons] ? IMAGE_WIDTH : 0);
             centerPoint.y = VERTICAL_OFFSET;
+            
+            // Draw text on left side.
+            centerPoint.x = -scrollCurrentOffset + ([model showIcons] ? IMAGE_WIDTH : 0);
             [t drawAtPoint:centerPoint withAttributes:drawStringAttributes];
+            
+            // Draw text on right side, if applicable.
+            float endOfStringOffset = stringPixelLength - scrollCurrentOffset + PX_BETWEEN_SCROLLS;
+            if (endOfStringOffset < MAX_SCROLLING_WIDTH) {
+                centerPoint.x = endOfStringOffset + ([model showIcons] ? IMAGE_WIDTH : 0);
+                [t drawAtPoint:centerPoint withAttributes:drawStringAttributes];
+            }
             [self setNeedsDisplay:YES];
         } else if (![t isEqualToString:@""]) {
             NSPoint centerPoint;

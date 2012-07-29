@@ -15,8 +15,7 @@
     
     NSTimer *timer;
     BOOL scrolling;
-    BOOL scrollLeft;
-    int scrollMaxOffset;
+    float stringPixelLength;
     float scrollCurrentOffset;
     
     const NSDictionary *imageDict;
