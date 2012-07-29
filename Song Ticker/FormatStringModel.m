@@ -1,11 +1,3 @@
-//
-//  FormatWindowModel.m
-//  Song Ticker
-//
-//  Created by Sean Kelley on 7/27/12.
-//
-//
-
 #import "FormatStringModel.h"
 
 @implementation FormatStringModel

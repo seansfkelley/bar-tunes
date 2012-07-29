@@ -1,11 +1,3 @@
-//
-//  AppDelegate.h
-//  Song Ticker
-//
-//  Created by Sean Kelley on 7/19/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "iTunes.h"
 #import "Spotify.h"
@@ -34,12 +26,10 @@
 
 /*
 To do (ordered by approximate priority):
- circular scroll
  buttons in display should replace selection if any, else append
 
  app icon
  support undo for editing format string?
- remove stupid header comments
 
 Questions:
  how to handle crash/force-quit of application we're listening to?

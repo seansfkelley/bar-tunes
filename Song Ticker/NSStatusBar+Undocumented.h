@@ -1,11 +1,5 @@
-//
-//  NSStatusBar+Undocumented.h
-//  Song Ticker
-//
-//  Created by Sean Kelley on 7/25/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
+// Add undocumented behavior to NSStatusBar, courtesy of StackOverflow.
+// Used primarily for forcing the status item all the way to the left.
 #import <Foundation/Foundation.h>
 
 @interface NSStatusBar (NSStatusBar_Private)
