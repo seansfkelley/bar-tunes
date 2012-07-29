@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class AppDelegate;
-
 #import <Foundation/Foundation.h>
 #import "MAAttachedWindow.h"
 #import "FormatStringModel.h"

@@ -61,7 +61,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         scrolling = NO;
         [self setFrame:NSMakeRect(0,
                                   0,
-                                  stringSize.width +([model showIcons] ? IMAGE_WIDTH : 0),
+                                  stringSize.width +([model showIcons] ? IMAGE_WIDTH : 0) + EXTRA_SPACE_STATIC * 2,
                                   [self frame].size.height)];
     } else {
         timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL

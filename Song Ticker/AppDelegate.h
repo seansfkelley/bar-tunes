@@ -6,14 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class PlayerControlView;
-@class FormatStringModel;
-@class FormatStringView;
-@class FormatStringController;
-@class DisplayModel;
-@class ScrollingTextView;
-@class DisplayController;
-
 #import <Cocoa/Cocoa.h>
 #import "iTunes.h"
 #import "Spotify.h"

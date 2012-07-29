@@ -24,7 +24,7 @@
 		785F599E15BE76D60061FBC7 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 785F599D15BE76D60061FBC7 /* note.png */; };
 		78690BA115C12C6E00E383A9 /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78690BA015C12C6E00E383A9 /* DefaultPreferences.plist */; };
 		786F152815BE935F004C36B1 /* FormatStringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786F152715BE935F004C36B1 /* FormatStringView.m */; };
-		7874867A15B9396F0059D593 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* MainMenu.xib */; };
+		7874867A15B9396F0059D593 /* UI Elements.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7874867815B9396F0059D593 /* UI Elements.xib */; };
 		7874867E15B942530059D593 /* ScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7874867D15B942530059D593 /* ScrollingTextView.m */; };
 		788B5F8615BBF631006D8691 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B5F8515BBF631006D8691 /* ScriptingBridge.framework */; };
 		788FFCAB15C3A96F00C6182E /* FormatStringModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788FFCAA15C3A96F00C6182E /* FormatStringModel.m */; };
@@ -68,7 +68,7 @@
 		786F152615BE935F004C36B1 /* FormatStringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatStringView.h; sourceTree = "<group>"; };
 		786F152715BE935F004C36B1 /* FormatStringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatStringView.m; sourceTree = "<group>"; };
 		786F154D15BFE07A004C36B1 /* NSStatusBar+Undocumented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStatusBar+Undocumented.h"; sourceTree = "<group>"; };
-		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7874867915B9396F0059D593 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/UI Elements.xib"; sourceTree = "<group>"; };
 		7874867C15B942530059D593 /* ScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingTextView.h; sourceTree = "<group>"; };
 		7874867D15B942530059D593 /* ScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingTextView.m; sourceTree = "<group>"; };
 		788B5F8415BBF59C006D8691 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			children = (
 				7854A09315B9202700026D40 /* AppDelegate.h */,
 				7854A09415B9202700026D40 /* AppDelegate.m */,
-				7874867815B9396F0059D593 /* MainMenu.xib */,
+				7874867815B9396F0059D593 /* UI Elements.xib */,
 				78FE49A815C4771400D68AFF /* Display Component */,
 				78FE49AE15C48DF300D68AFF /* Player Component */,
 				788FFCB615C46F5200C6182E /* Format String Component */,
@@ -301,7 +301,7 @@
 			files = (
 				7854A08C15B9202700026D40 /* InfoPlist.strings in Resources */,
 				7854A09215B9202700026D40 /* Credits.rtf in Resources */,
-				7874867A15B9396F0059D593 /* MainMenu.xib in Resources */,
+				7874867A15B9396F0059D593 /* UI Elements.xib in Resources */,
 				785F598A15BCC2020061FBC7 /* pauseHighlight.png in Resources */,
 				785F598B15BCC2020061FBC7 /* pauseHighlight@2x.png in Resources */,
 				785F598C15BCC2020061FBC7 /* play.png in Resources */,
@@ -359,12 +359,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		7874867815B9396F0059D593 /* MainMenu.xib */ = {
+		7874867815B9396F0059D593 /* UI Elements.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7874867915B9396F0059D593 /* en */,
 			);
-			name = MainMenu.xib;
+			name = "UI Elements.xib";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
