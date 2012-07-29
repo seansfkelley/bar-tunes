@@ -84,7 +84,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     }
 
     PlayerState state = [model state];
-    if ([model showPauseText] || state != PAUSE) {
+    if (state != STOP && ([model showPauseText] || state == PLAY)) {
         NSString *t = [model text];
         if (scrolling) {
             scrollCurrentOffset += SCROLL_SPEED;
