@@ -25,15 +25,10 @@
     NSImage *currentImage;
 }
 
-typedef enum changeType {
-    PLAYER_STATE,
-    DISPLAY_TEXT
-} ChangeType;
-
 @property DisplayModel *model;
 
 // Should be called after any change in the model.
-- (void) resize:(ChangeType)c;
+- (void) resize:(BOOL)textChanged;
 
 @property NSStatusItem *statusItem;
 @property FormatStringController *formatController;

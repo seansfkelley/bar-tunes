@@ -14,12 +14,6 @@
 @synthesize playerModel;
 @synthesize formatModel;
 
-- (void) awakeFromNib {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self setShowIcons:[defaults boolForKey:DEFAULTS_KEY_SHOW_ICONS]];
-    [self setShowPauseText:[defaults boolForKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT]];
-}
-
 - (void) setShowIcons:(BOOL)showIcons {
     [showIconsMenuItem setState:showIcons ? NSOnState : NSOffState];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -45,7 +39,6 @@
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"Updating display model.");
     NSString *displayString = [formatModel formatString];
     displayString = [displayString
                      stringByReplacingOccurrencesOfString:@"%artist" withString:[playerModel artist]];
@@ -55,8 +48,11 @@
                      stringByReplacingOccurrencesOfString:@"%song" withString:[playerModel name]];
     displayString = [displayString
                      stringByReplacingOccurrencesOfString:@"%number" withString:[NSString stringWithFormat:@"%ld", [playerModel trackNumber]]];
-    [model setText:displayString];
+    // Fire state event first: if we switch to a paused player, we have paused-text-display off, and
+    // the current player is playing, there is a flicker of text if the state (and hence text-hiding)
+    // update comes after.
     [model setState:[playerModel state]];
+    [model setText:displayString];
 }
 
 @end

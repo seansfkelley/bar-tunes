@@ -47,7 +47,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 // Triggered by a change in state.
-- (void) resize:(ChangeType)c {
+- (void) resize:(BOOL)textChanged {
     NSString *t = [model text];
     NSSize stringSize = [t sizeWithAttributes:drawStringAttributes];
     [timer invalidate];
@@ -67,7 +67,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
                                                userInfo:nil
                                                 repeats:YES];
         // More than just a state change.
-        if (!scrolling || c == DISPLAY_TEXT) {
+        if (!scrolling || textChanged) {
             scrollCurrentOffset = 0;
             scrollLeft = YES;
         }
@@ -76,7 +76,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + ([model showIcons] ? IMAGE_WIDTH : 0), [self frame].size.height)];
     }
     
-    if (c == DISPLAY_TEXT) {
+    if (textChanged) {
         [[statusItem menu] cancelTracking];
     }
     [self setNeedsDisplay:YES];
@@ -156,14 +156,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"Updating display view.");
-    ChangeType c;
-    if ([keyPath isEqualToString:@"text"]) {
-        c = DISPLAY_TEXT;
-    } else if ([keyPath isEqualToString:@"state"]) {
-        c = PLAYER_STATE;
-    }
-    [self resize:c];
+    [self resize:[keyPath isEqualToString:@"text"]];
 }
 
 

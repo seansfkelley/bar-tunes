@@ -30,7 +30,6 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
 }
 
 - (void) playerStateChangeNotification:(NSNotification*)note {
-    NSLog(@"Got notification, updating player model.");
     [model willChangeValueForKey:@"player"];
     // Both iTunes and Spotify have a Player State -> Playing in their userInfo.
     NSString *state = [[note userInfo] objectForKey:@"Player State"];

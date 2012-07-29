@@ -12,13 +12,6 @@
 
 @synthesize formatString;
 
-//- (FormatStringModel*) init {
-//    self = [super init];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    formatString = [defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING];
-//    return self;
-//}
-
 - (BOOL) isFormatStringOK:(NSString*)f {
     return (![f isEqualToString:@""] && ([f rangeOfString:@"%album"].location != NSNotFound ||
                                          [f rangeOfString:@"%artist"].location != NSNotFound ||

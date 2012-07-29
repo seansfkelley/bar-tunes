@@ -77,7 +77,9 @@
 
 - (void) setDisplayPlayer:(Player)p {
     assert(initialized);
+    [self willChangeValueForKey:@"player"];
     displayPlayer = p;
+    [self didChangeValueForKey:@"player"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:displayPlayer forKey:DEFAULTS_KEY_PLAYER];
     [defaults synchronize];

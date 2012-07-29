@@ -12,11 +12,6 @@
 
 @synthesize model;
 
-- (void) awakeFromNib {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self setWatch:[defaults integerForKey:DEFAULTS_KEY_PLAYER]];
-}
-
 - (void) setWatch:(Player)p {
     if (p == ITUNES) {
         [self setWatchItunes:nil];

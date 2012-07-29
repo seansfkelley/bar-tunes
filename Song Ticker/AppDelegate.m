@@ -42,16 +42,18 @@
     [displayController setFormatModel:formatModel];
     [displayController setPlayerModel:playerModel];
     
-    // Link up listeners
+    // Maintain consistent state listeners
     [formatModel addObserver:displayController forKeyPath:@"formatString" options:0 context:nil];
-    [playerModel addObserver:displayController forKeyPath:@"player" options:NSKeyValueObservingOptionOld context:nil];
-    [displayModel addObserver:displayView forKeyPath:@"state" options:NSKeyValueObservingOptionNew |
-                                                                      NSKeyValueObservingOptionOld context:nil];
-    [displayModel addObserver:displayView forKeyPath:@"text" options:NSKeyValueObservingOptionNew |
-                                                                     NSKeyValueObservingOptionOld context:nil];
+    [playerModel addObserver:displayController forKeyPath:@"player" options:0 context:nil];
     
+    // Update display listeners
+    [displayModel addObserver:displayView forKeyPath:@"state" options:0 context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"text" options:0 context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"showIcons" options:0 context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"showPauseText" options:0 context:nil];
     
-    // Initialize display by firing event before we add it to the menu bar.
+    // Initialize display with preferences, then fire event to make sure everything is updated.
+    [self initializePreferences];
     [playerModel willChangeValueForKey:@"player"];
     [playerModel didChangeValueForKey:@"player"];
     
@@ -71,6 +73,17 @@
     [statusItem setMenu:playerControlView];
     
     [displayView setStatusItem:statusItem];
+}
+
+- (void) initializePreferences {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [displayController setShowIcons:[defaults boolForKey:DEFAULTS_KEY_SHOW_ICONS]];
+    [displayController setShowPauseText:[defaults boolForKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT]];
+    
+    [playerControlView setWatch:(Player) [defaults integerForKey:DEFAULTS_KEY_PLAYER]];
+    
+    [formatModel setFormatString:[defaults objectForKey:DEFAULTS_KEY_FORMAT_STRING]];
 }
 
 - (IBAction) quitApplication:(id)sender {
