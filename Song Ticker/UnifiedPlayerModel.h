@@ -27,6 +27,8 @@
 // Get the state for a particular player.
 - (PlayerState) stateFor:(Player)p;
 
+- (void) playerExit:(Player)p;
+
 - (void) copyInfoFrom:(NSDictionary*)info for:(Player)p;
 
 - (NSString*) album;

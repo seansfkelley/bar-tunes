@@ -18,6 +18,14 @@
     return self;
 }
 
+- (void) playerExit {
+    album = @"";
+    artist = @"";
+    name = @"";
+    trackNumber = @"";
+    state = STOP;
+}
+
 - (void) copyInfoFrom:(NSDictionary*)info {
     [self setAlbum: [info objectForKey:@"Album"]];
     [self setArtist:[info objectForKey:@"Artist"]];

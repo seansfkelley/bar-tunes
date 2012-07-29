@@ -124,6 +124,16 @@
     return displayPlayer;
 }
 
+- (void) playerExit:(Player)p {
+    if (p == ITUNES) {
+        [itunesModel playerExit];
+    } else if (p == SPOTIFY) {
+        [spotifyModel playerExit];
+    } else {
+        assert(NO);
+    }
+}
+
 - (void) copyInfoFrom:(NSDictionary*)info for:(Player)p {
     [self willChangeValueForKey:@"player"];
     if (p == ITUNES) {

@@ -17,6 +17,10 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
                                                         selector:@selector(playerStateChangeNotification:)
                                                             name:spotifyNoteName
                                                           object:nil];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                           selector:@selector(playerTerminateNotification:)
+                                                               name:NSWorkspaceDidTerminateApplicationNotification
+                                                             object:nil];
     return self;
 }
 
@@ -44,6 +48,15 @@ NSString *spotifyNoteName = @"com.spotify.client.PlaybackStateChanged";
         [model copyInfoFrom:[note userInfo] for:ITUNES];
     } else if ([player isEqualToString:spotifyNoteName]) {
         [model copyInfoFrom:[note userInfo] for:SPOTIFY];
+    }
+}
+
+- (void) playerTerminateNotification:(NSNotification*)note {
+    NSString *name = [[note userInfo] objectForKey:@"NSApplicationName"];
+    if ([name isEqualToString:@"iTunes"]) {
+        [model playerExit:ITUNES];
+    } else if ([name isEqualToString:@"Spotify"]) {
+        [model playerExit:SPOTIFY];
     }
 }
 

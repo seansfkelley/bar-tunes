@@ -8,6 +8,7 @@
 @property NSString *trackNumber;
 @property PlayerState state;
 
+- (void) playerExit;
 - (void) copyInfoFrom:(NSDictionary*)info;
 
 @end

@@ -26,6 +26,5 @@
 
 /*
 Questions:
- how to handle crash/force-quit of application we're listening to?
  option for Open at Login
 */
