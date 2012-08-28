@@ -147,10 +147,13 @@
     [self didChangeValueForKey:@"player"];
 }
 
+
 - (NSString*) getProperty:(SEL)sel {
     if ([self player] == NONE || [self state] == STOP) {
         return @"";
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     if ([self player] == ITUNES) {
         return [itunesModel performSelector:sel];
     } else if ([self player] == SPOTIFY) {
@@ -158,6 +161,7 @@
     } else {
         assert(NO);
     }
+#pragma clang diagnostic pop
 }
 
 - (NSString*) album {
