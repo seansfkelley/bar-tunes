@@ -14,9 +14,6 @@ const int PX_BETWEEN_SCROLLS = 40;
 
 const int EXTRA_SPACE_STATIC = 4;
 
-const int MAX_STATIC_WIDTH = 300;
-const int MAX_SCROLLING_WIDTH = 250;
-
 const float SCROLL_SPEED = 0.5;
 const float INTERVAL = 1 / 30.0; // 30 FPS
 
@@ -49,7 +46,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
     if ([t isEqualToString:@""] || (![model showPauseText] && [model state] == PAUSE) || [model state] == STOP) {
         scrolling = NO;
         [self setFrame:NSMakeRect(0, 0, IMAGE_WIDTH, [self frame].size.height)];
-    } else if (stringSize.width <= MAX_STATIC_WIDTH) {
+    } else if (stringSize.width <= [model maxStaticWidth]) {
         scrolling = NO;
         [self setFrame:NSMakeRect(0,
                                   0,
@@ -67,7 +64,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
         }
         stringPixelLength = stringSize.width;
         scrolling = YES;
-        [self setFrame:NSMakeRect(0, 0, MAX_SCROLLING_WIDTH + ([model showIcons] ? IMAGE_WIDTH : 0), [self frame].size.height)];
+        [self setFrame:NSMakeRect(0, 0, [model maxScrollingWidth] + ([model showIcons] ? IMAGE_WIDTH : 0), [self frame].size.height)];
     }
     [self setNeedsDisplay:YES];
 }
@@ -98,7 +95,7 @@ const float INTERVAL = 1 / 30.0; // 30 FPS
             
             // Draw text on right side, if applicable.
             float endOfStringOffset = stringPixelLength - scrollCurrentOffset + PX_BETWEEN_SCROLLS;
-            if (endOfStringOffset < MAX_SCROLLING_WIDTH) {
+            if (endOfStringOffset < [model maxScrollingWidth]) {
                 centerPoint.x = endOfStringOffset + ([model showIcons] ? IMAGE_WIDTH : 0);
                 [t drawAtPoint:centerPoint withAttributes:drawStringAttributes];
             }

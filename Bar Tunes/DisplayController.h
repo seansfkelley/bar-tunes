@@ -7,6 +7,7 @@
 @interface DisplayController : NSObject <NSMenuDelegate> {
     IBOutlet NSMenuItem *showIconsMenuItem;
     IBOutlet NSMenuItem *showPauseTextMenuItem;
+    IBOutlet NSMenuItem *useWideDisplayMenuItem;
 }
 
 @property DisplayModel *model;
@@ -16,9 +17,11 @@
 
 - (void) setShowIcons:(BOOL)showIcons;
 - (void) setShowPauseText:(BOOL)showPauseText;
+- (void) setUseWideDisplay:(BOOL)useWideDisplay;
 
 - (IBAction) toggleShowIcons:(id)sender;
 - (IBAction) toggleShowPauseText:(id)sender;
+- (IBAction) toggleUseWideDisplay:(id)sender;
 
 // Called when the format string changes or the player info changes.
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;

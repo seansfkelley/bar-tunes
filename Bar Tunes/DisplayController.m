@@ -23,12 +23,24 @@
     [model setShowPauseText:showPauseText];
 }
 
+- (void) setUseWideDisplay:(BOOL)useWideDisplay {
+    [useWideDisplayMenuItem setState:useWideDisplay ? NSOnState : NSOffState];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:useWideDisplay forKey:DEFAULTS_KEY_USE_WIDE_DISPLAY];
+    [defaults synchronize];
+    [model setUseWideDisplay:useWideDisplay];
+}
+
 - (IBAction) toggleShowIcons:(NSMenuItem*)sender {
     [self setShowIcons:[sender state] != NSOnState];
 }
 
 - (IBAction) toggleShowPauseText:(NSMenuItem*)sender {
     [self setShowPauseText:[sender state] != NSOnState];
+}
+
+- (IBAction) toggleUseWideDisplay:(NSMenuItem*)sender {
+    [self setUseWideDisplay:[sender state] != NSOnState];
 }
 
 - (void) menuWillOpen:(NSMenu*)menu {

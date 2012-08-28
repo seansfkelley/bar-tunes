@@ -38,6 +38,7 @@
                                                                      NSKeyValueObservingOptionOld context:nil];
     [displayModel addObserver:displayView forKeyPath:@"showIcons" options:0 context:nil];
     [displayModel addObserver:displayView forKeyPath:@"showPauseText" options:0 context:nil];
+    [displayModel addObserver:displayView forKeyPath:@"useWideDisplay" options:0 context:nil];
     [displayModel addObserver:displayView forKeyPath:@"menuVisible" options:0 context:nil];
     
     // Keep-UI-elements-from-interfering-with-each-other listeners
@@ -75,6 +76,7 @@
     
     [displayController setShowIcons:[defaults boolForKey:DEFAULTS_KEY_SHOW_ICONS]];
     [displayController setShowPauseText:[defaults boolForKey:DEFAULTS_KEY_SHOW_PAUSE_TEXT]];
+    [displayController setUseWideDisplay:[defaults boolForKey:DEFAULTS_KEY_USE_WIDE_DISPLAY]];
     
     [playerControlView setWatch:(Player) [defaults integerForKey:DEFAULTS_KEY_PLAYER]];
     

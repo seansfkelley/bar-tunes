@@ -18,5 +18,6 @@ typedef enum playerState {
 #define DEFAULTS_KEY_PLAYER @"player"
 #define DEFAULTS_KEY_SHOW_ICONS @"showIcons"
 #define DEFAULTS_KEY_SHOW_PAUSE_TEXT @"showPauseText"
+#define DEFAULTS_KEY_USE_WIDE_DISPLAY @"useWideDisplay"
 
 #endif

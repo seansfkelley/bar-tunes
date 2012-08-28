@@ -8,6 +8,8 @@
 	<string>%artist — %song</string>
 	<key>showIcons</key>
 	<true/>
+	<key>useWideDisplay</key>
+	<true/>
 	<key>showPauseText</key>
 	<true/>
 </dict>
