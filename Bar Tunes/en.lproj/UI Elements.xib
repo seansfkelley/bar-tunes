@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -105,16 +105,6 @@
 						<reference key="NSOnImage" ref="220654110"/>
 						<reference key="NSMixedImage" ref="670801261"/>
 					</object>
-					<object class="NSMenuItem" id="801055715">
-						<reference key="NSMenu" ref="39211898"/>
-						<bool key="NSIsDisabled">YES</bool>
-						<bool key="NSIsSeparator">YES</bool>
-						<string key="NSTitle"/>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="220654110"/>
-						<reference key="NSMixedImage" ref="670801261"/>
-					</object>
 					<object class="NSMenuItem" id="877966719">
 						<reference key="NSMenu" ref="39211898"/>
 						<string key="NSTitle">Use Wide Display</string>
@@ -126,6 +116,16 @@
 					<object class="NSMenuItem" id="704615400">
 						<reference key="NSMenu" ref="39211898"/>
 						<string key="NSTitle">Set Display Format...</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="220654110"/>
+						<reference key="NSMixedImage" ref="670801261"/>
+					</object>
+					<object class="NSMenuItem" id="801055715">
+						<reference key="NSMenu" ref="39211898"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="220654110"/>
@@ -722,9 +722,9 @@ A</bytes>
 							<reference ref="704615400"/>
 							<reference ref="915500757"/>
 							<reference ref="836155359"/>
-							<reference ref="801055715"/>
 							<reference ref="5146111"/>
 							<reference ref="985519016"/>
+							<reference ref="801055715"/>
 							<reference ref="877966719"/>
 						</array>
 						<reference key="parent" ref="0"/>
